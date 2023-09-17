@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+
+# Build files
+build
+
+## Uploaded pdfs
+pdfs
+
+## MacOS
+.DS_Store
