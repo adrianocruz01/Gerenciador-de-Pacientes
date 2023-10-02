@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
+    "start": "node build/server.cjs",
     "start:dev": "tsx watch ./src/server.ts"
   },
   "keywords": [],
