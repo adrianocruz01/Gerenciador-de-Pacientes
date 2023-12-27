@@ -2,21 +2,22 @@ import { Pessoa } from './entities/person.entity';
 import { CreatePessoaDto } from './dto/pessoa.dto';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse } from '@nestjs/swagger';
-import { PessoaService } from './person.service';
+import { PrismaService } from '../../shared/db/libs/prisma/prisma.service';
+import { Colaborador } from '@prisma/client';
 
-@Controller('pessoa/')
+@Controller('colaborador/')
 export class PessoaController {
-//   constructor(private pessoaService: PessoaService) {}
 
-//   @Get()
-//   @ApiResponse({
-//     status: 200,
-//     description: 'Pessoas encontradas',
-//     type: [Pessoa],
-//   })
-//   async getAll(): Promise<Pessoa[]> {
-//     return await this.pessoaService.getAll();
-//   }
+    constructor(private prisma: PrismaService) {}
+
+  @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'Pessoas encontradas',
+  })
+  async getAll(): Promise<Colaborador[]> {
+    return await this.prisma.colaborador.findMany();
+  }
 
 //   @Post()
 //   @ApiResponse({

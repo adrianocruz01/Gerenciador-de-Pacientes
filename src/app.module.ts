@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { PessoaModule } from './modules/pessoa/person.module';
+import { PessoaModule } from './libs/pessoa/person.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { UploudModule } from './modules/uploud/uploud.module';
+import { UploudModule } from './libs/uploud/uploud.module';
 
 @Module({
   imports: [PessoaModule, UploudModule],
