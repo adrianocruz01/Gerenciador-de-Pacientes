@@ -1,13 +1,13 @@
-// // src/auth/auth.controller.ts
-// import { Controller, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
-// import { AuthService } from './auth.service';
+import { Body, Controller, Post } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { AuthCredentialsDto } from './dto/auth.dto';
 
-// @Controller('auth')
-// export class AuthController {
-//   constructor(private authService: AuthService) {}
+@Controller('login')
+export class AuthController {
+    constructor(private readonly authService: AuthService) {}
 
-//   @Post('login')
-//   async login(@Body() body: { cpf: string; password: string }) {
-//     // ... lógica para o endpoint de login
-//   }
-// }
+    @Post()
+    async login(@Body() authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
+        return this.authService.login(authCredentialsDto);
+    }
+}

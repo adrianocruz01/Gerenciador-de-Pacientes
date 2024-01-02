@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Colaborador {
-  colaborador_id                         Int                                      @id @unique(map: "colaborador_id")
+  colaborador_id                         Int                                      @id @unique(map: "colaborador_id")   @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
   cpf                                    String?                                  @db.VarChar(14)
   senha                                  String?                                  @db.VarChar(255)

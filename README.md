@@ -58,7 +58,7 @@ project-root/
   │    │    │    │      └── create-auth.dtos.ts
   │    │    │    │      └── update-auth.dtos.ts
   │    │    │    └── entities/
-  │    │    │    │      └── auth.entitye.ts
+  │    │    │    │      └── auth.entity.ts
   │    │    │    ├── auth.controller.spec.ts
   │    │    │    ├── auth.controller.ts
   │    │    │    ├── auth.module.ts
@@ -69,7 +69,7 @@ project-root/
   │    │    │    └── dto/
   │    │    │    │      └── pessoa.dtos.ts
   │    │    │    └── entities/
-  │    │    │    │      └── pessoa.entitye.ts
+  │    │    │    │      └── pessoa.entity.ts
   │    │    │    ├── pessoa.controller.ts
   │    │    │    ├── pessoa.module.ts
   │    │    │    ├── pessoa.service.ts

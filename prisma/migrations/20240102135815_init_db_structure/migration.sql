@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE `Colaborador` (
-    `colaborador_id` INTEGER NOT NULL,
+    `colaborador_id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(255) NULL,
     `cpf` VARCHAR(14) NULL,
     `senha` VARCHAR(255) NULL,

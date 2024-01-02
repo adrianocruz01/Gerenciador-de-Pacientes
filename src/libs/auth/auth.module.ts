@@ -1,18 +1,18 @@
-// // src/auth/auth.module.ts
-// import { Module } from '@nestjs/common';
-// import { AuthService } from './auth.service';
-// import { AuthController } from './auth.controller';
-// import { PrismaService } from '../prisma/prisma.service';
-// import { JwtModule } from '@nestjs/jwt';
+import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PrismaService } from '../../shared/db/libs/prisma/prisma.service';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 
-// @Module({
-//   imports: [
-//     JwtModule.register({
-//       secret: process.env.JWT_SECRET || 'secretKey',
-//       signOptions: { expiresIn: '1h' },
-//     }),
-//   ],
-//   controllers: [AuthController],
-//   providers: [AuthService, PrismaService],
-// })
-// export class AuthModule {}
+@Module({
+  imports: [
+    // JwtModule pode ser configurado aqui se você estiver usando JWT
+    JwtModule.register({
+      secret: process.env.JWT_SECRET, // Use uma chave secreta
+      signOptions: { expiresIn: '60m' }, // Exemplo de tempo de expiração
+    }),
+  ],
+  controllers: [AuthController], // Inclua AuthController
+  providers: [AuthService, PrismaService], // Inclua AuthService e PrismaService
+})
+export class AuthModule {}
