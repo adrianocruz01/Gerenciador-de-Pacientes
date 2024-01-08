@@ -145,3 +145,9 @@ pdfs
 .svelte-kit
 
 # End of https://www.toptal.com/developers/gitignore/api/node
+
+# Local data
+data
+
+# MacOS
+.DS_Store
