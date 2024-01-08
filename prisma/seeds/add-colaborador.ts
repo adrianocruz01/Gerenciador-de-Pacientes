@@ -7,8 +7,8 @@ async function addColaborador() {
   const senhaHashed = await bcrypt.hash('123456789', 10); 
 
   const novoColaborador = {
-    nome: 'Adriano Cruz',
-    cpf: '053.197.201-14', 
+    nome: 'yuri',
+    cpf: '046.179.703-80', 
     senha: senhaHashed,
   };
 

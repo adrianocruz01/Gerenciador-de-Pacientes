@@ -24,7 +24,7 @@ export class CreatePatientService {
         nome: patientDTO.nome,
         sexo: patientDTO.sexo,
         dtnascimento: patientDTO.dtnascimento,
-        dtalteracao: new Date(),
+        dtalteracao: new ,
         dtcadastro: new Date() // Data de agora
       }
     })
