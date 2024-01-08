@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: icl-mysql
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=icl
+      - MYSQL_USER=docker
+      - MYSQL_PASSWORD=docker
+      - MYSQL_ROOT_PASSWORD=docker
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/mysql:/var/lib/mysql

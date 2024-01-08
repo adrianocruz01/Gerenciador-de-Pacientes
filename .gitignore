@@ -148,3 +148,9 @@ pdfs
 
 # MISC
 .vscode/
+
+# Local data
+data
+
+# MacOS
+.DS_Store
