@@ -26,7 +26,7 @@ export class CreatePatientService {
         dtnascimento: patientDTO.dtnascimento,
         dtalteracao: new Date(),
         dtcadastro: new Date(),
-      }
+      },
     });
   }
 }
