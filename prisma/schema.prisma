@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Colaborador {
-  colaborador_id                         Int                                      @id @unique(map: "colaborador_id")   @default(autoincrement())
+  colaborador_id                         Int                                      @id @unique(map: "colaborador_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
   cpf                                    String?                                  @db.VarChar(14)
   senha                                  String?                                  @db.VarChar(255)
@@ -64,7 +64,7 @@ model Ficha_Admissao_Paciente_Unidade {
 }
 
 model Ficha_Avaliacao_Nutricional {
-  fch_avaliacao_nutricional_id          Int           @id @unique(map: "fch_avaliacao_nutricional_id")
+  fch_avaliacao_nutricional_id          Int           @id @unique(map: "fch_avaliacao_nutricional_id") @default(autoincrement())
   paciente_id                           Int?
   colaborador_id                        Int?
   procedimento_id                       Int?
@@ -134,7 +134,7 @@ model Ficha_Controle_Material {
 }
 
 model Ficha_Diagnostico_Enfermagem {
-  fch_diagnostico_enfermagem_id          Int           @id @unique(map: "fch_diagnostico_enfermagem_id")
+  fch_diagnostico_enfermagem_id          Int           @id @unique(map: "fch_diagnostico_enfermagem_id") @default(autoincrement())
   paciente_id                            Int?
   colaborador_id                         Int?
   procedimento_id                        Int?
@@ -178,7 +178,7 @@ model Ficha_Diagnostico_Enfermagem {
 }
 
 model Ficha_Encaminhamento_Paciente {
-  fch_encaminhamento_paciente_id     Int           @id @unique(map: "fch_encaminhamento_paciente_id")
+  fch_encaminhamento_paciente_id     Int           @id @unique(map: "fch_encaminhamento_paciente_id") @default(autoincrement())
   paciente_id                        Int?
   colaborador_id                     Int?
   procedimento_id                    Int?
@@ -203,7 +203,7 @@ model Ficha_Encaminhamento_Paciente {
 }
 
 model Ficha_Encaminhamento_Paciente_Cirurgia {
-  fch_encaminhamento_paciente_cirurgia_id     Int           @id @unique(map: "fch_encaminhamento_paciente_cirurgia_id")
+  fch_encaminhamento_paciente_cirurgia_id     Int           @id @unique(map: "fch_encaminhamento_paciente_cirurgia_id") @default(autoincrement())
   paciente_id                                 Int?
   colaborador_id                              Int?
   procedimento_id                             Int?
@@ -291,7 +291,7 @@ model Ficha_Intraoperatoria {
 }
 
 model Ficha_Recebimento_Paciente_Cirurgia {
-  fch_recebimento_paciente_cirurgia_id     Int           @id @unique(map: "fch_recebimento_paciente_cirurgia_id")
+  fch_recebimento_paciente_cirurgia_id     Int           @id @unique(map: "fch_recebimento_paciente_cirurgia_id") @default(autoincrement())
   paciente_id                              Int?
   colaborador_id                           Int?
   procedimento_id                          Int?
@@ -316,7 +316,7 @@ model Ficha_Recebimento_Paciente_Cirurgia {
 }
 
 model Ficha_SAE_Triagem {
-  fch_SAE_Triagem_id                         Int           @id @unique(map: "fch_SAE_Triagem_id")
+  fch_SAE_Triagem_id                         Int           @id @unique(map: "fch_SAE_Triagem_id") @default(autoincrement())
   paciente_id                                Int?
   colaborador_id                             Int?
   procedimento_id                            Int?
@@ -459,10 +459,11 @@ model Ficha_Transferencia_Paciente {
 }
 
 model Paciente {
-  paciente_id                            Int                                      @id @unique(map: "paciente_id")
+  paciente_id                            Int                                      @id @unique(map: "paciente_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
   cpf                                    String?                                  @db.VarChar(14)
   sexo                                   String?                                  @db.VarChar(1)
+  dtnascimento                           DateTime?                                @db.Date
   dtcadastro                             DateTime?                                @db.Date
   dtalteracao                            DateTime?                                @db.Date
   status                                 String?                                  @db.Char(1)
@@ -480,7 +481,7 @@ model Paciente {
 }
 
 model Paciente_Procedimento {
-  paciente_Procedimento_id Int           @id @unique(map: "paciente_Procedimento_id")
+  paciente_Procedimento_id Int           @id @unique(map: "paciente_Procedimento_id") @default(autoincrement())
   paciente_id              Int?
   procedimento_id          Int?
   status                   String?       @db.Char(1)
@@ -492,7 +493,7 @@ model Paciente_Procedimento {
 }
 
 model Procedimento {
-  procedimento_id                        Int                                      @id @unique(map: "procedimento_id")
+  procedimento_id                        Int                                      @id @unique(map: "procedimento_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
   descricao                              String?                                  @db.VarChar(255)
   status                                 String?                                  @db.Char(1)

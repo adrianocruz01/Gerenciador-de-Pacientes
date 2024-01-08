@@ -50,7 +50,7 @@ CREATE TABLE `Ficha_Admissao_Paciente_Unidade` (
 
 -- CreateTable
 CREATE TABLE `Ficha_Avaliacao_Nutricional` (
-    `fch_avaliacao_nutricional_id` INTEGER NOT NULL,
+    `fch_avaliacao_nutricional_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -120,7 +120,7 @@ CREATE TABLE `Ficha_Controle_Material` (
 
 -- CreateTable
 CREATE TABLE `Ficha_Diagnostico_Enfermagem` (
-    `fch_diagnostico_enfermagem_id` INTEGER NOT NULL,
+    `fch_diagnostico_enfermagem_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -164,7 +164,7 @@ CREATE TABLE `Ficha_Diagnostico_Enfermagem` (
 
 -- CreateTable
 CREATE TABLE `Ficha_Encaminhamento_Paciente` (
-    `fch_encaminhamento_paciente_id` INTEGER NOT NULL,
+    `fch_encaminhamento_paciente_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -189,7 +189,7 @@ CREATE TABLE `Ficha_Encaminhamento_Paciente` (
 
 -- CreateTable
 CREATE TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` (
-    `fch_encaminhamento_paciente_cirurgia_id` INTEGER NOT NULL,
+    `fch_encaminhamento_paciente_cirurgia_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -277,7 +277,7 @@ CREATE TABLE `Ficha_Intraoperatoria` (
 
 -- CreateTable
 CREATE TABLE `Ficha_Recebimento_Paciente_Cirurgia` (
-    `fch_recebimento_paciente_cirurgia_id` INTEGER NOT NULL,
+    `fch_recebimento_paciente_cirurgia_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -302,7 +302,7 @@ CREATE TABLE `Ficha_Recebimento_Paciente_Cirurgia` (
 
 -- CreateTable
 CREATE TABLE `Ficha_SAE_Triagem` (
-    `fch_SAE_Triagem_id` INTEGER NOT NULL,
+    `fch_SAE_Triagem_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `colaborador_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
@@ -445,10 +445,11 @@ CREATE TABLE `Ficha_Transferencia_Paciente` (
 
 -- CreateTable
 CREATE TABLE `Paciente` (
-    `paciente_id` INTEGER NOT NULL,
+    `paciente_id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(255) NULL,
     `cpf` VARCHAR(14) NULL,
     `sexo` VARCHAR(1) NULL,
+    `dtnascimento` DATE NULL,
     `dtcadastro` DATE NULL,
     `dtalteracao` DATE NULL,
     `status` CHAR(1) NULL,
@@ -459,7 +460,7 @@ CREATE TABLE `Paciente` (
 
 -- CreateTable
 CREATE TABLE `Paciente_Procedimento` (
-    `paciente_Procedimento_id` INTEGER NOT NULL,
+    `paciente_Procedimento_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
     `status` CHAR(1) NULL,
@@ -472,7 +473,7 @@ CREATE TABLE `Paciente_Procedimento` (
 
 -- CreateTable
 CREATE TABLE `Procedimento` (
-    `procedimento_id` INTEGER NOT NULL,
+    `procedimento_id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(255) NULL,
     `descricao` VARCHAR(255) NULL,
     `status` CHAR(1) NULL,
