@@ -27,7 +27,7 @@ describe('PessoaController e2e', () => {
 
   describe('createOne', () => {
     it('should call pessoaService.createOne with the provided dto', async () => {
-      let email = randomUUID().toString();
+      const email = randomUUID().toString();
 
       const createPessoaDto = new CreatePessoaDto();
       createPessoaDto.email = email;

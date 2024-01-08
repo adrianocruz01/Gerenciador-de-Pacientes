@@ -1,13 +1,13 @@
-import { IsOptional, IsString, Matches } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class SearchPatientDto {
   @IsOptional()
   @IsString()
-//   @Matches(/^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, { message: 'Nome completo inválido' })
+  //   @Matches(/^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/, { message: 'Nome completo inválido' })
   nome?: string;
 
   @IsOptional()
   @IsString()
-//   @Matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, { message: 'CPF inválido.' })
+  //   @Matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, { message: 'CPF inválido.' })
   cpf?: string;
 }

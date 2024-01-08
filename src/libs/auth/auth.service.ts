@@ -6,24 +6,26 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-    constructor(
-        private prisma: PrismaService,
-        private jwtService: JwtService
-    ) {}
+  constructor(
+    private prisma: PrismaService,
+    private jwtService: JwtService,
+  ) {}
 
-    async login(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-        const { cpf, password } = authCredentialsDto;
+  async login(
+    authCredentialsDto: AuthCredentialsDto,
+  ): Promise<{ accessToken: string }> {
+    const { cpf, password } = authCredentialsDto;
 
-        const colaborador = await this.prisma.colaborador.findFirst({
-            where: { cpf }
-        });
+    const colaborador = await this.prisma.colaborador.findFirst({
+      where: { cpf },
+    });
 
-        if (colaborador && await bcrypt.compare(password, colaborador.senha)) {
-            const payload = { cpf: colaborador.cpf, sub: colaborador.colaborador_id };
-            const accessToken = this.jwtService.sign(payload);
-            return { accessToken };
-        } else {
-            throw new BadRequestException("Usuario ou senha incorretos!");
-        }
+    if (colaborador && (await bcrypt.compare(password, colaborador.senha))) {
+      const payload = { cpf: colaborador.cpf, sub: colaborador.colaborador_id };
+      const accessToken = this.jwtService.sign(payload);
+      return { accessToken };
+    } else {
+      throw new BadRequestException('Usuario ou senha incorretos!');
     }
+  }
 }

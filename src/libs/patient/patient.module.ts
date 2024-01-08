@@ -5,8 +5,8 @@ import { CreatePatientService } from './services/create-patient.service';
 import { PrismaModule } from '../../shared/db/libs/prisma/prisma.module';
 
 @Module({
-    imports: [PrismaModule],
-    controllers: [PatientController],
-    providers: [SearchPatientService, CreatePatientService]
+  imports: [PrismaModule],
+  controllers: [PatientController],
+  providers: [SearchPatientService, CreatePatientService],
 })
 export class PatientModule {}

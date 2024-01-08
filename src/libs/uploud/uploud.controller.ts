@@ -1,5 +1,12 @@
 // Lida com a rota HTTP e utiliza o FileInterceptor para processar o upload do arquivo.
-import { Controller, Post, UploadedFile, UseInterceptors, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { UploadInterceptor } from './upload.interceptor';
 
 @Controller('upload')

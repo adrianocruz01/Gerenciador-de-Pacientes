@@ -19,30 +19,30 @@ export class SearchPatientService {
           OR: [
             patientDTO.nome ? { nome: patientDTO.nome } : undefined,
             patientDTO.cpf ? { cpf: patientDTO.cpf } : undefined,
-          ].filter(condition => condition !== undefined),
+          ].filter((condition) => condition !== undefined),
         },
         include: {
           Paciente_Procedimento: {
             include: {
               Procedimento: true,
-            }
-          }
+            },
+          },
         },
       });
-      console.log(patients)
+      console.log(patients);
 
-      return patients.map(patient => {
+      return patients.map((patient) => {
         return {
           nome: patient.nome,
           cpf: patient.cpf,
           dtnascimento: patient.dtnascimento,
-          procedimentos: patient.Paciente_Procedimento.map(pProc => pProc.Procedimento)
+          procedimentos: patient.Paciente_Procedimento.map(
+            (pProc) => pProc.Procedimento,
+          ),
         };
       });
-
     } catch (error) {
       throw new BadRequestException('Erro ao buscar pacientes');
     }
   }
 }
-

@@ -8,7 +8,7 @@ import { SearchPatientDto } from './dto/search.patient.dto';
 export class PatientController {
   constructor(
     private readonly createPatientService: CreatePatientService,
-    private readonly searchPatientService: SearchPatientService
+    private readonly searchPatientService: SearchPatientService,
   ) {}
 
   @Post('/cadastrar')
@@ -19,7 +19,8 @@ export class PatientController {
 
   @Get('/pesquisar') // Nome do endpoint em inglês e simplificado
   @HttpCode(200)
-  async search(@Query() searchPatientDto: SearchPatientDto) { // Usando @Query() para métodos GET
+  async search(@Query() searchPatientDto: SearchPatientDto) {
+    // Usando @Query() para métodos GET
     const patients = await this.searchPatientService.execute(searchPatientDto);
     if (patients.length === 0) {
       // Você pode querer lidar com isso de outra forma, talvez retornando um status 404
@@ -27,5 +28,4 @@ export class PatientController {
     }
     return patients;
   }
-
 }
