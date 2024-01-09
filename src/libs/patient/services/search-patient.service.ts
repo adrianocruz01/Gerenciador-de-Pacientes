@@ -29,7 +29,6 @@ export class SearchPatientService {
           },
         },
       });
-      console.log(patients);
 
       return patients.map((patient) => {
         return {

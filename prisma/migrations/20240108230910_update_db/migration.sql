@@ -7,11 +7,12 @@ CREATE TABLE `Colaborador` (
     `especialidade` VARCHAR(255) NULL,
     `matricula` VARCHAR(255) NULL,
     `matricula_estado` VARCHAR(255) NULL,
-    `dtcadastro` DATE NULL,
-    `dtalteracao` DATE NULL,
+    `dtcadastro` DATETIME(3) NULL,
+    `dtalteracao` DATETIME(3) NULL,
     `status` CHAR(1) NULL,
 
     UNIQUE INDEX `colaborador_id`(`colaborador_id`),
+    UNIQUE INDEX `Colaborador_cpf_key`(`cpf`),
     PRIMARY KEY (`colaborador_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -449,12 +450,13 @@ CREATE TABLE `Paciente` (
     `nome` VARCHAR(255) NULL,
     `cpf` VARCHAR(14) NULL,
     `sexo` VARCHAR(1) NULL,
-    `dtnascimento` DATE NULL,
-    `dtcadastro` DATE NULL,
-    `dtalteracao` DATE NULL,
+    `dtnascimento` DATETIME(3) NULL,
+    `dtcadastro` DATETIME(3) NULL,
+    `dtalteracao` DATETIME(3) NULL,
     `status` CHAR(1) NULL,
 
     UNIQUE INDEX `paciente_id`(`paciente_id`),
+    UNIQUE INDEX `Paciente_cpf_key`(`cpf`),
     PRIMARY KEY (`paciente_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -464,6 +466,8 @@ CREATE TABLE `Paciente_Procedimento` (
     `paciente_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
     `status` CHAR(1) NULL,
+    `dtregistro` DATETIME(3) NULL,
+    `hrregistro` DATETIME(3) NULL,
 
     UNIQUE INDEX `paciente_Procedimento_id`(`paciente_Procedimento_id`),
     INDEX `paciente_id`(`paciente_id`),

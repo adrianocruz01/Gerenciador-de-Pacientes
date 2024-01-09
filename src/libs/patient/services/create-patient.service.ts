@@ -18,15 +18,17 @@ export class CreatePatientService {
       throw new BadRequestException('Já existe um usuário com esse CPF');
     }
 
-    await this.prisma.paciente.create({
+    const patient = await this.prisma.paciente.create({
       data: {
         cpf: patientDTO.cpf,
         nome: patientDTO.nome,
         sexo: patientDTO.sexo,
         dtnascimento: patientDTO.dtnascimento,
         dtalteracao: new Date(),
-        dtcadastro: new Date(),
-      },
-    });
+        dtcadastro: new Date()
+      }
+    })
+
+    return patient
   }
 }

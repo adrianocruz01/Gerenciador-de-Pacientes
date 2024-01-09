@@ -16,7 +16,7 @@ async function addColaborador() {
     const colaborador = await prisma.colaborador.create({
       data: novoColaborador,
     });
-    console.log('Colaborador adicionado:', colaborador);
+    // console.log('Colaborador adicionado:', colaborador);
   } catch (error) {
     console.error('Erro ao adicionar colaborador:', error);
   } finally {
