@@ -1,13 +1,5 @@
 import { Transform } from 'class-transformer';
-import {
-  IsString,
-  IsDate,
-  Matches,
-  IsEnum,
-  MinLength,
-  MaxLength,
-  IsOptional,
-} from 'class-validator';
+import { IsString, IsDate, Matches, IsEnum, MinLength, MaxLength, IsOptional } from 'class-validator';
 
 export class CreatePatientDto {
   @IsString()

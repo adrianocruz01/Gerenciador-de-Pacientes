@@ -39,13 +39,9 @@ describe('PessoaController e2e', () => {
       pessoa.name = 'Teste da Silva';
       pessoa.years = 23;
 
-      const createOneSpy = jest
-        .spyOn(pessoaService, 'createOne')
-        .mockResolvedValue(pessoa);
+      const createOneSpy = jest.spyOn(pessoaService, 'createOne').mockResolvedValue(pessoa);
 
-      const response = await request(app.getHttpServer())
-        .post('/pessoa/')
-        .send(createPessoaDto);
+      const response = await request(app.getHttpServer()).post('/pessoa/').send(createPessoaDto);
 
       expect(createOneSpy).toHaveBeenCalledWith(createPessoaDto);
       expect(response.status).toBe(201);

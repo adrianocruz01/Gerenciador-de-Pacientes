@@ -11,9 +11,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(
-    authCredentialsDto: AuthCredentialsDto,
-  ): Promise<{ accessToken: string }> {
+  async login(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     const { cpf, password } = authCredentialsDto;
 
     const colaborador = await this.prisma.colaborador.findFirst({
