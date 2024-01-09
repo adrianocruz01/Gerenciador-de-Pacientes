@@ -40,7 +40,7 @@ export class PatientController {
   async search(@Query() searchPatientDto: SearchPatientDto) {
     const patients = await this.searchPatientService.execute(searchPatientDto);
     if (patients.length === 0) {
-      return 'Nenhum paciente encontrado.';
+      return [];
     }
     return patients;
   }

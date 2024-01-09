@@ -36,6 +36,7 @@ export class SearchPatientService {
           nome: patient.nome,
           cpf: patient.cpf,
           dtnascimento: patient.dtnascimento,
+          sexo: patient.sexo,
           procedimentos: patient.Paciente_Procedimento.map(
             (pProc) => pProc.Procedimento,
           ),
