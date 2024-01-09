@@ -2,7 +2,7 @@
 CREATE TABLE `Colaborador` (
     `colaborador_id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(255) NULL,
-    `cpf` VARCHAR(14) NULL,
+    `cpf` VARCHAR(14) NOT NULL,
     `senha` VARCHAR(255) NULL,
     `especialidade` VARCHAR(255) NULL,
     `matricula` VARCHAR(255) NULL,
@@ -448,7 +448,7 @@ CREATE TABLE `Ficha_Transferencia_Paciente` (
 CREATE TABLE `Paciente` (
     `paciente_id` INTEGER NOT NULL AUTO_INCREMENT,
     `nome` VARCHAR(255) NULL,
-    `cpf` VARCHAR(14) NULL,
+    `cpf` VARCHAR(14) NOT NULL,
     `sexo` VARCHAR(1) NULL,
     `dtnascimento` DATETIME(3) NULL,
     `dtcadastro` DATETIME(3) NULL,

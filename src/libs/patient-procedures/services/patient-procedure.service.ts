@@ -11,14 +11,18 @@ export class PatientProcedureService {
   async create(patientId: number, procedureDTO: CreatePatientProcedureDto) {
     return await this.prisma.paciente_Procedimento.create({
       data: {
-        paciente_id: +patientId,
+        paciente_id: patientId,
         procedimento_id: procedureDTO.procedimento_id,
         status: procedureDTO.status,
       },
     });
   }
 
-  async update(patientId: number, id: number, procedureDTO: UpdatePatientProcedureDto) {
+  async update(
+    patientId: number,
+    id: number,
+    procedureDTO: UpdatePatientProcedureDto,
+  ) {
     const procedure = await this.prisma.paciente_Procedimento.findUnique({
       where: { paciente_id: +patientId, paciente_Procedimento_id: +id },
     });
@@ -30,13 +34,17 @@ export class PatientProcedureService {
         paciente_Procedimento_id: procedure.paciente_Procedimento_id,
       },
       data: {
-        procedimento_id: procedureDTO.procedimento_id ?? procedure.procedimento_id,
+        procedimento_id:
+          procedureDTO.procedimento_id ?? procedure.procedimento_id,
         status: procedureDTO.status ?? procedure.status,
       },
     });
   }
 
-  async findAll(patientId: number, searchProcedureDto: SearchPatientProcedureDto) {
+  async findAll(
+    patientId: number,
+    searchProcedureDto: SearchPatientProcedureDto,
+  ) {
     return await this.prisma.paciente_Procedimento.findMany({
       where: {
         AND: {
