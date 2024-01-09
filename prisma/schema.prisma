@@ -10,7 +10,7 @@ datasource db {
 model Colaborador {
   colaborador_id                         Int                                      @id @unique(map: "colaborador_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
-  cpf                                    String?                                  @db.VarChar(14) @unique
+  cpf                                    String                                  @db.VarChar(14) @unique
   senha                                  String?                                  @db.VarChar(255)
   especialidade                          String?                                  @db.VarChar(255)
   matricula                              String?                                  @db.VarChar(255)
@@ -461,7 +461,7 @@ model Ficha_Transferencia_Paciente {
 model Paciente {
   paciente_id                            Int                                      @id @unique(map: "paciente_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)
-  cpf                                    String?                                  @db.VarChar(14) @unique
+  cpf                                    String                                  @db.VarChar(14) @unique
   sexo                                   String?                                  @db.VarChar(1)
   dtnascimento                           DateTime?                                
   dtcadastro                             DateTime?                                

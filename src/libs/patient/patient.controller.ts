@@ -32,12 +32,7 @@ export class PatientController {
       );
     }
 
-    return {
-      nome: patient.nome,
-      cpf: patient.cpf,
-      sexo: patient.sexo,
-      dtnascimento: patient.dtnascimento,
-    };
+    return patient;
   }
 
   @Get('/pesquisar')
