@@ -5,7 +5,7 @@ import { Public } from './guards/public';
 
 @Controller('login')
 export class AuthController {
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Public()
   @Post()
