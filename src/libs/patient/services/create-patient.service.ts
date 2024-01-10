@@ -10,12 +10,12 @@ export class CreatePatientService {
     // Trás somente um paciente (o primeiro que encontrar)
     const hasPatient = await this.prisma.paciente.findFirst({
       where: {
-        cpf: patientDTO.cpf
-      }
-    })
+        cpf: patientDTO.cpf,
+      },
+    });
 
     if (hasPatient) {
-      throw new BadRequestException('Já existe um usuário com esse CPF')
+      throw new BadRequestException('Já existe um usuário com esse CPF');
     }
 
     const patient = await this.prisma.paciente.create({
@@ -25,10 +25,10 @@ export class CreatePatientService {
         sexo: patientDTO.sexo,
         dtnascimento: patientDTO.dtnascimento,
         dtalteracao: new Date(),
-        dtcadastro: new Date()
-      }
-    })
+        dtcadastro: new Date(),
+      },
+    });
 
-    return patient
+    return patient;
   }
 }

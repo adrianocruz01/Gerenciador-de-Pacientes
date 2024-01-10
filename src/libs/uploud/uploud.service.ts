@@ -4,7 +4,7 @@ import * as path from 'path';
 
 @Injectable()
 export class UploadService {
-  private readonly uploadPath = path.join(__dirname, "..", "..", "..", "pdfs");
+  private readonly uploadPath = path.join(__dirname, '..', '..', '..', 'pdfs');
 
   constructor() {
     this.ensureUploadPathExists();
@@ -15,5 +15,4 @@ export class UploadService {
       fs.mkdirSync(this.uploadPath, { recursive: true });
     }
   }
-
 }

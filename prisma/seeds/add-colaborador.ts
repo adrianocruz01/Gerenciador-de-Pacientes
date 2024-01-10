@@ -4,11 +4,11 @@ import * as bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 
 async function addColaborador() {
-  const senhaHashed = await bcrypt.hash('123456789', 10); 
+  const senhaHashed = await bcrypt.hash('123456789', 10);
 
   const novoColaborador = {
     nome: 'yuri',
-    cpf: '046.179.703-80', 
+    cpf: '046.179.703-80',
     senha: senhaHashed,
   };
 

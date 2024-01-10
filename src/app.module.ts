@@ -5,9 +5,21 @@ import { AppController } from './app.controller';
 import { UploudModule } from './libs/uploud/uploud.module';
 import { AuthModule } from './libs/auth/auth.module';
 import { PatientModule } from './libs/patient/patient.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [PessoaModule, UploudModule, AuthModule, PatientModule],
+  imports: [
+    ConfigModule.forRoot({
+      cache: true,
+      isGlobal: true,
+      expandVariables: true,
+      // envFilePath: '.env',
+    }),
+    PessoaModule,
+    UploudModule,
+    AuthModule,
+    PatientModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

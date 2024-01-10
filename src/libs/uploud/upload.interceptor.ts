@@ -5,7 +5,7 @@ import * as path from 'path';
 
 export const UploadInterceptor = FileInterceptor('pdf', {
   storage: diskStorage({
-    destination: path.join(__dirname, "..", "..", "..", "pdfs"),
+    destination: path.join(__dirname, '..', '..', '..', 'pdfs'),
     filename: (req, file, callback) => {
       const filename = path.parse(file.originalname).name;
       const extension = path.parse(file.originalname).ext;
