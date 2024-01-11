@@ -6,6 +6,7 @@ import { UploudModule } from './libs/uploud/uploud.module';
 import { AuthModule } from './libs/auth/auth.module';
 import { PatientModule } from './libs/patient/patient.module';
 import { ConfigModule } from '@nestjs/config';
+import { ProcedureModule } from './libs/procedures/procedure.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@nestjs/config';
     UploudModule,
     AuthModule,
     PatientModule,
+    ProcedureModule,
   ],
   controllers: [AppController],
   providers: [AppService],
