@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PatientProcedureController } from './patient-procedure.controller';
 
-describe('ProcedureController', () => {
+describe('PatientProcedureController', () => {
   let controller: PatientProcedureController;
 
   beforeEach(async () => {
