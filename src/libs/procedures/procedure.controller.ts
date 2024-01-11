@@ -28,7 +28,7 @@ export class ProcedureController {
 
   @Get('')
   @HttpCode(200)
-  async search(@Query() searchPatientDto: SearchProcedureDto) {
-    return this.procedureService.findAll(searchPatientDto);
+  async search(@Query() searchProcedureDto: SearchProcedureDto) {
+    return this.procedureService.findAll(searchProcedureDto);
   }
 }

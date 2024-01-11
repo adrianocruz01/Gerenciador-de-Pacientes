@@ -30,17 +30,17 @@ export class ProcedureService {
     });
   }
 
-  async findAll(searchPatientDto: SearchProcedureDto) {
+  async findAll(searchProcedureDto: SearchProcedureDto) {
     return await this.prisma.procedimento.findMany({
       where: {
-        nome: !!searchPatientDto?.nome
+        nome: !!searchProcedureDto?.nome
           ? {
-              contains: searchPatientDto.nome,
+              contains: searchProcedureDto.nome,
             }
           : undefined,
-        descricao: !!searchPatientDto?.descricao
+        descricao: !!searchProcedureDto?.descricao
           ? {
-              contains: searchPatientDto.descricao,
+              contains: searchProcedureDto.descricao,
             }
           : undefined,
       },
