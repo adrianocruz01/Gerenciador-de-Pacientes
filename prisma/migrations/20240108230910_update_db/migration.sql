@@ -69,7 +69,7 @@ CREATE TABLE `Ficha_Avaliacao_Nutricional` (
     `disturbios_hepaticos` CHAR(1) NULL,
     `cardiopatias` CHAR(1) NULL,
     `doencao_respiratoria` CHAR(1) NULL,
-    `outras_patologias_qauis` VARCHAR(255) NULL,
+    `outras_patologias_quais` VARCHAR(255) NULL,
     `fumante` CHAR(1) NULL,
     `fumante_frequencia` VARCHAR(255) NULL,
     `mastigacao` CHAR(1) NULL,

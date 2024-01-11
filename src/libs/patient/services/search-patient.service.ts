@@ -30,14 +30,13 @@ export class SearchPatientService {
         },
       });
 
-      return patients.map((patient) => {
-        return {
-          nome: patient.nome,
-          cpf: patient.cpf,
-          dtnascimento: patient.dtnascimento,
-          procedimentos: patient.Paciente_Procedimento.map((pProc) => pProc.Procedimento),
-        };
-      });
+      return patients.map((patient) => ({
+        paciente_id: patient.paciente_id,
+        nome: patient.nome,
+        cpf: patient.cpf,
+        dtnascimento: patient.dtnascimento,
+        procedimentos: patient.Paciente_Procedimento.map((pProc) => pProc.Procedimento),
+      }));
     } catch (error) {
       throw new BadRequestException('Erro ao buscar pacientes');
     }

@@ -7,6 +7,8 @@ import { AuthModule } from './libs/auth/auth.module';
 import { PatientModule } from './libs/patient/patient.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProcedureModule } from './libs/procedures/procedure.module';
+import { PatientProcedureModule } from './libs/patient-procedures/patient-procedure.module';
+import { NutritionalModule } from './libs/forms/nutritional/nutritional.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { ProcedureModule } from './libs/procedures/procedure.module';
     AuthModule,
     PatientModule,
     ProcedureModule,
+    PatientProcedureModule,
+    NutritionalModule,
   ],
   controllers: [AppController],
   providers: [AppService],

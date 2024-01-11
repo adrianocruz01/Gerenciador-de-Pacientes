@@ -21,12 +21,7 @@ export class PatientController {
       throw new BadRequestException('Não foi possível criar o paciente com os dados fornecidos.');
     }
 
-    return {
-      nome: patient.nome,
-      cpf: patient.cpf,
-      sexo: patient.sexo,
-      dtnascimento: patient.dtnascimento,
-    };
+    return patient;
   }
 
   @Get('/pesquisar')
