@@ -463,7 +463,7 @@ model Paciente {
   nome                                   String?                                  @db.VarChar(255)
   cpf                                    String                                  @db.VarChar(14) @unique
   sexo                                   String?                                  @db.VarChar(1)
-  dtnascimento                           DateTime?                                
+  dtnascimento                           DateTime                                
   dtcadastro                             DateTime?                                
   dtalteracao                            DateTime?                                
   status                                 String?                                  @db.Char(1)
@@ -487,8 +487,8 @@ model Paciente_Procedimento {
   status                   String?       @db.Char(1)
   Paciente                 Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Paciente_Procedimento_ibfk_1")
   Procedimento             Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Paciente_Procedimento_ibfk_2")
-  dtregistro               DateTime? 
-  hrregistro               DateTime? 
+  dtregistro               DateTime
+  hrregistro               DateTime 
 
   @@index([paciente_id], map: "paciente_id")
   @@index([procedimento_id], map: "procedimento_id")
