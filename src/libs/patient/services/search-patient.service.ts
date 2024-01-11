@@ -17,7 +17,7 @@ export class SearchPatientService {
       const patients = await this.prisma.paciente.findMany({
         where: {
           OR: [
-            patientDTO.nome ? { nome: patientDTO.nome } : undefined,
+            patientDTO.nome ? { nome: { contains: patientDTO.nome } } : undefined,
             patientDTO.cpf ? { cpf: patientDTO.cpf } : undefined,
           ].filter((condition) => condition !== undefined),
         },
