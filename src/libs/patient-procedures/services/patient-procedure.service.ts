@@ -1,42 +1,31 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
 import { CreatePatientProcedureDto } from '../dto/create-patient-procedure.dto';
-import { UpdatePatientProcedureDto } from '../dto/update-patient-procedure.dto';
 import { SearchPatientProcedureDto } from '../dto/search-patient-procedure.dto';
 
 @Injectable()
 export class PatientProcedureService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(patientId: number, procedureDTO: CreatePatientProcedureDto) {
+  async create(
+    pacienteId: number,
+    { procedimentoId, dtregistro, hrregistro }: CreatePatientProcedureDto,
+  ) {
+    const patient = await this.prisma.paciente.findUnique({
+      where: { paciente_id: pacienteId },
+    });
+
+    if (!patient) throw new NotFoundException('Paciente não cadastrado');
+
     return await this.prisma.paciente_Procedimento.create({
       data: {
-        paciente_id: patientId,
-        procedimento_id: procedureDTO.procedimento_id,
-        status: procedureDTO.status,
+        paciente_id: pacienteId,
+        procedimento_id: procedimentoId,
+        dtregistro: dtregistro,
+        hrregistro: hrregistro,
       },
-    });
-  }
-
-  async update(
-    patientId: number,
-    id: number,
-    procedureDTO: UpdatePatientProcedureDto,
-  ) {
-    const procedure = await this.prisma.paciente_Procedimento.findUnique({
-      where: { paciente_id: +patientId, paciente_Procedimento_id: +id },
-    });
-    if (!procedure) throw new NotFoundException('Procedimento não cadastrado');
-
-    return await this.prisma.paciente_Procedimento.update({
-      where: {
-        paciente_id: +patientId,
-        paciente_Procedimento_id: procedure.paciente_Procedimento_id,
-      },
-      data: {
-        procedimento_id:
-          procedureDTO.procedimento_id ?? procedure.procedimento_id,
-        status: procedureDTO.status ?? procedure.status,
+      include: {
+        Procedimento: true,
       },
     });
   }
