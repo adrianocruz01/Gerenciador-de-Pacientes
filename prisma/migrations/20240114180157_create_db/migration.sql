@@ -465,7 +465,7 @@ CREATE TABLE `Paciente_Procedimento` (
     `paciente_Procedimento_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
-    `status` CHAR(1) NULL,
+    `status` ENUM('PREENCHIDO', 'NAO_PREENCHIDO') NOT NULL,
     `dtregistro` DATETIME(3) NOT NULL,
     `hrregistro` DATETIME(3) NOT NULL,
 

@@ -18,6 +18,7 @@ export class PatientProcedureService {
       data: {
         paciente_id: pacienteId,
         procedimento_id: procedimentoId,
+        status: "NAO_PREENCHIDO",
         dtregistro: dtregistro,
         hrregistro: hrregistro,
       },
