@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
 import { CreatePatientProcedureDto } from '../dto/create-patient-procedure.dto';
 import { SearchPatientProcedureDto } from '../dto/search-patient-procedure.dto';
@@ -18,9 +18,9 @@ export class PatientProcedureService {
       data: {
         paciente_id: pacienteId,
         procedimento_id: procedimentoId,
-        status: "NAO_PREENCHIDO",
         dtregistro: dtregistro,
         hrregistro: hrregistro,
+        preenchido: false
       },
       include: {
         Procedimento: true,
@@ -28,26 +28,40 @@ export class PatientProcedureService {
     });
   }
 
-  async findAll(patientId: number, searchProcedureDto: SearchPatientProcedureDto) {
-    return await this.prisma.paciente_Procedimento.findMany({
+
+  async findAllForms(patientId: number, procedureId: number) {
+
+    const hasPatient = await this.prisma.paciente.findFirst({
+      where: {
+        paciente_id: patientId
+      },
+    });
+
+    if (!hasPatient) {
+      throw new BadRequestException('Paciente não encontrado!');
+    } 
+
+    return await this.prisma.paciente_Procedimento.findFirst({
       where: {
         AND: {
           paciente_id: +patientId,
-          Procedimento: {
-            nome: !!searchProcedureDto?.nome
-              ? {
-                  contains: searchProcedureDto.nome,
-                }
-              : undefined,
-            descricao: !!searchProcedureDto?.descricao
-              ? {
-                  contains: searchProcedureDto.descricao,
-                }
-              : undefined,
-          },
+          procedimento_id: +procedureId
         },
       },
-      include: { Procedimento: true },
+      include:{ Procedimento: {
+        include: {
+          Ficha_Admissao_Paciente_Unidade: true,
+          Ficha_Avaliacao_Nutricional: true,
+          Ficha_Controle_Material: true,
+          Ficha_Diagnostico_Enfermagem: true,
+          Ficha_Encaminhamento_Paciente: true,
+          Ficha_Encaminhamento_Paciente_Cirurgia: true,
+          Ficha_Intraoperatoria: true,
+          Ficha_Recebimento_Paciente_Cirurgia: true,
+          Ficha_SAE_Triagem: true,
+          Ficha_Transferencia_Paciente: true,
+        }
+      } },
     });
   }
 

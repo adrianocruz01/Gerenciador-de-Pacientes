@@ -21,9 +21,9 @@ export class ProcedimentoService {
       data: {
         paciente_id: pacienteId,
         procedimento_id: dadosProcedimento.procedimentoId,
-        status: dadosProcedimento.status,
         dtregistro: dtregistro,
         hrregistro: hrregistro,
+        preenchido: false
       },
     });
 

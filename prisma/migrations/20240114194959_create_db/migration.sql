@@ -465,9 +465,10 @@ CREATE TABLE `Paciente_Procedimento` (
     `paciente_Procedimento_id` INTEGER NOT NULL AUTO_INCREMENT,
     `paciente_id` INTEGER NULL,
     `procedimento_id` INTEGER NULL,
-    `status` ENUM('PREENCHIDO', 'NAO_PREENCHIDO') NOT NULL,
+    `status` CHAR(1) NULL,
     `dtregistro` DATETIME(3) NOT NULL,
     `hrregistro` DATETIME(3) NOT NULL,
+    `preenchido` BOOLEAN NOT NULL,
 
     UNIQUE INDEX `paciente_Procedimento_id`(`paciente_Procedimento_id`),
     INDEX `paciente_id`(`paciente_id`),

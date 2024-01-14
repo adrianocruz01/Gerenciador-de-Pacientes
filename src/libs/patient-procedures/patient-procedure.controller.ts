@@ -1,7 +1,6 @@
 import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { PatientProcedureService } from './services/patient-procedure.service';
 import { CreatePatientProcedureDto } from './dto/create-patient-procedure.dto';
-import { SearchPatientProcedureDto } from './dto/search-patient-procedure.dto';
 
 @Controller('pacientes/:patientId/procedimentos')
 export class PatientProcedureController {
@@ -19,9 +18,9 @@ export class PatientProcedureController {
     return await this.procedureService.remove(patientId, id);
   }
 
-  @Get('')
+  @Get(':procedureId')
   @HttpCode(200)
-  async search(@Param('patientId') patientId: number, @Query() searchPatientProcedure: SearchPatientProcedureDto) {
-    return this.procedureService.findAll(patientId, searchPatientProcedure);
+  async search(@Param('patientId') patientId: number, @Param('procedureId') procedureId: number) {
+    return this.procedureService.findAllForms(patientId, procedureId);
   }
 }

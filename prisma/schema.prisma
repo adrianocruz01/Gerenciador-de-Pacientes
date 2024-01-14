@@ -480,19 +480,16 @@ model Paciente {
   Paciente_Procedimento                  Paciente_Procedimento[]
 }
 
-enum Paciente_Procedimento_Status {
-  PREENCHIDO
-  NAO_PREENCHIDO
-}
 model Paciente_Procedimento {
   paciente_Procedimento_id Int           @id @unique(map: "paciente_Procedimento_id") @default(autoincrement())
   paciente_id              Int?
   procedimento_id          Int?
-  status                   Paciente_Procedimento_Status
+  status                   String?       @db.Char(1)
   Paciente                 Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Paciente_Procedimento_ibfk_1")
   Procedimento             Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Paciente_Procedimento_ibfk_2")
   dtregistro               DateTime
   hrregistro               DateTime
+  preenchido               Boolean
 
   @@index([paciente_id], map: "paciente_id")
   @@index([procedimento_id], map: "procedimento_id")

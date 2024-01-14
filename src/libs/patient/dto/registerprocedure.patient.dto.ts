@@ -1,4 +1,3 @@
-import { Paciente_Procedimento_Status } from '@prisma/client';
 import { IsString, IsDateString, IsNumber, IsEnum } from 'class-validator';
 
 export class RegisterprocedureDto {
@@ -13,7 +12,4 @@ export class RegisterprocedureDto {
 
   @IsNumber()
   procedimentoId: number;
-
-  @IsEnum(Paciente_Procedimento_Status)
-  status: Paciente_Procedimento_Status;
 }
