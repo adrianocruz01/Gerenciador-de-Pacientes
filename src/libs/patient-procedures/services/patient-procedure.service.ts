@@ -31,15 +31,15 @@ export class PatientProcedureService {
 
   async findAllForms(patientId: number, procedureId: number) {
 
-    const hasPatient = await this.prisma.paciente.findFirst({
-      where: {
-        paciente_id: patientId
-      },
-    });
+    // const hasPatient = await this.prisma.paciente.findFirst({
+    //   where: {
+    //     paciente_id: patientId
+    //   },
+    // });
 
-    if (!hasPatient) {
-      throw new BadRequestException('Paciente não encontrado!');
-    } 
+    // if (!hasPatient) {
+    //   throw new BadRequestException('Paciente não encontrado!');
+    // } 
 
     return await this.prisma.paciente_Procedimento.findFirst({
       where: {
