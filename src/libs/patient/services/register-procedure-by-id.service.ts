@@ -17,16 +17,14 @@ export class ProcedimentoService {
     const dtregistro = new Date(dadosProcedimento.dataRegistro);
     const hrregistro = new Date(dadosProcedimento.dataHora);
 
-    const procedimentoPaciente = await this.prisma.paciente_Procedimento.create(
-      {
-        data: {
-          paciente_id: pacienteId,
-          procedimento_id: dadosProcedimento.procedimentoId,
-          dtregistro: dtregistro,
-          hrregistro: hrregistro,
-        },
+    const procedimentoPaciente = await this.prisma.paciente_Procedimento.create({
+      data: {
+        paciente_id: pacienteId,
+        procedimento_id: dadosProcedimento.procedimentoId,
+        dtregistro: dtregistro,
+        hrregistro: hrregistro,
       },
-    );
+    });
 
     const procedimentoDetalhes = await this.prisma.procedimento.findUnique({
       where: { procedimento_id: dadosProcedimento.procedimentoId },

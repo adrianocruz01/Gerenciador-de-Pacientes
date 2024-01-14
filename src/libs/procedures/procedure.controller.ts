@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  Get,
-  Query,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, Patch, Param, Delete } from '@nestjs/common';
 import { ProcedureService } from './services/procedure.service';
 import { ProcedureDto } from './dto/procedure.dto';
 import { UpdateProcedureDto } from './dto/update-procedure.dto';
@@ -26,10 +16,7 @@ export class ProcedureController {
 
   @HttpCode(200)
   @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() createProcedureDto: UpdateProcedureDto,
-  ) {
+  async update(@Param('id') id: string, @Body() createProcedureDto: UpdateProcedureDto) {
     return await this.procedureService.update(id, createProcedureDto);
   }
 

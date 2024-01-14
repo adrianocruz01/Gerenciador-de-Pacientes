@@ -17,9 +17,7 @@ export class SearchPatientService {
       const patients = await this.prisma.paciente.findMany({
         where: {
           OR: [
-            patientDTO.nome
-              ? { nome: { contains: patientDTO.nome } }
-              : undefined,
+            patientDTO.nome ? { nome: { contains: patientDTO.nome } } : undefined,
             patientDTO.cpf ? { cpf: patientDTO.cpf } : undefined,
           ].filter((condition) => condition !== undefined),
         },
@@ -39,9 +37,7 @@ export class SearchPatientService {
           cpf: patient.cpf,
           dtnascimento: patient.dtnascimento,
           sexo: patient.sexo,
-          procedimentos: patient.Paciente_Procedimento.map(
-            (pProc) => pProc.Procedimento,
-          ),
+          procedimentos: patient.Paciente_Procedimento.map((pProc) => pProc.Procedimento),
         };
       });
     } catch (error) {

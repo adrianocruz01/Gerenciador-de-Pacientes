@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  Get,
-  Query,
-  BadRequestException,
-  Param,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param } from '@nestjs/common';
 import { CreatePatientService } from './services/create-patient.service';
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientService } from './services/search-patient.service';
@@ -28,9 +19,7 @@ export class PatientController {
   async register(@Body() createPatientDtos: CreatePatientDto) {
     const patient = await this.createPatientService.execute(createPatientDtos);
     if (!patient) {
-      throw new BadRequestException(
-        'Não foi possível criar o paciente com os dados fornecidos.',
-      );
+      throw new BadRequestException('Não foi possível criar o paciente com os dados fornecidos.');
     }
 
     return patient;

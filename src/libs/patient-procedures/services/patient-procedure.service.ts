@@ -7,10 +7,7 @@ import { SearchPatientProcedureDto } from '../dto/search-patient-procedure.dto';
 export class PatientProcedureService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(
-    pacienteId: number,
-    { procedimentoId, dtregistro, hrregistro }: CreatePatientProcedureDto,
-  ) {
+  async create(pacienteId: number, { procedimentoId, dtregistro, hrregistro }: CreatePatientProcedureDto) {
     const patient = await this.prisma.paciente.findUnique({
       where: { paciente_id: pacienteId },
     });
@@ -30,10 +27,7 @@ export class PatientProcedureService {
     });
   }
 
-  async findAll(
-    patientId: number,
-    searchProcedureDto: SearchPatientProcedureDto,
-  ) {
+  async findAll(patientId: number, searchProcedureDto: SearchPatientProcedureDto) {
     return await this.prisma.paciente_Procedimento.findMany({
       where: {
         AND: {

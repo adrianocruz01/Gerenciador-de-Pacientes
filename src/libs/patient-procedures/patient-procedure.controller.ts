@@ -1,14 +1,4 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post,
-  Get,
-  Query,
-  Param,
-  Delete,
-  ParseIntPipe,
-} from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { PatientProcedureService } from './services/patient-procedure.service';
 import { CreatePatientProcedureDto } from './dto/create-patient-procedure.dto';
 import { SearchPatientProcedureDto } from './dto/search-patient-procedure.dto';
@@ -19,10 +9,7 @@ export class PatientProcedureController {
 
   @Post()
   @HttpCode(201)
-  register(
-    @Param('patientId', ParseIntPipe) patientId: number,
-    @Body() createProcedureDto: CreatePatientProcedureDto,
-  ) {
+  register(@Param('patientId', ParseIntPipe) patientId: number, @Body() createProcedureDto: CreatePatientProcedureDto) {
     return this.procedureService.create(patientId, createProcedureDto);
   }
 
@@ -34,10 +21,7 @@ export class PatientProcedureController {
 
   @Get('')
   @HttpCode(200)
-  async search(
-    @Param('patientId') patientId: number,
-    @Query() searchPatientProcedure: SearchPatientProcedureDto,
-  ) {
+  async search(@Param('patientId') patientId: number, @Query() searchPatientProcedure: SearchPatientProcedureDto) {
     return this.procedureService.findAll(patientId, searchPatientProcedure);
   }
 }
