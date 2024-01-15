@@ -11,6 +11,7 @@ export class CreateNutritionalDto {
   paciente_procedimento_id: number;
 
   @IsString()
+  @MaxLength(3)
   diabetes: string;
 
   @IsOptional()
