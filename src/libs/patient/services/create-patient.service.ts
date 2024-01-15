@@ -28,7 +28,6 @@ export class CreatePatientService {
         dtcadastro: new Date(),
       },
     });
-    console.log(patient);
     return {
       id: patient.paciente_id,
       nome: patient.nome,
