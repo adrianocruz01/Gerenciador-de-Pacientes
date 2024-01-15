@@ -2,25 +2,25 @@ import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPi
 import { PatientProcedureService } from './services/patient-procedure.service';
 import { CreatePatientProcedureDto } from './dto/create-patient-procedure.dto';
 
-@Controller('pacientes/:patientId/procedimentos')
+@Controller()
 export class PatientProcedureController {
   constructor(private readonly procedureService: PatientProcedureService) {}
 
-  @Post()
+  @Post('pacientes/:patientId/procedimentos')
   @HttpCode(201)
   register(@Param('patientId', ParseIntPipe) patientId: number, @Body() createProcedureDto: CreatePatientProcedureDto) {
     return this.procedureService.create(patientId, createProcedureDto);
   }
 
   @HttpCode(200)
-  @Delete(':id')
+  @Delete('pacientes/:patientId/procedimentos/:id')
   async remove(@Param('patientId') patientId: number, @Param('id') id: string) {
     return await this.procedureService.remove(patientId, id);
   }
 
-  @Get(':procedureId')
+  @Get('paciente-procedimento/:id')
   @HttpCode(200)
-  async search(@Param('patientId') patientId: number, @Param('procedureId') procedureId: number) {
-    return this.procedureService.findAllForms(patientId, procedureId);
+  async search(@Param('id') id: string) {
+    return this.procedureService.findAllForms(id);
   }
 }

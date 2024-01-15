@@ -31,32 +31,34 @@ model Colaborador {
 }
 
 model Ficha_Admissao_Paciente_Unidade {
-  fch_admissao_paciente_unidade_id        Int           @id @unique(map: "fch_admissao_paciente_unidade_id")
-  paciente_id                             Int?
-  colaborador_id                          Int?
-  procedimento_id                         Int?
-  fch_admissao_paciente_unidade_status    String?       @db.Char(1)
-  pulseira_identificacao                  String?       @db.Char(1)
-  fumante                                 String?       @db.Char(1)
-  alergia_intolerancia_medicamentosa      String?       @db.Char(1)
-  alergia_intolerancia_medicamentosa_qual String?       @db.VarChar(255)
-  alergia_intolerancia_alimentar          String?       @db.Char(1)
-  alergia_intolerancia_alimentar_qual     String?       @db.VarChar(255)
-  jejum_inicio_hora                       String?       @db.VarChar(255)
-  jejum_inicio_dia                        String?       @db.VarChar(255)
-  doenca_previa                           String?       @db.Char(1)
-  doenca_previa_qual                      String?       @db.VarChar(255)
-  medicacao_continua                      String?       @db.Char(1)
-  medicacao_continua_qual                 String?       @db.Char(1)
-  tricotomia                              String?       @db.Char(1)
-  tricotomia_regiao                       String?       @db.VarChar(255)
-  tricotomia_metodo                       String?       @db.VarChar(255)
-  banho_pre_operatorio                    String?       @db.Char(1)
-  banho_pre_operatorio_horario            String?       @db.VarChar(255)
-  banho_pre_operatorio_dia                String?       @db.VarChar(255)
-  Paciente                                Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_1")
-  Colaborador                             Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_2")
-  Procedimento                            Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_3")
+  fch_admissao_paciente_unidade_id              Int                    @id @unique(map: "fch_admissao_paciente_unidade_id")
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_admissao_paciente_unidade_status          String?                @db.Char(1)
+  pulseira_identificacao                        String?                @db.Char(1)
+  fumante                                       String?                @db.Char(1)
+  alergia_intolerancia_medicamentosa            String?                @db.Char(1)
+  alergia_intolerancia_medicamentosa_qual       String?                @db.VarChar(255)
+  alergia_intolerancia_alimentar                String?                @db.Char(1)
+  alergia_intolerancia_alimentar_qual           String?                @db.VarChar(255)
+  jejum_inicio_hora                             String?                @db.VarChar(255)
+  jejum_inicio_dia                              String?                @db.VarChar(255)
+  doenca_previa                                 String?                @db.Char(1)
+  doenca_previa_qual                            String?                @db.VarChar(255)
+  medicacao_continua                            String?                @db.Char(1)
+  medicacao_continua_qual                       String?                @db.Char(1)
+  tricotomia                                    String?                @db.Char(1)
+  tricotomia_regiao                             String?                @db.VarChar(255)
+  tricotomia_metodo                             String?                @db.VarChar(255)
+  banho_pre_operatorio                          String?                @db.Char(1)
+  banho_pre_operatorio_horario                  String?                @db.VarChar(255)
+  banho_pre_operatorio_dia                      String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Admissao_Paciente_Unidade_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -64,41 +66,43 @@ model Ficha_Admissao_Paciente_Unidade {
 }
 
 model Ficha_Avaliacao_Nutricional {
-  fch_avaliacao_nutricional_id          Int           @id @unique(map: "fch_avaliacao_nutricional_id") @default(autoincrement())
-  paciente_id                           Int?
-  colaborador_id                        Int?
-  procedimento_id                       Int?
-  fch_avaliacao_nutricional_status      String?       @db.Char(1)
-  diabetes                              String?       @db.VarChar(3)
-  medicamento_diabetes                  String?       @db.Char(1)
-  medicamento_diabetes_qual             String?       @db.VarChar(255)
-  horario_isulina                       String?       @db.VarChar(255)
-  hipertensao                           String?       @db.Char(1)
-  medicamento_hipertensao               String?       @db.Char(1)
-  medicamento_hipertensao_quais         String?       @db.VarChar(255)
-  dislipidemias                         String?       @db.Char(1)
-  disturbios_renais                     String?       @db.Char(1)
-  distubios_tireoide                    String?       @db.Char(1)
-  disturbios_hepaticos                  String?       @db.Char(1)
-  cardiopatias                          String?       @db.Char(1)
-  doencao_respiratoria                  String?       @db.Char(1)
-  outras_patologias_quais               String?       @db.VarChar(255)
-  fumante                               String?       @db.Char(1)
-  fumante_frequencia                    String?       @db.VarChar(255)
-  mastigacao                            String?       @db.Char(1)
-  medicamento_diaria                    String?       @db.Char(1)
-  medicamento_diaria_qual               String?       @db.VarChar(255)
-  azia_gastrite_refluxo                 String?       @db.Char(1)
-  azia_gastrite_refluxo_qual            String?       @db.VarChar(255)
-  funcionamento_intestinal_regular      String?       @db.Char(1)
-  funcionamento_intestinal_costipado    String?       @db.Char(1)
-  alergias                              String?       @db.Char(1)
-  alergias_qual                         String?       @db.VarChar(255)
-  aversao_intolerancia_alimentares      String?       @db.Char(1)
-  aversao_intolerancia_alimentares_qual String?       @db.VarChar(255)
-  Paciente                              Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_1")
-  Colaborador                           Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_2")
-  Procedimento                          Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_3")
+  fch_avaliacao_nutricional_id                  Int                    @id @unique(map: "fch_avaliacao_nutricional_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_avaliacao_nutricional_status              String?                @db.Char(1)
+  diabetes                                      String?                @db.VarChar(3)
+  medicamento_diabetes                          String?                @db.Char(1)
+  medicamento_diabetes_qual                     String?                @db.VarChar(255)
+  horario_isulina                               String?                @db.VarChar(255)
+  hipertensao                                   String?                @db.Char(1)
+  medicamento_hipertensao                       String?                @db.Char(1)
+  medicamento_hipertensao_quais                 String?                @db.VarChar(255)
+  dislipidemias                                 String?                @db.Char(1)
+  disturbios_renais                             String?                @db.Char(1)
+  distubios_tireoide                            String?                @db.Char(1)
+  disturbios_hepaticos                          String?                @db.Char(1)
+  cardiopatias                                  String?                @db.Char(1)
+  doencao_respiratoria                          String?                @db.Char(1)
+  outras_patologias_quais                       String?                @db.VarChar(255)
+  fumante                                       String?                @db.Char(1)
+  fumante_frequencia                            String?                @db.VarChar(255)
+  mastigacao                                    String?                @db.Char(1)
+  medicamento_diaria                            String?                @db.Char(1)
+  medicamento_diaria_qual                       String?                @db.VarChar(255)
+  azia_gastrite_refluxo                         String?                @db.Char(1)
+  azia_gastrite_refluxo_qual                    String?                @db.VarChar(255)
+  funcionamento_intestinal_regular              String?                @db.Char(1)
+  funcionamento_intestinal_costipado            String?                @db.Char(1)
+  alergias                                      String?                @db.Char(1)
+  alergias_qual                                 String?                @db.VarChar(255)
+  aversao_intolerancia_alimentares              String?                @db.Char(1)
+  aversao_intolerancia_alimentares_qual         String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Avaliacao_Nutricional_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -106,27 +110,29 @@ model Ficha_Avaliacao_Nutricional {
 }
 
 model Ficha_Controle_Material {
-  fch_controle_material_id             BigInt        @id @unique(map: "fch_controle_material_id") @default(autoincrement()) @db.UnsignedBigInt
-  paciente_id                          Int?
-  colaborador_id                       Int?
-  procedimento_id                      Int?
-  fch_controle_material_status         String?       @db.Char(1)
-  contagem_compressas_entregues        String?       @db.VarChar(255)
-  contagem_compressas_devolvidas       String?       @db.VarChar(255)
-  contagem_gases_entregues             String?       @db.VarChar(255)
-  contagem_gases_devolvidas            String?       @db.VarChar(255)
-  contagem_instrumental_entregues      String?       @db.VarChar(255)
-  contagem_instrumental_devolvidas     String?       @db.VarChar(255)
-  pecas_cirurgicas_anatomia            String?       @db.Char(1)
-  pecas_cirurgicas_anatomia_quantidade String?       @db.VarChar(255)
-  pecas_identificadas                  String?       @db.Char(1)
-  soro_infusao_medicamentos_fluidos    String?       @db.Char(1)
-  pulseira_identificacao               String?       @db.Char(1)
-  problemas_equipamentos               String?       @db.Char(1)
-  problemas_equipamentos_quais         String?       @db.VarChar(255)
-  Paciente                             Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_1")
-  Colaborador                          Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_2")
-  Procedimento                         Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_3")
+  fch_controle_material_id                      BigInt                 @id @unique(map: "fch_controle_material_id") @default(autoincrement()) @db.UnsignedBigInt
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_controle_material_status                  String?                @db.Char(1)
+  contagem_compressas_entregues                 String?                @db.VarChar(255)
+  contagem_compressas_devolvidas                String?                @db.VarChar(255)
+  contagem_gases_entregues                      String?                @db.VarChar(255)
+  contagem_gases_devolvidas                     String?                @db.VarChar(255)
+  contagem_instrumental_entregues               String?                @db.VarChar(255)
+  contagem_instrumental_devolvidas              String?                @db.VarChar(255)
+  pecas_cirurgicas_anatomia                     String?                @db.Char(1)
+  pecas_cirurgicas_anatomia_quantidade          String?                @db.VarChar(255)
+  pecas_identificadas                           String?                @db.Char(1)
+  soro_infusao_medicamentos_fluidos             String?                @db.Char(1)
+  pulseira_identificacao                        String?                @db.Char(1)
+  problemas_equipamentos                        String?                @db.Char(1)
+  problemas_equipamentos_quais                  String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Controle_Material_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -134,43 +140,45 @@ model Ficha_Controle_Material {
 }
 
 model Ficha_Diagnostico_Enfermagem {
-  fch_diagnostico_enfermagem_id          Int           @id @unique(map: "fch_diagnostico_enfermagem_id") @default(autoincrement())
-  paciente_id                            Int?
-  colaborador_id                         Int?
-  procedimento_id                        Int?
-  fch_diagnostico_enfermagem_status      String?       @db.Char(1)
-  insonia_relacionado_ansiedade          String?       @db.Char(1)
-  deficit_autocuidado_banho              String?       @db.Char(1)
-  retencao_urinario                      String?       @db.Char(1)
-  deambulacao_projudicada_dor            String?       @db.Char(1)
-  nausea_medo_ansiedade                  String?       @db.Char(1)
-  ansiedade_relacionado_estressores      String?       @db.Char(1)
-  risco_lesao_presao                     String?       @db.Char(1)
-  risco_reacao_alergica                  String?       @db.Char(1)
-  risco_lesao_trato_urinario             String?       @db.Char(1)
-  risco_queda_hipontensao                String?       @db.Char(1)
-  risco_tromboembolismo_veneso           String?       @db.Char(1)
-  risco_hiportemia_perioperatoria        String?       @db.Char(1)
-  observacao                             String?       @db.VarChar(255)
-  verificacao_ssvv                       String?       @db.VarChar(255)
-  observar_posicionamento_paciente       String?       @db.VarChar(255)
-  observar_nauseas_vomitos               String?       @db.VarChar(255)
-  atentar_queixar_dor                    String?       @db.VarChar(255)
-  estimular_deambulacao                  String?       @db.VarChar(255)
-  observar_dreno_sonda                   String?       @db.VarChar(255)
-  realizar_protecao_proeminencias_osseas String?       @db.VarChar(255)
-  observar_local_puncao_venosa           String?       @db.VarChar(255)
-  manter_grades_elevadas                 String?       @db.VarChar(255)
-  manter_monitorizacao_hemodinamica      String?       @db.VarChar(255)
-  realizar_banho_aspersao                String?       @db.VarChar(255)
-  realizar_curativo                      String?       @db.VarChar(255)
-  estimular_eliminacao_espontanea        String?       @db.VarChar(255)
-  realizar_sondagem_vesical              String?       @db.VarChar(255)
-  manter_paciente_aquecido               String?       @db.VarChar(255)
-  checar_identificador_alergia           String?       @db.VarChar(255)
-  Paciente                               Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_1")
-  Colaborador                            Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_2")
-  Procedimento                           Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_3")
+  fch_diagnostico_enfermagem_id                 Int                    @id @unique(map: "fch_diagnostico_enfermagem_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_diagnostico_enfermagem_status             String?                @db.Char(1)
+  insonia_relacionado_ansiedade                 String?                @db.Char(1)
+  deficit_autocuidado_banho                     String?                @db.Char(1)
+  retencao_urinario                             String?                @db.Char(1)
+  deambulacao_projudicada_dor                   String?                @db.Char(1)
+  nausea_medo_ansiedade                         String?                @db.Char(1)
+  ansiedade_relacionado_estressores             String?                @db.Char(1)
+  risco_lesao_presao                            String?                @db.Char(1)
+  risco_reacao_alergica                         String?                @db.Char(1)
+  risco_lesao_trato_urinario                    String?                @db.Char(1)
+  risco_queda_hipontensao                       String?                @db.Char(1)
+  risco_tromboembolismo_veneso                  String?                @db.Char(1)
+  risco_hiportemia_perioperatoria               String?                @db.Char(1)
+  observacao                                    String?                @db.VarChar(255)
+  verificacao_ssvv                              String?                @db.VarChar(255)
+  observar_posicionamento_paciente              String?                @db.VarChar(255)
+  observar_nauseas_vomitos                      String?                @db.VarChar(255)
+  atentar_queixar_dor                           String?                @db.VarChar(255)
+  estimular_deambulacao                         String?                @db.VarChar(255)
+  observar_dreno_sonda                          String?                @db.VarChar(255)
+  realizar_protecao_proeminencias_osseas        String?                @db.VarChar(255)
+  observar_local_puncao_venosa                  String?                @db.VarChar(255)
+  manter_grades_elevadas                        String?                @db.VarChar(255)
+  manter_monitorizacao_hemodinamica             String?                @db.VarChar(255)
+  realizar_banho_aspersao                       String?                @db.VarChar(255)
+  realizar_curativo                             String?                @db.VarChar(255)
+  estimular_eliminacao_espontanea               String?                @db.VarChar(255)
+  realizar_sondagem_vesical                     String?                @db.VarChar(255)
+  manter_paciente_aquecido                      String?                @db.VarChar(255)
+  checar_identificador_alergia                  String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Diagnostico_Enfermagem_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -178,24 +186,26 @@ model Ficha_Diagnostico_Enfermagem {
 }
 
 model Ficha_Encaminhamento_Paciente {
-  fch_encaminhamento_paciente_id     Int           @id @unique(map: "fch_encaminhamento_paciente_id") @default(autoincrement())
-  paciente_id                        Int?
-  colaborador_id                     Int?
-  procedimento_id                    Int?
-  fch_encaminhamento_paciente_status String?       @db.Char(1)
-  encaminhamento_horario             String?       @db.VarChar(255)
-  cateter_venoso                     String?       @db.Char(1)
-  cateter_venoso_local               String?       @db.VarChar(255)
-  sonda_vesical_demora               String?       @db.Char(1)
-  dreno                              String?       @db.Char(1)
-  dreno_qual                         String?       @db.VarChar(255)
-  dreno_local                        String?       @db.VarChar(255)
-  peca_patologica                    String?       @db.Char(1)
-  prontuario_completo                String?       @db.Char(1)
-  prontuario_completo_observacao     String?       @db.VarChar(255)
-  Paciente                           Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_1")
-  Colaborador                        Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_2")
-  Procedimento                       Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_3")
+  fch_encaminhamento_paciente_id                Int                    @id @unique(map: "fch_encaminhamento_paciente_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_encaminhamento_paciente_status            String?                @db.Char(1)
+  encaminhamento_horario                        String?                @db.VarChar(255)
+  cateter_venoso                                String?                @db.Char(1)
+  cateter_venoso_local                          String?                @db.VarChar(255)
+  sonda_vesical_demora                          String?                @db.Char(1)
+  dreno                                         String?                @db.Char(1)
+  dreno_qual                                    String?                @db.VarChar(255)
+  dreno_local                                   String?                @db.VarChar(255)
+  peca_patologica                               String?                @db.Char(1)
+  prontuario_completo                           String?                @db.Char(1)
+  prontuario_completo_observacao                String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -203,23 +213,25 @@ model Ficha_Encaminhamento_Paciente {
 }
 
 model Ficha_Encaminhamento_Paciente_Cirurgia {
-  fch_encaminhamento_paciente_cirurgia_id     Int           @id @unique(map: "fch_encaminhamento_paciente_cirurgia_id") @default(autoincrement())
-  paciente_id                                 Int?
-  colaborador_id                              Int?
-  procedimento_id                             Int?
-  fch_encaminhamento_paciente_cirurgia_status String?       @db.Char(1)
-  consentimento_cirurgico_assinado            String?       @db.Char(1)
-  consentimento_anestesico_assinado           String?       @db.Char(1)
-  avaliacao_pre_anestesico                    String?       @db.Char(1)
-  exames_complementares_imagem                String?       @db.Char(1)
-  retirada_pecas_intimas                      String?       @db.Char(1)
-  retirada_orteose_proteses_adernos           String?       @db.Char(1)
-  sitio_cirurgico_demarcado                   String?       @db.Char(1)
-  sitio_cirurgico_demarcado_observacao        String?       @db.VarChar(255)
-  encaminhamento_centro_cirurgico_horario     String?       @db.VarChar(255)
-  Paciente                                    Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_1")
-  Colaborador                                 Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_2")
-  Procedimento                                Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_3")
+  fch_encaminhamento_paciente_cirurgia_id       Int                    @id @unique(map: "fch_encaminhamento_paciente_cirurgia_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_encaminhamento_paciente_cirurgia_status   String?                @db.Char(1)
+  consentimento_cirurgico_assinado              String?                @db.Char(1)
+  consentimento_anestesico_assinado             String?                @db.Char(1)
+  avaliacao_pre_anestesico                      String?                @db.Char(1)
+  exames_complementares_imagem                  String?                @db.Char(1)
+  retirada_pecas_intimas                        String?                @db.Char(1)
+  retirada_orteose_proteses_adernos             String?                @db.Char(1)
+  sitio_cirurgico_demarcado                     String?                @db.Char(1)
+  sitio_cirurgico_demarcado_observacao          String?                @db.VarChar(255)
+  encaminhamento_centro_cirurgico_horario       String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -227,63 +239,65 @@ model Ficha_Encaminhamento_Paciente_Cirurgia {
 }
 
 model Ficha_Intraoperatoria {
-  fch_intraoperatoria_id                         BigInt        @id @unique(map: "fch_intraoperatoria_id") @default(autoincrement()) @db.UnsignedBigInt
+  fch_intraoperatoria_id                         BigInt                 @id @unique(map: "fch_intraoperatoria_id") @default(autoincrement()) @db.UnsignedBigInt
   paciente_id                                    Int?
   colaborador_id                                 Int?
   procedimento_id                                Int?
-  fch_intraoperatoria_status                     String?       @db.Char(1)
-  questionar_paciente                            String?       @db.Char(1)
-  termos_consentimento_assinados                 String?       @db.Char(1)
-  sitio_demarcado                                String?       @db.Char(1)
-  sitio_demarcado_nao_aplica                     String?       @db.Char(1)
-  oximetro_instalado_funcionando                 String?       @db.Char(1)
-  eletrodos_pneumatico_pa                        String?       @db.VarChar(255)
-  eletrodos_pneumatico_mmhg                      String?       @db.VarChar(255)
-  paciente_alergico                              String?       @db.Char(1)
-  paciente_alergico_qual                         String?       @db.VarChar(255)
-  risco_broncoaspiracao                          String?       @db.Char(1)
-  profilaxia_para_tev                            String?       @db.Char(1)
-  profilaxia_para_tev_horario                    String?       @db.VarChar(255)
-  profilaxia_para_tev_qual                       String?       @db.VarChar(255)
-  antibioticoprofilaxia                          String?       @db.Char(1)
-  antibioticoprofilaxia_horario                  String?       @db.VarChar(255)
-  acesso_venoso_periferico                       String?       @db.Char(1)
-  acesso_venoso_periferico_local                 String?       @db.VarChar(255)
-  pam                                            String?       @db.Char(1)
-  pam_local                                      String?       @db.VarChar(255)
-  acesso_dificil                                 String?       @db.Char(1)
-  perda_acesso                                   String?       @db.Char(1)
-  tipo_fixacao                                   String?       @db.VarChar(255)
-  posicao_operatorio_trendelemburg               String?       @db.Char(1)
-  posicao_operatorio_lateral_direira             String?       @db.Char(1)
-  posicao_operatorio_lateral_esquerda            String?       @db.Char(1)
-  posicao_operatorio_lateral_dorsal              String?       @db.Char(1)
-  posicao_operatorio_lateral_ventral             String?       @db.Char(1)
-  posicao_operatorio_lateral_semiGinecologica    String?       @db.Char(1)
-  posicao_operatorio_lateral_Ginecologica        String?       @db.Char(1)
-  assistencia_ventilosa_ar_ambiente              String?       @db.Char(1)
-  assistencia_ventilosa_masc_02                  String?       @db.Char(1)
-  assistencia_ventilosa_catete_02                String?       @db.Char(1)
-  assistencia_ventilosa_mascara_laringea         String?       @db.VarChar(255)
-  assistencia_ventilosa_mascara_venture          String?       @db.Char(1)
-  assistencia_ventilosa_tubo_endotraqueal        String?       @db.VarChar(255)
-  mobilizacao                                    String?       @db.Char(1)
-  implantacao_materiais_equipamentos_disponiveis String?       @db.Char(1)
-  prontuario_preenchido                          String?       @db.Char(1)
-  mobilizacao_local                              String?       @db.Char(1)
-  meia_elastica                                  String?       @db.Char(1)
-  ataduras                                       String?       @db.Char(1)
-  bota_pneumatica                                String?       @db.Char(1)
-  higienizacao_clorex_dergemate                  String?       @db.Char(1)
-  higienizacao_alcoolica                         String?       @db.Char(1)
-  higienizacao_aquosa                            String?       @db.Char(1)
-  higienizacao_responsavel                       String?       @db.VarChar(255)
-  placa_bisturi                                  String?       @db.Char(1)
-  placa_bisturi_localizacao                      String?       @db.VarChar(255)
-  placa_bisturi_frequencia                       String?       @db.VarChar(255)
-  Paciente                                       Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_1")
-  Colaborador                                    Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_2")
-  Procedimento                                   Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_3")
+  fch_intraoperatoria_status                     String?                @db.Char(1)
+  questionar_paciente                            String?                @db.Char(1)
+  termos_consentimento_assinados                 String?                @db.Char(1)
+  sitio_demarcado                                String?                @db.Char(1)
+  sitio_demarcado_nao_aplica                     String?                @db.Char(1)
+  oximetro_instalado_funcionando                 String?                @db.Char(1)
+  eletrodos_pneumatico_pa                        String?                @db.VarChar(255)
+  eletrodos_pneumatico_mmhg                      String?                @db.VarChar(255)
+  paciente_alergico                              String?                @db.Char(1)
+  paciente_alergico_qual                         String?                @db.VarChar(255)
+  risco_broncoaspiracao                          String?                @db.Char(1)
+  profilaxia_para_tev                            String?                @db.Char(1)
+  profilaxia_para_tev_horario                    String?                @db.VarChar(255)
+  profilaxia_para_tev_qual                       String?                @db.VarChar(255)
+  antibioticoprofilaxia                          String?                @db.Char(1)
+  antibioticoprofilaxia_horario                  String?                @db.VarChar(255)
+  acesso_venoso_periferico                       String?                @db.Char(1)
+  acesso_venoso_periferico_local                 String?                @db.VarChar(255)
+  pam                                            String?                @db.Char(1)
+  pam_local                                      String?                @db.VarChar(255)
+  acesso_dificil                                 String?                @db.Char(1)
+  perda_acesso                                   String?                @db.Char(1)
+  tipo_fixacao                                   String?                @db.VarChar(255)
+  posicao_operatorio_trendelemburg               String?                @db.Char(1)
+  posicao_operatorio_lateral_direira             String?                @db.Char(1)
+  posicao_operatorio_lateral_esquerda            String?                @db.Char(1)
+  posicao_operatorio_lateral_dorsal              String?                @db.Char(1)
+  posicao_operatorio_lateral_ventral             String?                @db.Char(1)
+  posicao_operatorio_lateral_semiGinecologica    String?                @db.Char(1)
+  posicao_operatorio_lateral_Ginecologica        String?                @db.Char(1)
+  assistencia_ventilosa_ar_ambiente              String?                @db.Char(1)
+  assistencia_ventilosa_masc_02                  String?                @db.Char(1)
+  assistencia_ventilosa_catete_02                String?                @db.Char(1)
+  assistencia_ventilosa_mascara_laringea         String?                @db.VarChar(255)
+  assistencia_ventilosa_mascara_venture          String?                @db.Char(1)
+  assistencia_ventilosa_tubo_endotraqueal        String?                @db.VarChar(255)
+  mobilizacao                                    String?                @db.Char(1)
+  implantacao_materiais_equipamentos_disponiveis String?                @db.Char(1)
+  prontuario_preenchido                          String?                @db.Char(1)
+  mobilizacao_local                              String?                @db.Char(1)
+  meia_elastica                                  String?                @db.Char(1)
+  ataduras                                       String?                @db.Char(1)
+  bota_pneumatica                                String?                @db.Char(1)
+  higienizacao_clorex_dergemate                  String?                @db.Char(1)
+  higienizacao_alcoolica                         String?                @db.Char(1)
+  higienizacao_aquosa                            String?                @db.Char(1)
+  higienizacao_responsavel                       String?                @db.VarChar(255)
+  placa_bisturi                                  String?                @db.Char(1)
+  placa_bisturi_localizacao                      String?                @db.VarChar(255)
+  placa_bisturi_frequencia                       String?                @db.VarChar(255)
+  Paciente                                       Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_1")
+  Colaborador                                    Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_2")
+  Procedimento                                   Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Intraoperatoria_ibfk_3")
+  Paciente_Procedimento                          Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id  Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -291,24 +305,26 @@ model Ficha_Intraoperatoria {
 }
 
 model Ficha_Recebimento_Paciente_Cirurgia {
-  fch_recebimento_paciente_cirurgia_id     Int           @id @unique(map: "fch_recebimento_paciente_cirurgia_id") @default(autoincrement())
-  paciente_id                              Int?
-  colaborador_id                           Int?
-  procedimento_id                          Int?
-  fch_recebimento_paciente_cirurgia_status String?       @db.Char(1)
-  horario_chegada                          String?       @db.VarChar(255)
-  sala                                     String?       @db.VarChar(255)
-  responsavel_recebimento_paciente         String?       @db.VarChar(255)
-  anexo                                    String?       @db.Char(1)
-  anexo_qual                               String?       @db.VarChar(255)
-  materiais_implantes_equipamentos         String?       @db.Char(1)
-  prazo_validacao_esterilizacao            String?       @db.Char(1)
-  integradores_quimicos_todas_caixas       String?       @db.Char(1)
-  montagem_so_conforme_procedimento        String?       @db.Char(1)
-  observacao                               String?       @db.VarChar(255)
-  Paciente                                 Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_1")
-  Colaborador                              Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_2")
-  Procedimento                             Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_3")
+  fch_recebimento_paciente_cirurgia_id          Int                    @id @unique(map: "fch_recebimento_paciente_cirurgia_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_recebimento_paciente_cirurgia_status      String?                @db.Char(1)
+  horario_chegada                               String?                @db.VarChar(255)
+  sala                                          String?                @db.VarChar(255)
+  responsavel_recebimento_paciente              String?                @db.VarChar(255)
+  anexo                                         String?                @db.Char(1)
+  anexo_qual                                    String?                @db.VarChar(255)
+  materiais_implantes_equipamentos              String?                @db.Char(1)
+  prazo_validacao_esterilizacao                 String?                @db.Char(1)
+  integradores_quimicos_todas_caixas            String?                @db.Char(1)
+  montagem_so_conforme_procedimento             String?                @db.Char(1)
+  observacao                                    String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Recebimento_Paciente_Cirurgia_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -316,37 +332,39 @@ model Ficha_Recebimento_Paciente_Cirurgia {
 }
 
 model Ficha_SAE_Triagem {
-  fch_SAE_Triagem_id                         Int           @id @unique(map: "fch_SAE_Triagem_id") @default(autoincrement())
-  paciente_id                                Int?
-  colaborador_id                             Int?
-  procedimento_id                            Int?
-  fch_SAE_Triagem_status                     String?       @db.Char(1)
-  dt_internacao                              DateTime?     @db.Date
-  apartamento                                String?       @db.VarChar(255)
-  numero_registro                            String?       @db.VarChar(255)
-  idade                                      String?       @db.VarChar(255)
-  medico                                     String?       @db.VarChar(255)
-  procedimento                               String?       @db.VarChar(255)
-  sinais_vitais_fc                           String?       @db.VarChar(255)
-  sinais_vitais_pa                           String?       @db.VarChar(255)
-  sinais_vitais_saturacao                    String?       @db.VarChar(255)
-  percepcao_sensorial                        String?       @db.VarChar(255)
-  umidade                                    String?       @db.VarChar(255)
-  atividade                                  String?       @db.VarChar(255)
-  mobilidade                                 String?       @db.VarChar(255)
-  nutricao                                   String?       @db.VarChar(255)
-  friccao_cisalhamento                       String?       @db.VarChar(255)
-  total_escala_branden                       String?       @db.VarChar(255)
-  historico_quedas                           String?       @db.Char(1)
-  diagnostico_secundario                     String?       @db.Char(1)
-  auxilio_deambulacao                        String?       @db.VarChar(255)
-  terapia_endovenosa_salinizado_heparinizado String?       @db.Char(1)
-  marcha                                     String?       @db.VarChar(255)
-  estado_mental                              String?       @db.VarChar(255)
-  pontuacao_total_escala_morse               String?       @db.VarChar(255)
-  Paciente                                   Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_1")
-  Colaborador                                Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_2")
-  Procedimento                               Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_3")
+  fch_SAE_Triagem_id                            Int                    @id @unique(map: "fch_SAE_Triagem_id") @default(autoincrement())
+  paciente_id                                   Int?
+  colaborador_id                                Int?
+  procedimento_id                               Int?
+  fch_SAE_Triagem_status                        String?                @db.Char(1)
+  dt_internacao                                 DateTime?              @db.Date
+  apartamento                                   String?                @db.VarChar(255)
+  numero_registro                               String?                @db.VarChar(255)
+  idade                                         String?                @db.VarChar(255)
+  medico                                        String?                @db.VarChar(255)
+  procedimento                                  String?                @db.VarChar(255)
+  sinais_vitais_fc                              String?                @db.VarChar(255)
+  sinais_vitais_pa                              String?                @db.VarChar(255)
+  sinais_vitais_saturacao                       String?                @db.VarChar(255)
+  percepcao_sensorial                           String?                @db.VarChar(255)
+  umidade                                       String?                @db.VarChar(255)
+  atividade                                     String?                @db.VarChar(255)
+  mobilidade                                    String?                @db.VarChar(255)
+  nutricao                                      String?                @db.VarChar(255)
+  friccao_cisalhamento                          String?                @db.VarChar(255)
+  total_escala_branden                          String?                @db.VarChar(255)
+  historico_quedas                              String?                @db.Char(1)
+  diagnostico_secundario                        String?                @db.Char(1)
+  auxilio_deambulacao                           String?                @db.VarChar(255)
+  terapia_endovenosa_salinizado_heparinizado    String?                @db.Char(1)
+  marcha                                        String?                @db.VarChar(255)
+  estado_mental                                 String?                @db.VarChar(255)
+  pontuacao_total_escala_morse                  String?                @db.VarChar(255)
+  Paciente                                      Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_1")
+  Colaborador                                   Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_2")
+  Procedimento                                  Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_SAE_Triagem_ibfk_3")
+  Paciente_Procedimento                         Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -354,19 +372,19 @@ model Ficha_SAE_Triagem {
 }
 
 model Ficha_Transferencia_Paciente {
-  fch_transferencia_paciente_id                  BigInt        @id @unique(map: "fch_transferencia_paciente_id") @default(autoincrement()) @db.UnsignedBigInt
+  fch_transferencia_paciente_id                  BigInt                 @id @unique(map: "fch_transferencia_paciente_id") @default(autoincrement()) @db.UnsignedBigInt
   paciente_id                                    Int?
   colaborador_id                                 Int?
   procedimento_id                                Int?
-  fch_transferencia_paciente_status              String?       @db.Char(1)
-  apartamento                                    String?       @db.Char(1)
-  srpa                                           String?       @db.Char(1)
-  alta                                           String?       @db.Char(1)
-  recomendacoes                                  String?       @db.Char(1)
-  recomendacoes_quais                            String?       @db.VarChar(255)
-  horario_encaminhamento                         String?       @db.VarChar(255)
-  nome_enfermeiro_tecnico_enfermagem             String?       @db.Char(1)
-  nome_anestesista                               String?       @db.VarChar(255)
+  fch_transferencia_paciente_status              String?                @db.Char(1)
+  apartamento                                    String?                @db.Char(1)
+  srpa                                           String?                @db.Char(1)
+  alta                                           String?                @db.Char(1)
+  recomendacoes                                  String?                @db.Char(1)
+  recomendacoes_quais                            String?                @db.VarChar(255)
+  horario_encaminhamento                         String?                @db.VarChar(255)
+  nome_enfermeiro_tecnico_enfermagem             String?                @db.Char(1)
+  nome_anestesista                               String?                @db.VarChar(255)
   consciencia_total_indicealdrete                Int?
   consciencia_total_aochegar                     Int?
   consciencia_total_30min                        Int?
@@ -447,11 +465,13 @@ model Ficha_Transferencia_Paciente {
   intensa_7a10_60min                             Int?
   intensa_7a10_90min                             Int?
   intensa_7a10_120min                            Int?
-  a10_condicao_alta_srpa                         String?       @map("8a10_condicao_alta_srpa") @db.Char(1)
-  a7_vigilancia_relativa                         String?       @map("5a7_vigilancia_relativa") @db.Char(1)
-  Paciente                                       Paciente?     @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_1")
-  Colaborador                                    Colaborador?  @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_2")
-  Procedimento                                   Procedimento? @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_3")
+  a10_condicao_alta_srpa                         String?                @map("8a10_condicao_alta_srpa") @db.Char(1)
+  a7_vigilancia_relativa                         String?                @map("5a7_vigilancia_relativa") @db.Char(1)
+  Paciente                                       Paciente?              @relation(fields: [paciente_id], references: [paciente_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_1")
+  Colaborador                                    Colaborador?           @relation(fields: [colaborador_id], references: [colaborador_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_2")
+  Procedimento                                   Procedimento?          @relation(fields: [procedimento_id], references: [procedimento_id], onDelete: NoAction, onUpdate: NoAction, map: "Ficha_Transferencia_Paciente_ibfk_3")
+  Paciente_Procedimento                          Paciente_Procedimento? @relation(fields: [paciente_ProcedimentoPaciente_Procedimento_id], references: [paciente_Procedimento_id])
+  paciente_ProcedimentoPaciente_Procedimento_id  Int?
 
   @@index([colaborador_id], map: "colaborador_id")
   @@index([paciente_id], map: "paciente_id")
@@ -490,6 +510,17 @@ model Paciente_Procedimento {
   dtregistro               DateTime
   hrregistro               DateTime
   preenchido               Boolean
+
+  Ficha_Admissao_Paciente_Unidade        Ficha_Admissao_Paciente_Unidade[]
+  Ficha_Avaliacao_Nutricional            Ficha_Avaliacao_Nutricional[]
+  Ficha_Controle_Material                Ficha_Controle_Material[]
+  Ficha_Diagnostico_Enfermagem           Ficha_Diagnostico_Enfermagem[]
+  Ficha_Encaminhamento_Paciente          Ficha_Encaminhamento_Paciente[]
+  Ficha_Encaminhamento_Paciente_Cirurgia Ficha_Encaminhamento_Paciente_Cirurgia[]
+  Ficha_Intraoperatoria                  Ficha_Intraoperatoria[]
+  Ficha_Recebimento_Paciente_Cirurgia    Ficha_Recebimento_Paciente_Cirurgia[]
+  Ficha_SAE_Triagem                      Ficha_SAE_Triagem[]
+  Ficha_Transferencia_Paciente           Ficha_Transferencia_Paciente[]
 
   @@index([paciente_id], map: "paciente_id")
   @@index([procedimento_id], map: "procedimento_id")

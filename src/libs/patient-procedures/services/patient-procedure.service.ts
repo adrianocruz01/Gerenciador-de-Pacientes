@@ -1,7 +1,6 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
 import { CreatePatientProcedureDto } from '../dto/create-patient-procedure.dto';
-import { SearchPatientProcedureDto } from '../dto/search-patient-procedure.dto';
 
 @Injectable()
 export class PatientProcedureService {
@@ -20,7 +19,7 @@ export class PatientProcedureService {
         procedimento_id: procedimentoId,
         dtregistro: dtregistro,
         hrregistro: hrregistro,
-        preenchido: false
+        preenchido: false,
       },
       include: {
         Procedimento: true,
@@ -28,40 +27,68 @@ export class PatientProcedureService {
     });
   }
 
-
-  async findAllForms(patientId: number, procedureId: number) {
-
-    // const hasPatient = await this.prisma.paciente.findFirst({
-    //   where: {
-    //     paciente_id: patientId
-    //   },
-    // });
-
-    // if (!hasPatient) {
-    //   throw new BadRequestException('Paciente não encontrado!');
-    // } 
-
-    return await this.prisma.paciente_Procedimento.findFirst({
+  async findAllForms(patitentProcedureId: string) {
+    return await this.prisma.paciente_Procedimento.findUnique({
       where: {
-        AND: {
-          paciente_id: +patientId,
-          procedimento_id: +procedureId
+        paciente_Procedimento_id: +patitentProcedureId,
+      },
+      include: {
+        Paciente: true,
+        Procedimento: {
+          include: {
+            Ficha_Admissao_Paciente_Unidade: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Avaliacao_Nutricional: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Controle_Material: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Diagnostico_Enfermagem: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Encaminhamento_Paciente: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Encaminhamento_Paciente_Cirurgia: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Intraoperatoria: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Recebimento_Paciente_Cirurgia: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_SAE_Triagem: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+            Ficha_Transferencia_Paciente: {
+              where: {
+                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
+              },
+            },
+          },
         },
       },
-      include:{ Procedimento: {
-        include: {
-          Ficha_Admissao_Paciente_Unidade: true,
-          Ficha_Avaliacao_Nutricional: true,
-          Ficha_Controle_Material: true,
-          Ficha_Diagnostico_Enfermagem: true,
-          Ficha_Encaminhamento_Paciente: true,
-          Ficha_Encaminhamento_Paciente_Cirurgia: true,
-          Ficha_Intraoperatoria: true,
-          Ficha_Recebimento_Paciente_Cirurgia: true,
-          Ficha_SAE_Triagem: true,
-          Ficha_Transferencia_Paciente: true,
-        }
-      } },
     });
   }
 
