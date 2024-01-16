@@ -4,10 +4,10 @@ import { UpdateNutritionalDto } from '../dto/update-patient-procedure.dto';
 import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
-export class NutritionalService {
+export class CreateNutritionalFormService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(nutritionalDTO: CreateNutritionalDto, colaborador_id: number) {
+  async execute(nutritionalDTO: CreateNutritionalDto, colaborador_id: number) {
     const { paciente_id, procedimento_id, paciente_procedimento_id } = nutritionalDTO;
 
     const form = await this.prisma.ficha_Avaliacao_Nutricional.findFirst({
@@ -64,21 +64,6 @@ export class NutritionalService {
           },
         },
       },
-    });
-  }
-
-  async update(patientId: string, procedureId: string, nutritionalDTO: UpdateNutritionalDto) {
-    const form = await this.prisma.ficha_Avaliacao_Nutricional.findFirst({
-      where: { paciente_id: +patientId, procedimento_id: +procedureId },
-    });
-
-    if (!form) throw new NotFoundException('Ficha não preenchida');
-
-    return await this.prisma.ficha_Avaliacao_Nutricional.update({
-      where: {
-        fch_avaliacao_nutricional_id: form.fch_avaliacao_nutricional_id,
-      },
-      data: nutritionalDTO,
     });
   }
 }
