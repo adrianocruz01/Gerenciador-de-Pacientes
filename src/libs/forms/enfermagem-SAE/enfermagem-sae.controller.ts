@@ -3,7 +3,7 @@ import { CreateSAEDto } from './dto/create-sae.dto';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
 // import { GetSAETriagemService } from './services/get-sae-triagem.service';
-import { CreateSAEFormService } from './service/enfermagem-sae.service';
+import { CreateSAEFormService } from './service/create-enfermagem-sae.service';
 
 @Controller('fichas/sae-triagem')
 export class SAETriagemController {
