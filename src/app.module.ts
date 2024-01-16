@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProcedureModule } from './libs/procedures/procedure.module';
 import { PatientProcedureModule } from './libs/patient-procedures/patient-procedure.module';
 import { NutritionalModule } from './libs/forms/nutritional/nutritional.module';
+import { EnfermagemSaeModule } from './libs/forms/enfermagem-SAE/enfermagem-sae.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { NutritionalModule } from './libs/forms/nutritional/nutritional.module';
     ProcedureModule,
     PatientProcedureModule,
     NutritionalModule,
+    EnfermagemSaeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
