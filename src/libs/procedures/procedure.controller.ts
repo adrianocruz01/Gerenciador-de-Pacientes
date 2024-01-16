@@ -8,7 +8,7 @@ import { SearchProcedureDto } from './dto/search-procedure.dto';
 export class ProcedureController {
   constructor(private readonly procedureService: ProcedureService) {}
 
-  @Post('')
+  @Post()
   @HttpCode(201)
   async register(@Body() createProcedureDto: ProcedureDto) {
     return await this.procedureService.create(createProcedureDto);
@@ -26,7 +26,7 @@ export class ProcedureController {
     return await this.procedureService.remove(id);
   }
 
-  @Get('')
+  @Get()
   @HttpCode(200)
   async search(@Query() searchProcedureDto: SearchProcedureDto) {
     return this.procedureService.findAll(searchProcedureDto);

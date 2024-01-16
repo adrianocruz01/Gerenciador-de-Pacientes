@@ -41,6 +41,7 @@ CREATE TABLE `Ficha_Admissao_Paciente_Unidade` (
     `banho_pre_operatorio` CHAR(1) NULL,
     `banho_pre_operatorio_horario` VARCHAR(255) NULL,
     `banho_pre_operatorio_dia` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_admissao_paciente_unidade_id`(`fch_admissao_paciente_unidade_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -83,6 +84,7 @@ CREATE TABLE `Ficha_Avaliacao_Nutricional` (
     `alergias_qual` VARCHAR(255) NULL,
     `aversao_intolerancia_alimentares` CHAR(1) NULL,
     `aversao_intolerancia_alimentares_qual` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_avaliacao_nutricional_id`(`fch_avaliacao_nutricional_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -111,6 +113,7 @@ CREATE TABLE `Ficha_Controle_Material` (
     `pulseira_identificacao` CHAR(1) NULL,
     `problemas_equipamentos` CHAR(1) NULL,
     `problemas_equipamentos_quais` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_controle_material_id`(`fch_controle_material_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -155,6 +158,7 @@ CREATE TABLE `Ficha_Diagnostico_Enfermagem` (
     `realizar_sondagem_vesical` VARCHAR(255) NULL,
     `manter_paciente_aquecido` VARCHAR(255) NULL,
     `checar_identificador_alergia` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_diagnostico_enfermagem_id`(`fch_diagnostico_enfermagem_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -180,6 +184,7 @@ CREATE TABLE `Ficha_Encaminhamento_Paciente` (
     `peca_patologica` CHAR(1) NULL,
     `prontuario_completo` CHAR(1) NULL,
     `prontuario_completo_observacao` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_encaminhamento_paciente_id`(`fch_encaminhamento_paciente_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -204,6 +209,7 @@ CREATE TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` (
     `sitio_cirurgico_demarcado` CHAR(1) NULL,
     `sitio_cirurgico_demarcado_observacao` VARCHAR(255) NULL,
     `encaminhamento_centro_cirurgico_horario` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_encaminhamento_paciente_cirurgia_id`(`fch_encaminhamento_paciente_cirurgia_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -268,6 +274,7 @@ CREATE TABLE `Ficha_Intraoperatoria` (
     `placa_bisturi` CHAR(1) NULL,
     `placa_bisturi_localizacao` VARCHAR(255) NULL,
     `placa_bisturi_frequencia` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_intraoperatoria_id`(`fch_intraoperatoria_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -293,6 +300,7 @@ CREATE TABLE `Ficha_Recebimento_Paciente_Cirurgia` (
     `integradores_quimicos_todas_caixas` CHAR(1) NULL,
     `montagem_so_conforme_procedimento` CHAR(1) NULL,
     `observacao` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_recebimento_paciente_cirurgia_id`(`fch_recebimento_paciente_cirurgia_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -331,6 +339,7 @@ CREATE TABLE `Ficha_SAE_Triagem` (
     `marcha` VARCHAR(255) NULL,
     `estado_mental` VARCHAR(255) NULL,
     `pontuacao_total_escala_morse` VARCHAR(255) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_SAE_Triagem_id`(`fch_SAE_Triagem_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -436,6 +445,7 @@ CREATE TABLE `Ficha_Transferencia_Paciente` (
     `intensa_7a10_120min` INTEGER NULL,
     `8a10_condicao_alta_srpa` CHAR(1) NULL,
     `5a7_vigilancia_relativa` CHAR(1) NULL,
+    `paciente_ProcedimentoPaciente_Procedimento_id` INTEGER NULL,
 
     UNIQUE INDEX `fch_transferencia_paciente_id`(`fch_transferencia_paciente_id`),
     INDEX `colaborador_id`(`colaborador_id`),
@@ -468,6 +478,7 @@ CREATE TABLE `Paciente_Procedimento` (
     `status` CHAR(1) NULL,
     `dtregistro` DATETIME(3) NOT NULL,
     `hrregistro` DATETIME(3) NOT NULL,
+    `preenchido` BOOLEAN NOT NULL,
 
     UNIQUE INDEX `paciente_Procedimento_id`(`paciente_Procedimento_id`),
     INDEX `paciente_id`(`paciente_id`),
@@ -496,6 +507,9 @@ ALTER TABLE `Ficha_Admissao_Paciente_Unidade` ADD CONSTRAINT `Ficha_Admissao_Pac
 ALTER TABLE `Ficha_Admissao_Paciente_Unidade` ADD CONSTRAINT `Ficha_Admissao_Paciente_Unidade_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE `Ficha_Admissao_Paciente_Unidade` ADD CONSTRAINT `Ficha_Admissao_Paciente_Unidade_paciente_ProcedimentoPacien_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Ficha_Avaliacao_Nutricional` ADD CONSTRAINT `Ficha_Avaliacao_Nutricional_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -503,6 +517,9 @@ ALTER TABLE `Ficha_Avaliacao_Nutricional` ADD CONSTRAINT `Ficha_Avaliacao_Nutric
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Avaliacao_Nutricional` ADD CONSTRAINT `Ficha_Avaliacao_Nutricional_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `Ficha_Avaliacao_Nutricional` ADD CONSTRAINT `Ficha_Avaliacao_Nutricional_paciente_ProcedimentoPaciente_P_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Controle_Material` ADD CONSTRAINT `Ficha_Controle_Material_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -514,6 +531,9 @@ ALTER TABLE `Ficha_Controle_Material` ADD CONSTRAINT `Ficha_Controle_Material_ib
 ALTER TABLE `Ficha_Controle_Material` ADD CONSTRAINT `Ficha_Controle_Material_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE `Ficha_Controle_Material` ADD CONSTRAINT `Ficha_Controle_Material_paciente_ProcedimentoPaciente_Proce_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Ficha_Diagnostico_Enfermagem` ADD CONSTRAINT `Ficha_Diagnostico_Enfermagem_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -521,6 +541,9 @@ ALTER TABLE `Ficha_Diagnostico_Enfermagem` ADD CONSTRAINT `Ficha_Diagnostico_Enf
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Diagnostico_Enfermagem` ADD CONSTRAINT `Ficha_Diagnostico_Enfermagem_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `Ficha_Diagnostico_Enfermagem` ADD CONSTRAINT `Ficha_Diagnostico_Enfermagem_paciente_ProcedimentoPaciente__fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Encaminhamento_Paciente` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -532,6 +555,9 @@ ALTER TABLE `Ficha_Encaminhamento_Paciente` ADD CONSTRAINT `Ficha_Encaminhamento
 ALTER TABLE `Ficha_Encaminhamento_Paciente` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE `Ficha_Encaminhamento_Paciente` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_paciente_ProcedimentoPaciente_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -539,6 +565,9 @@ ALTER TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Encam
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_Cirurgia_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `Ficha_Encaminhamento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Encaminhamento_Paciente_Cirurgia_paciente_Procediment_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Intraoperatoria` ADD CONSTRAINT `Ficha_Intraoperatoria_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -550,6 +579,9 @@ ALTER TABLE `Ficha_Intraoperatoria` ADD CONSTRAINT `Ficha_Intraoperatoria_ibfk_2
 ALTER TABLE `Ficha_Intraoperatoria` ADD CONSTRAINT `Ficha_Intraoperatoria_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE `Ficha_Intraoperatoria` ADD CONSTRAINT `Ficha_Intraoperatoria_paciente_ProcedimentoPaciente_Procedi_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Ficha_Recebimento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Recebimento_Paciente_Cirurgia_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -557,6 +589,9 @@ ALTER TABLE `Ficha_Recebimento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Recebime
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Recebimento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Recebimento_Paciente_Cirurgia_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `Ficha_Recebimento_Paciente_Cirurgia` ADD CONSTRAINT `Ficha_Recebimento_Paciente_Cirurgia_paciente_ProcedimentoPa_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Ficha_SAE_Triagem` ADD CONSTRAINT `Ficha_SAE_Triagem_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
@@ -568,6 +603,9 @@ ALTER TABLE `Ficha_SAE_Triagem` ADD CONSTRAINT `Ficha_SAE_Triagem_ibfk_2` FOREIG
 ALTER TABLE `Ficha_SAE_Triagem` ADD CONSTRAINT `Ficha_SAE_Triagem_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
+ALTER TABLE `Ficha_SAE_Triagem` ADD CONSTRAINT `Ficha_SAE_Triagem_paciente_ProcedimentoPaciente_Procediment_fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `Ficha_Transferencia_Paciente` ADD CONSTRAINT `Ficha_Transferencia_Paciente_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- AddForeignKey
@@ -575,6 +613,9 @@ ALTER TABLE `Ficha_Transferencia_Paciente` ADD CONSTRAINT `Ficha_Transferencia_P
 
 -- AddForeignKey
 ALTER TABLE `Ficha_Transferencia_Paciente` ADD CONSTRAINT `Ficha_Transferencia_Paciente_ibfk_3` FOREIGN KEY (`procedimento_id`) REFERENCES `Procedimento`(`procedimento_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE `Ficha_Transferencia_Paciente` ADD CONSTRAINT `Ficha_Transferencia_Paciente_paciente_ProcedimentoPaciente__fkey` FOREIGN KEY (`paciente_ProcedimentoPaciente_Procedimento_id`) REFERENCES `Paciente_Procedimento`(`paciente_Procedimento_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Paciente_Procedimento` ADD CONSTRAINT `Paciente_Procedimento_ibfk_1` FOREIGN KEY (`paciente_id`) REFERENCES `Paciente`(`paciente_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;

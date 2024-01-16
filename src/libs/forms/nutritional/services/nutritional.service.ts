@@ -7,18 +7,62 @@ import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 export class NutritionalService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(patientId: string, procedureId: string, nutritionalDTO: CreateNutritionalDto) {
+  async create(nutritionalDTO: CreateNutritionalDto, colaborador_id: number) {
+    const { paciente_id, procedimento_id, paciente_procedimento_id } = nutritionalDTO;
+
     const form = await this.prisma.ficha_Avaliacao_Nutricional.findFirst({
-      where: { paciente_id: +patientId, procedimento_id: +procedureId },
+      where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
     });
 
     if (form) throw new BadRequestException('Essa ficha já foi preenchida neste procedimento');
 
     return await this.prisma.ficha_Avaliacao_Nutricional.create({
       data: {
-        ...nutritionalDTO,
-        paciente_id: +patientId,
-        procedimento_id: +procedureId,
+        diabetes: nutritionalDTO.diabetes,
+        medicamento_diabetes: nutritionalDTO.medicamento_diabetes,
+        medicamento_diabetes_qual: nutritionalDTO.medicamento_diabetes_qual,
+        horario_isulina: nutritionalDTO.horario_insulina,
+        hipertensao: nutritionalDTO.hipertensao,
+        medicamento_hipertensao: nutritionalDTO.medicamento_hipertensao,
+        medicamento_hipertensao_quais: nutritionalDTO.medicamento_hipertensao_quais,
+        dislipidemias: nutritionalDTO.dislipidemias,
+        disturbios_renais: nutritionalDTO.disturbios_renais,
+        distubios_tireoide: nutritionalDTO.distubios_tireoide,
+        disturbios_hepaticos: nutritionalDTO.disturbios_hepaticos,
+        cardiopatias: nutritionalDTO.cardiopatias,
+        doencao_respiratoria: nutritionalDTO.doencao_respiratoria,
+        outras_patologias_quais: nutritionalDTO.outras_patologias_quais,
+        fumante: nutritionalDTO.fumante,
+        fumante_frequencia: nutritionalDTO.fumante_frequencia,
+        mastigacao: nutritionalDTO.mastigacao,
+        medicamento_diaria: nutritionalDTO.medicamento_diaria,
+        medicamento_diaria_qual: nutritionalDTO.medicamento_diaria_qual,
+        azia_gastrite_refluxo: nutritionalDTO.azia_gastrite_refluxo,
+        azia_gastrite_refluxo_qual: nutritionalDTO.azia_gastrite_refluxo_qual,
+        funcionamento_intestinal_regular: nutritionalDTO.funcionamento_intestinal_regular,
+        funcionamento_intestinal_costipado: nutritionalDTO.funcionamento_intestinal_costipado,
+        alergias: nutritionalDTO.alergias,
+        alergias_qual: nutritionalDTO.alergias_qual,
+        aversao_intolerancia_alimentares: nutritionalDTO.aversao_intolerancia_alimentares,
+        aversao_intolerancia_alimentares_qual: nutritionalDTO.aversao_intolerancia_alimentares_qual,
+        Paciente: {
+          connect: {
+            paciente_id: +paciente_id,
+          },
+        },
+        Colaborador: {
+          connect: { colaborador_id: colaborador_id },
+        },
+        Procedimento: {
+          connect: {
+            procedimento_id: +procedimento_id,
+          },
+        },
+        Paciente_Procedimento: {
+          connect: {
+            paciente_Procedimento_id: +paciente_procedimento_id,
+          },
+        },
       },
     });
   }

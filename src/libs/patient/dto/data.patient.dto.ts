@@ -1,16 +1,15 @@
-import { IsString, IsDate, Matches } from "class-validator";
+import { IsString, IsDate, Matches } from 'class-validator';
 
 export class DataPatient {
+  @IsString()
+  nome: string;
 
-    @IsString()
-    nome: string;
+  @IsString()
+  cpf: string;
 
-    @IsString()
-    cpf: string;
+  @IsString()
+  sexo: string;
 
-    @IsString()
-    sexo: string;
-
-    @IsDate()
-    dtnascimento: Date;
+  @IsDate()
+  dtnascimento: Date;
 }

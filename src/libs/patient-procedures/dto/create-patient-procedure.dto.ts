@@ -1,9 +1,13 @@
-import { IsEnum, IsNumber } from 'class-validator';
+import { IsDateString, IsNumber } from 'class-validator';
 
 export class CreatePatientProcedureDto {
-  @IsNumber()
-  procedimento_id: number;
 
-  @IsEnum(['1', '2'], { message: 'Status inválido' })
-  status: string;
+  @IsDateString()
+  dtregistro: string;
+
+  @IsDateString()
+  hrregistro: string;
+
+  @IsNumber()
+  procedimentoId: number;
 }

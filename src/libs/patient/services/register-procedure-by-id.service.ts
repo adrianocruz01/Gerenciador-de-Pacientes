@@ -1,13 +1,19 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../../../shared/db/libs/prisma/prisma.service";
-import { Paciente_Procedimento, Procedimento } from "@prisma/client";
-import { RegisterprocedureDto } from "../dto/registerprocedure.patient.dto";
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
+import { Paciente_Procedimento, Procedimento } from '@prisma/client';
+import { RegisterprocedureDto } from '../dto/registerprocedure.patient.dto';
 
 @Injectable()
 export class ProcedimentoService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
-  async execute(pacienteId: number, dadosProcedimento: RegisterprocedureDto): Promise<{ procedimentoPaciente: Paciente_Procedimento, procedimentoDetalhes: Procedimento }> {
+  async execute(
+    pacienteId: number,
+    dadosProcedimento: RegisterprocedureDto,
+  ): Promise<{
+    procedimentoPaciente: Paciente_Procedimento;
+    procedimentoDetalhes: Procedimento;
+  }> {
     const dtregistro = new Date(dadosProcedimento.dataRegistro);
     const hrregistro = new Date(dadosProcedimento.dataHora);
 
@@ -17,6 +23,7 @@ export class ProcedimentoService {
         procedimento_id: dadosProcedimento.procedimentoId,
         dtregistro: dtregistro,
         hrregistro: hrregistro,
+        preenchido: false
       },
     });
 
@@ -26,5 +33,4 @@ export class ProcedimentoService {
 
     return { procedimentoPaciente, procedimentoDetalhes };
   }
-
 }

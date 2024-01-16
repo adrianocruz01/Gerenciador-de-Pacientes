@@ -1,8 +1,14 @@
-import { IsEnum, IsNumber, IsOptional, IsString, MaxLength, maxLength } from 'class-validator';
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class CreateNutritionalDto {
-  @IsEnum(['1', '2'], { message: 'Status inválido' })
-  fch_avaliacao_nutricional_status: string;
+  @IsNumber()
+  paciente_id: number;
+
+  @IsNumber()
+  procedimento_id: number;
+
+  @IsNumber()
+  paciente_procedimento_id: number;
 
   @IsString()
   @MaxLength(3)
@@ -13,8 +19,8 @@ export class CreateNutritionalDto {
   @MaxLength(1)
   medicamento_diabetes: string;
 
-  @IsOptional()
   @IsString()
+  @IsOptional()
   medicamento_diabetes_qual: string;
 
   @IsOptional()
@@ -76,7 +82,7 @@ export class CreateNutritionalDto {
 
   @IsOptional()
   @IsString()
-  fumantfumante_frequenciae: string;
+  fumante_frequencia: string;
 
   @IsOptional()
   @IsString()

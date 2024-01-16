@@ -1,4 +1,4 @@
-import { IsString, IsDateString, IsNumber } from 'class-validator';
+import { IsString, IsDateString, IsNumber, IsEnum } from 'class-validator';
 
 export class RegisterprocedureDto {
   @IsString()
