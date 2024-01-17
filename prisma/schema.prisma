@@ -31,7 +31,7 @@ model Colaborador {
 }
 
 model Ficha_Admissao_Paciente_Unidade {
-  fch_admissao_paciente_unidade_id              Int                    @id @unique(map: "fch_admissao_paciente_unidade_id")
+  fch_admissao_paciente_unidade_id              Int                    @id @unique(map: "fch_admissao_paciente_unidade_id")  @default(autoincrement())
   paciente_id                                   Int?
   colaborador_id                                Int?
   procedimento_id                               Int?
