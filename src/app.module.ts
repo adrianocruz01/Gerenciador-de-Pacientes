@@ -11,6 +11,7 @@ import { PatientProcedureModule } from './libs/patient-procedures/patient-proced
 import { NutritionalModule } from './libs/forms/nutritional/nutritional.module';
 import { EnfermagemSaeModule } from './libs/forms/enfermagem-SAE/enfermagem-sae.module';
 import { PatientAdmissionModule } from './libs/forms/patient-admission/patient-admission.module';
+import { SurvicalReferralModule } from './libs/forms/surgical-referral/survical-referral.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { PatientAdmissionModule } from './libs/forms/patient-admission/patient-a
     NutritionalModule,
     EnfermagemSaeModule,
     PatientAdmissionModule,
+    SurvicalReferralModule,
   ],
   controllers: [AppController],
   providers: [AppService],
