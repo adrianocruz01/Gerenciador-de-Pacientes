@@ -12,6 +12,7 @@ import { NutritionalModule } from './libs/forms/nutritional/nutritional.module';
 import { EnfermagemSaeModule } from './libs/forms/enfermagem-SAE/enfermagem-sae.module';
 import { PatientAdmissionModule } from './libs/forms/patient-admission/patient-admission.module';
 import { SurvicalReferralModule } from './libs/forms/surgical-referral/survical-referral.module';
+import { ReceiptModule } from './libs/forms/receipt-surgical/receipt.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { SurvicalReferralModule } from './libs/forms/surgical-referral/survical-
     EnfermagemSaeModule,
     PatientAdmissionModule,
     SurvicalReferralModule,
+    ReceiptModule
   ],
   controllers: [AppController],
   providers: [AppService],
