@@ -28,66 +28,23 @@ export class PatientProcedureService {
   }
 
   async findAllForms(patitentProcedureId: string) {
-    return await this.prisma.paciente_Procedimento.findUnique({
+    return await this.prisma.paciente_Procedimento.findFirst({
       where: {
         paciente_Procedimento_id: +patitentProcedureId,
       },
       include: {
         Paciente: true,
-        Procedimento: {
-          include: {
-            Ficha_Admissao_Paciente_Unidade: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Avaliacao_Nutricional: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Controle_Material: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Diagnostico_Enfermagem: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Encaminhamento_Paciente: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Encaminhamento_Paciente_Cirurgia: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Intraoperatoria: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Recebimento_Paciente_Cirurgia: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_SAE_Triagem: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-            Ficha_Transferencia_Paciente: {
-              where: {
-                paciente_ProcedimentoPaciente_Procedimento_id: +patitentProcedureId,
-              },
-            },
-          },
-        },
+        Procedimento: true,
+        Ficha_Admissao_Paciente_Unidade: true,
+        Ficha_Avaliacao_Nutricional: true,
+        Ficha_Controle_Material: true,
+        Ficha_Diagnostico_Enfermagem: true,
+        Ficha_Encaminhamento_Paciente: true,
+        Ficha_Encaminhamento_Paciente_Cirurgia: true,
+        Ficha_Intraoperatoria: true,
+        Ficha_Recebimento_Paciente_Cirurgia: true,
+        Ficha_SAE_Triagem: true,
+        Ficha_Transferencia_Paciente: true,
       },
     });
   }
