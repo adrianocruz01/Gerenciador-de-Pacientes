@@ -47,7 +47,7 @@ model Ficha_Admissao_Paciente_Unidade {
   doenca_previa                                 String?                @db.Char(1)
   doenca_previa_qual                            String?                @db.VarChar(255)
   medicacao_continua                            String?                @db.Char(1)
-  medicacao_continua_qual                       String?                @db.Char(1)
+  medicacao_continua_qual                       String?                @db.Char(255)
   tricotomia                                    String?                @db.Char(1)
   tricotomia_regiao                             String?                @db.VarChar(255)
   tricotomia_metodo                             String?                @db.VarChar(255)
