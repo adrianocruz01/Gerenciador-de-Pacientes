@@ -17,6 +17,7 @@ import { IntraoperativeModule } from './libs/forms/intraoperative/intraoperative
 import { MaterialControlModule } from './libs/forms/material-control/material-control.module';
 import { PatientTransferModule } from './libs/forms/patient-transfer/patient-transfer.module';
 import { PatientApartamentModule } from './libs/forms/patient-apartament/patient-apartament.module';
+import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-diagnosis.module';
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { PatientApartamentModule } from './libs/forms/patient-apartament/patient
     IntraoperativeModule,
     MaterialControlModule,
     PatientTransferModule,
-    PatientApartamentModule
+    PatientApartamentModule,
+    NursingDiagnosisModule
   ],
   controllers: [AppController],
   providers: [AppService],
