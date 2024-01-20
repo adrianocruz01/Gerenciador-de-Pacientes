@@ -110,7 +110,7 @@ model Ficha_Avaliacao_Nutricional {
 }
 
 model Ficha_Controle_Material {
-  fch_controle_material_id                      BigInt                 @id @unique(map: "fch_controle_material_id") @default(autoincrement()) @db.UnsignedBigInt
+  fch_controle_material_id                      Int                 @id @unique(map: "fch_controle_material_id") @default(autoincrement())
   paciente_id                                   Int?
   colaborador_id                                Int?
   procedimento_id                               Int?
@@ -239,7 +239,7 @@ model Ficha_Encaminhamento_Paciente_Cirurgia {
 }
 
 model Ficha_Intraoperatoria {
-  fch_intraoperatoria_id                         BigInt                 @id @unique(map: "fch_intraoperatoria_id") @default(autoincrement()) @db.UnsignedBigInt
+  fch_intraoperatoria_id                         Int                 @id @unique(map: "fch_intraoperatoria_id") @default(autoincrement())
   paciente_id                                    Int?
   colaborador_id                                 Int?
   procedimento_id                                Int?
@@ -372,7 +372,7 @@ model Ficha_SAE_Triagem {
 }
 
 model Ficha_Transferencia_Paciente {
-  fch_transferencia_paciente_id                  BigInt                 @id @unique(map: "fch_transferencia_paciente_id") @default(autoincrement()) @db.UnsignedBigInt
+  fch_transferencia_paciente_id                  Int                 @id @unique(map: "fch_transferencia_paciente_id") @default(autoincrement())
   paciente_id                                    Int?
   colaborador_id                                 Int?
   procedimento_id                                Int?
