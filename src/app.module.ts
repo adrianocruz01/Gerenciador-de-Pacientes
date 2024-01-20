@@ -14,6 +14,7 @@ import { PatientAdmissionModule } from './libs/forms/patient-admission/patient-a
 import { SurvicalReferralModule } from './libs/forms/surgical-referral/survical-referral.module';
 import { ReceiptModule } from './libs/forms/receipt-surgical/receipt.module';
 import { IntraoperativeModule } from './libs/forms/intraoperative/intraoperative.module';
+import { MaterialControlModule } from './libs/forms/material-control/material-control.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { IntraoperativeModule } from './libs/forms/intraoperative/intraoperative
     SurvicalReferralModule,
     ReceiptModule,
     IntraoperativeModule,
+    MaterialControlModule,
   ],
   controllers: [AppController],
   providers: [AppService],
