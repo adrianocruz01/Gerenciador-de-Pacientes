@@ -383,7 +383,7 @@ model Ficha_Transferencia_Paciente {
   recomendacoes                                  String?                @db.Char(1)
   recomendacoes_quais                            String?                @db.VarChar(255)
   horario_encaminhamento                         String?                @db.VarChar(255)
-  nome_enfermeiro_tecnico_enfermagem             String?                @db.Char(1)
+  nome_enfermeiro_tecnico_enfermagem             String?                @db.VarChar(255)
   nome_anestesista                               String?                @db.VarChar(255)
   consciencia_total_indicealdrete                Int?
   consciencia_total_aochegar                     Int?
