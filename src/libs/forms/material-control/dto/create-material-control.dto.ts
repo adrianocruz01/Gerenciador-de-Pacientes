@@ -1,89 +1,75 @@
-import { IsIn, IsInt, IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
+import { IsOptional, IsString, IsInt, IsIn } from 'class-validator';
 
 export class CreateControleMaterialDto {
-  @IsInt()
   @IsOptional()
+  @IsInt()
+  paciente_procedimento_id?: number;
+
+  @IsOptional()
+  @IsInt()
   paciente_id?: number;
 
-  @IsInt()
   @IsOptional()
+  @IsInt()
   colaborador_id?: number;
 
-  @IsInt()
   @IsOptional()
+  @IsInt()
   procedimento_id?: number;
 
-  @IsInt()
-  @IsNotEmpty()
-  paciente_procedimento_id: number;
-
-  @IsString()
   @IsOptional()
-  @IsIn(['A', 'I']) // 'A' para Assinado e 'I' para Não Assinado (ou outra lógica de validação)
+  @IsIn(['S', 'N'])
   fch_controle_material_status?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (ou outra lógica de validação)
+  @IsString()
   contagem_compressas_entregues?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsString()
   contagem_compressas_devolvidas?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsString()
   contagem_gases_entregues?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsString()
   contagem_gases_devolvidas?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsString()
   contagem_instrumental_entregues?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsString()
   contagem_instrumental_devolvidas?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsIn(['S', 'N'])
   pecas_cirurgicas_anatomia?: string;
 
-  @IsString()
   @IsOptional()
-  @MaxLength(255)
+  @IsString()
   pecas_cirurgicas_anatomia_quantidade?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsIn(['S', 'N'])
   pecas_identificadas?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsIn(['S', 'N'])
   soro_infusao_medicamentos_fluidos?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsIn(['S', 'N'])
   pulseira_identificacao?: string;
 
-  @IsString()
   @IsOptional()
-  @IsIn(['S', 'N']) // 'S' para Sim e 'N' para Não (outra lógica de validação)
+  @IsIn(['S', 'N'])
   problemas_equipamentos?: string;
 
-  @IsString()
   @IsOptional()
-  @MaxLength(255)
+  @IsString()
   problemas_equipamentos_quais?: string;
 }
