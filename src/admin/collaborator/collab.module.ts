@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { PrismaModule } from 'src/shared/db/libs/prisma/prisma.module';
-import { CreateCollabService } from './service/collab.service';
-import { Collabontroller } from './collab.controller';
+import { CreateCollabService } from './service/create-collab.service';
+import { CollabController } from './collab.controller';
+import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
 
 @Module({
     imports: [PrismaModule],
-    providers: [CreateCollabService],
-    controllers: [Collabontroller]
+    controllers: [CollabController],
+    providers: [SearchByCPFCollabService, CreateCollabService],
 })
 export class CollabModule { }
