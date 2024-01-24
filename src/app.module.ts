@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PessoaModule } from './libs/pessoa/person.module';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { UploudModule } from './libs/uploud/uploud.module';
@@ -18,6 +17,7 @@ import { MaterialControlModule } from './libs/forms/material-control/material-co
 import { PatientTransferModule } from './libs/forms/patient-transfer/patient-transfer.module';
 import { PatientApartamentModule } from './libs/forms/patient-apartament/patient-apartament.module';
 import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-diagnosis.module';
+import { CollabModule } from './admin/collaborator/collab.module';
 
 @Module({
   imports: [
@@ -27,7 +27,6 @@ import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-d
       expandVariables: true,
       // envFilePath: '.env',
     }),
-    PessoaModule,
     UploudModule,
     AuthModule,
     PatientModule,
@@ -42,7 +41,8 @@ import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-d
     MaterialControlModule,
     PatientTransferModule,
     PatientApartamentModule,
-    NursingDiagnosisModule
+    NursingDiagnosisModule,
+    CollabModule
   ],
   controllers: [AppController],
   providers: [AppService],
