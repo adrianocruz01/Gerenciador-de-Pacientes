@@ -19,4 +19,4 @@ import { UpdatePatientService } from './services/update-patient.service';
   ],
   controllers: [PatientController],
 })
-export class PatientModule { }
+export class PatientModule {}

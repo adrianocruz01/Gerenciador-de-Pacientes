@@ -15,9 +15,24 @@ export class UpdatePatientService {
       throw new BadRequestException(`Paciente com ID ${id} não encontrado!`);
     }
 
-    return await this.prisma.paciente.update({
+    // Salve o estado atual do paciente antes da atualização
+    const pacienteAntes = { ...patient };
+
+    // Atualize o paciente com os novos dados
+    const updatedPatient = await this.prisma.paciente.update({
       where: { paciente_id: id },
       data: updatePatientDto,
     });
+
+    // Compare o estado anterior com o estado atual para determinar o que foi alterado
+    const changes: Partial<UpdatePatientDto> = {};
+
+    for (const key in updatePatientDto) {
+      if (pacienteAntes[key] !== updatedPatient[key]) {
+        changes[key] = updatedPatient[key];
+      }
+    }
+
+    return changes;
   }
 }

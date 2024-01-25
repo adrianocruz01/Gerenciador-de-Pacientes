@@ -8,7 +8,6 @@ import { UpdateCollabService } from './service/update.collab.service';
 import { CreateColaboradorDto } from './dto/create-collab.dto';
 import { SearchCollabDto } from './dto/search-collab.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
-import { UpdateStatusCollabService } from './service/inative-collab.service';
 
 
 @Controller('colaborador')
@@ -19,7 +18,6 @@ export class CollabController {
         private readonly searchByCPFCollabService: SearchByCPFCollabService,
         private readonly collabService: CollabService,
         private readonly updateCollabService: UpdateCollabService,
-        private readonly updateStatusCollabService: UpdateStatusCollabService,
     ) { }
 
     @Post()
@@ -64,15 +62,4 @@ export class CollabController {
         return updatedColaborador;
     }
 
-    @Put(':id/inativar')
-    async inativarColaborador(
-        @Param('id') id: number,
-        @Body() updateColaboradorDto: UpdateColaboradorDto,
-    ) {
-        const updatedColaborador = await this.updateStatusCollabService.update(
-            id,
-            updateColaboradorDto,
-        );
-        return updatedColaborador;
-    }
 }
