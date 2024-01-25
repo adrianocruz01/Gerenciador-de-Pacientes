@@ -5,10 +5,17 @@ import { CollabController } from './collab.controller';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
 import { CollabService } from './service/search-collab.service';
 import { UpdateCollabService } from './service/update.collab.service';
+import { UpdateStatusCollabService } from './service/inative-collab.service';
 
 @Module({
     imports: [PrismaModule],
-    providers: [SearchByCPFCollabService, CollabService, CreateCollabService, UpdateCollabService],
+    providers: [
+        SearchByCPFCollabService,
+        CollabService,
+        CreateCollabService,
+        UpdateCollabService,
+        UpdateStatusCollabService
+    ],
     controllers: [CollabController],
 })
 export class CollabModule { }

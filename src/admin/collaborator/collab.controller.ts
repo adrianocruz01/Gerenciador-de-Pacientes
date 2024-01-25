@@ -1,14 +1,15 @@
-import { BadRequestException, Body, Controller, Get, HttpCode, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put } from '@nestjs/common';
 
 import { CreateCollabService } from './service/create-collab.service';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
-import { CollabService } from './service/search-collab.service'; 
+import { CollabService } from './service/search-collab.service';
 import { UpdateCollabService } from './service/update.collab.service';
 
 import { CreateColaboradorDto } from './dto/create-collab.dto';
 import { SearchCollabDto } from './dto/search-collab.dto';
-import { CollabResponseDto } from './dto/collab-response.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
+import { UpdateStatusCollabService } from './service/inative-collab.service';
+
 
 @Controller('colaborador')
 export class CollabController {
@@ -18,6 +19,7 @@ export class CollabController {
         private readonly searchByCPFCollabService: SearchByCPFCollabService,
         private readonly collabService: CollabService,
         private readonly updateCollabService: UpdateCollabService,
+        private readonly updateStatusCollabService: UpdateStatusCollabService,
     ) { }
 
     @Post()
@@ -33,18 +35,9 @@ export class CollabController {
     }
 
     @Get()
-    async getAllCollabs(): Promise<CollabResponseDto[]> {
+    async getAllCollabs() {
         const collabs = await this.collabService.getAllCollabs();
-
-        return collabs.map((collab) => ({
-            colaborador_id: collab.colaborador_id,
-            nome: collab.nome,
-            cpf: collab.cpf,
-            especialidade: collab.especialidade,
-            matricula: collab.matricula,
-            matricula_estado: collab.matricula_estado,
-            status: collab.status,
-        }));
+        return collabs;
     }
 
     @Get('/pesquisarCpf')
@@ -54,31 +47,32 @@ export class CollabController {
         return collab;
     }
 
-    // @Put(':id')
-    // @HttpCode(200)
-    // async update(@Param('id') id: number, @Body() updateColaboradorDto: UpdateColaboradorDto) {
-    //     return this.updateCollabService.update(id, updateColaboradorDto);
-    // }
-
-
     @Put(':id')
     async updateCollaborador(@Param('id') id: string, @Body() updateColaboradorDto: UpdateColaboradorDto) {
-        // Converta 'id' para um número inteiro
         const idNumber = parseInt(id, 10);
 
-        // Verifique se 'idNumber' é um número válido antes de chamar o serviço
         if (isNaN(idNumber)) {
             throw new BadRequestException('ID inválido. Deve ser um número inteiro.');
         }
 
-        // Chame o serviço de atualização com 'idNumber'
         const updatedColaborador = await this.updateCollabService.update(idNumber, updateColaboradorDto);
 
-        // Retorne a resposta adequada, dependendo do resultado da atualização
         if (!updatedColaborador) {
             throw new NotFoundException(`Colaborador com ID ${idNumber} não encontrado.`);
         }
 
+        return updatedColaborador;
+    }
+
+    @Put(':id/inativar')
+    async inativarColaborador(
+        @Param('id') id: number,
+        @Body() updateColaboradorDto: UpdateColaboradorDto,
+    ) {
+        const updatedColaborador = await this.updateStatusCollabService.update(
+            id,
+            updateColaboradorDto,
+        );
         return updatedColaborador;
     }
 }
