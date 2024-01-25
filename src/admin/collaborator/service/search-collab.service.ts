@@ -8,7 +8,7 @@ export class CollabService {
     async getAllCollabs() {
         const collabs = await this.prisma.colaborador.findMany();
         if (!collabs || collabs.length === 0) {
-            throw new NotFoundException('Nenhum colaborador encontrado.');
+            throw new NotFoundException('Nenhum colaborador encontrado!');
         }
         return collabs;
     }
