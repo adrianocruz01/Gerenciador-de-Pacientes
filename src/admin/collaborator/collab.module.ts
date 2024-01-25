@@ -3,10 +3,11 @@ import { PrismaModule } from 'src/shared/db/libs/prisma/prisma.module';
 import { CreateCollabService } from './service/create-collab.service';
 import { CollabController } from './collab.controller';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
+import { CollabService } from './service/search-collab.service';
 
 @Module({
     imports: [PrismaModule],
+    providers: [SearchByCPFCollabService, CollabService, CreateCollabService],
     controllers: [CollabController],
-    providers: [SearchByCPFCollabService, CreateCollabService],
 })
 export class CollabModule { }

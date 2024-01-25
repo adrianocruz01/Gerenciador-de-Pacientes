@@ -22,7 +22,13 @@ export class SearchByCPFCollabService {
             throw new BadRequestException('Colaborador não existe');
         }
 
-        // nome: patient.nome,
-        return  colab
+        return colab.map((c) => ({
+            colaborador_id: c.colaborador_id,
+            nome: c.nome,
+            cpf: c.cpf,
+            matricula: c.matricula,
+            status: c.status,
+            especialidade: c.especialidade,
+        }));
     }
 }
