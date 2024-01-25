@@ -1,9 +1,11 @@
-import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param, Put } from '@nestjs/common';
 import { CreatePatientService } from './services/create-patient.service';
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientService } from './services/search-patient.service';
 import { SearchPatientDto } from './dto/search.patient.dto';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
+import { UpdatePatientDto } from './dto/update-patient.dto';
+import { UpdatePatientService } from './services/update-patient.service';
 
 @Controller('pacientes')
 export class PatientController {
@@ -12,6 +14,7 @@ export class PatientController {
     private readonly createPatientService: CreatePatientService,
     private readonly searchPatientService: SearchPatientService,
     private readonly getPatientByIdService: GetPatientByIdService,
+    private readonly updatePatientService: UpdatePatientService,
   ) {}
 
   @Post('/cadastrar')
@@ -43,5 +46,19 @@ export class PatientController {
       return 'Nenhum paciente encontrado.';
     }
     return patient;
+  }
+
+  @Put(':id')
+  @HttpCode(200)
+  async update(
+    @Param('id') id: string,
+    @Body() updatePatientDto: UpdatePatientDto,
+  ) {
+    const updatedPatient = await this.updatePatientService.update(
+      parseInt(id, 10),
+      updatePatientDto,
+    );
+
+    return updatedPatient;
   }
 }
