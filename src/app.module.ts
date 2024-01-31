@@ -18,6 +18,7 @@ import { PatientTransferModule } from './libs/forms/patient-transfer/patient-tra
 import { PatientApartamentModule } from './libs/forms/patient-apartament/patient-apartament.module';
 import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-diagnosis.module';
 import { CollabModule } from './admin/collaborator/collab.module';
+import { DashboardModule } from './admin/dashboard/dashboard.module';
 
 @Module({
   imports: [
@@ -42,7 +43,8 @@ import { CollabModule } from './admin/collaborator/collab.module';
     PatientTransferModule,
     PatientApartamentModule,
     NursingDiagnosisModule,
-    CollabModule
+    CollabModule,
+    DashboardModule
   ],
   controllers: [AppController],
   providers: [AppService],
