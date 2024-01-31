@@ -9,7 +9,9 @@ export class DashboardService {
     try {
       const totalColaboradores = await this.prisma.colaborador.count();
       const totalPacientes = await this.prisma.paciente.count();
-      const totalProcedimentos = await this.prisma.procedimento.count();
+      const totalProcedimentos = await this.prisma.paciente_Procedimento.count();
+
+      // implementar o Promisse.all()
 
       return {
         total_colaboradores: totalColaboradores,
