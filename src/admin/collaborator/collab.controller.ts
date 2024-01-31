@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put, Query } from '@nestjs/common';
 
 import { CreateCollabService } from './service/create-collab.service';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
@@ -32,9 +32,13 @@ export class CollabController {
         return collab;
     }
 
-    @Get()
-    async getAllCollabs() {
-        const collabs = await this.collabService.getAllCollabs();
+    @Get('/pesquisar')
+    @HttpCode(200)
+    async getAllCollabs(@Query() searchCollabDto: SearchCollabDto) {
+        const collabs = await this.collabService.getAllCollabs(searchCollabDto);
+        if (collabs.length === 0) {
+            return [];
+          }
         return collabs;
     }
 
