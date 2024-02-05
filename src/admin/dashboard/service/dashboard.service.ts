@@ -3,16 +3,16 @@ import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class DashboardService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async getResumo() {
     try {
-      const totalColaboradores = await this.prisma.colaborador.count();
-      const totalPacientes = await this.prisma.paciente.count();
-      const totalProcedimentos = await this.prisma.paciente_Procedimento.count();
-
-      // implementar o Promisse.all()
-
+      const [totalColaboradores, totalPacientes, totalProcedimentos] = await Promise.all([
+        this.prisma.colaborador.count(),
+        this.prisma.paciente.count(),
+        this.prisma.paciente_Procedimento.count(),
+      ]);
+      
       return {
         total_colaboradores: totalColaboradores,
         total_pacientes: totalPacientes,
