@@ -17,16 +17,11 @@ export class PatientController {
     private readonly updatePatientService: UpdatePatientService,
   ) { }
 
-  @Post('/cadastrar')
-  @HttpCode(201)
-  async register(@Body() createPatientDtos: CreatePatientDto) {
-    const patient = await this.createPatientService.execute(createPatientDtos);
-    if (!patient) {
-      throw new BadRequestException('Não foi possível criar o paciente com os dados fornecidos.');
-    }
-
-    return patient;
-  }
+  // @Get()
+  // @HttpCode(200)
+  // async findAll(@Query() query: SearchPatientDto): Promise<any> {
+  //   return this.searchPatientService.execute(query);
+  // }
 
   @Get('/pesquisar')
   @HttpCode(200)
@@ -45,6 +40,17 @@ export class PatientController {
     if (!patient) {
       return 'Nenhum paciente encontrado.';
     }
+    return patient;
+  }
+
+  @Post('/cadastrar')
+  @HttpCode(201)
+  async register(@Body() createPatientDtos: CreatePatientDto) {
+    const patient = await this.createPatientService.execute(createPatientDtos);
+    if (!patient) {
+      throw new BadRequestException('Não foi possível criar o paciente com os dados fornecidos.');
+    }
+
     return patient;
   }
 

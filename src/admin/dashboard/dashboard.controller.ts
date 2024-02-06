@@ -19,6 +19,6 @@ export class DashboardController {
   @Get('fichas')
   @HttpCode(200)
   async getFichas(@Query() fichasAllDto: FichasAllDto) {
-    return this.fichasAllDashboardService.getFichas({});
+    return this.fichasAllDashboardService.getFichas(fichasAllDto);
   }
 }

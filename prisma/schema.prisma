@@ -7,6 +7,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Administrador {
+  administrador_id Int       @id @unique(map: "administrador_id") @default(autoincrement())
+  nome             String?   @db.VarChar(255)
+  cpf              String    @unique @db.VarChar(14)
+  senha            String    @db.VarChar(255)
+  dtcadastro       DateTime  @default(now())
+  dtalteracao      DateTime?
+  status           String?   @db.Char(1)
+}
+
 model Colaborador {
   colaborador_id                         Int                                      @id @unique(map: "colaborador_id") @default(autoincrement())
   nome                                   String?                                  @db.VarChar(255)

@@ -50,6 +50,7 @@ export class CollabController {
     }
 
     @Put(':id')
+    @HttpCode(204)
     async updateCollaborador(@Param('id') id: string, @Body() updateColaboradorDto: UpdateColaboradorDto) {
         const idNumber = parseInt(id, 10);
 
@@ -57,13 +58,9 @@ export class CollabController {
             throw new BadRequestException('ID inválido. Deve ser um número inteiro.');
         }
 
-        const updatedColaborador = await this.updateCollabService.update(idNumber, updateColaboradorDto);
+        await this.updateCollabService.update(idNumber, updateColaboradorDto);
 
-        if (!updatedColaborador) {
-            throw new NotFoundException(`Colaborador com ID ${idNumber} não encontrado.`);
-        }
-
-        return updatedColaborador;
+        return ;
     }
 
 }

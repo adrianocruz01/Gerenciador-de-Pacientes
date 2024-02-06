@@ -13,36 +13,52 @@ const fichas = {
   Ficha_SAE_Triagem: "Ficha SAE Triagem",
   Ficha_Transferencia_Paciente: "Ficha Transferencia Paciente",
 };
+
 @Injectable()
 export class FichasAllDashboardService {
   constructor(private readonly prisma: PrismaService) { }
 
-  async getFichas(queryParams: { nome_procedimento?: string }) {
+  async getFichas(queryParams: {
+    colaborador_id?: string,
+    paciente_id?: string,
+    paciente_procedimento_id?: string
+  }) {
     try {
       const result = [];
-
       const fichasKeys = Object.keys(fichas);
 
       for (const key of fichasKeys) {
+        const whereCondition: any = {};
+
+        if (queryParams.colaborador_id) {
+          whereCondition.colaborador_id = Number(queryParams.colaborador_id);
+        }
+
+        if (queryParams.paciente_id) {
+          whereCondition.paciente_id = Number(queryParams.paciente_id);
+        }
+
+        if (queryParams.paciente_procedimento_id) {
+          whereCondition.paciente_ProcedimentoPaciente_Procedimento_id = Number(queryParams.paciente_procedimento_id);
+        }
+
         const fichaData = await this.prisma[key].findMany({
           include: {
             Procedimento: true,
             Paciente: true,
             Paciente_Procedimento: true,
           },
+          where: whereCondition
         });
 
-        fichaData.map(
-          item => {
-            result.push({
-              nome_ficha: fichas[key],
-              nome_procedimento: item?.Procedimento?.nome,
-              nome_paciente: item?.Paciente?.nome,
-              data_procedimento: item?.Paciente_Procedimento.dtregistro
-
-            });
-          }
-        );
+        fichaData.map(item => {
+          result.push({
+            nome_ficha: fichas[key],
+            nome_procedimento: item?.Procedimento?.nome,
+            nome_paciente: item?.Paciente?.nome,
+            data_procedimento: item?.Paciente_Procedimento.dtregistro
+          });
+        });
       }
 
       return result;
