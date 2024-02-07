@@ -27,7 +27,9 @@ export class AuthService {
 
     if (colaborador && (await bcrypt.compare(password, colaborador.senha))) {
       const payload = { cpf: colaborador.cpf, sub: colaborador.colaborador_id };
-      const accessToken = this.jwtService.sign(payload);
+      const accessToken = this.jwtService.sign(payload, {
+        privateKey: process.env.JWT_SECRET_KEY,
+      });
       return { accessToken };
     } else {
       throw new UnauthorizedException('Usuario ou senha incorretos!');

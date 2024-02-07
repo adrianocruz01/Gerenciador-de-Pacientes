@@ -12,8 +12,6 @@ export class UpdateCollabService {
             where: { colaborador_id: id },
         });
 
-        console.log(colab.senha)
-
         if (!colab) {
             throw new BadRequestException(`Colaborador com ID ${id} não encontrado!`);
         }

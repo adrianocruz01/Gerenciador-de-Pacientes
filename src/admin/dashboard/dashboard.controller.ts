@@ -1,9 +1,11 @@
-import { Controller, Get, HttpCode, Query } from '@nestjs/common';
+import { Controller, Get, HttpCode, Query, UseGuards } from '@nestjs/common';
 import { DashboardService } from './service/dashboard.service';
 import { FichasAllDashboardService } from './service/fichas.service';
 import { FichasAllDto } from './dto/fichas.dto';
+import { AdminAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('dashboard')
+@UseGuards(AdminAuthGuard)
 export class DashboardController {
   constructor(
     private readonly dashboardService: DashboardService,

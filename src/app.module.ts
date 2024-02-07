@@ -19,6 +19,7 @@ import { PatientApartamentModule } from './libs/forms/patient-apartament/patient
 import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-diagnosis.module';
 import { CollabModule } from './admin/collaborator/collab.module';
 import { DashboardModule } from './admin/dashboard/dashboard.module';
+import { AdminAuthModule } from './admin/auth/admin-auth.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DashboardModule } from './admin/dashboard/dashboard.module';
       expandVariables: true,
       // envFilePath: '.env',
     }),
+    AdminAuthModule,
     UploudModule,
     AuthModule,
     PatientModule,

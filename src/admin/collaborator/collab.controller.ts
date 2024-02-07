@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, NotFoundException, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 
 import { CreateCollabService } from './service/create-collab.service';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
@@ -8,9 +8,11 @@ import { UpdateCollabService } from './service/update.collab.service';
 import { CreateColaboradorDto } from './dto/create-collab.dto';
 import { SearchCollabDto } from './dto/search-collab.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
+import { AdminAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 
 @Controller('colaborador')
+@UseGuards(AdminAuthGuard)
 export class CollabController {
 
     constructor(
