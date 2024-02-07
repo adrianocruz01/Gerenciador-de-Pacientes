@@ -11,6 +11,13 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
+
+  validateToken(token: string) {
+    return this.jwtService.verify(token, {
+        secret : process.env.JWT_SECRET_KEY
+    });
+}
+
   async login(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     const { cpf, password } = authCredentialsDto;
 

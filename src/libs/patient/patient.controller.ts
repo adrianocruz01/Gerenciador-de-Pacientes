@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param, Put, Delete, NotFoundException } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param, Put, Delete, NotFoundException, UseGuards } from '@nestjs/common';
 import { CreatePatientService } from './services/create-patient.service';
 import { SearchPatientService } from './services/search-patient.service';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
@@ -7,7 +7,9 @@ import { UpdatePatientService } from './services/update-patient.service';
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientDto } from './dto/search.patient.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @Controller('pacientes')
+@UseGuards(JwtAuthGuard)
 export class PatientController {
   registerProcedureById: any;
   constructor(

@@ -1,8 +1,10 @@
-import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { PatientProcedureService } from './services/patient-procedure.service';
 import { CreatePatientProcedureDto } from './dto/create-patient-procedure.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller()
+@UseGuards(JwtAuthGuard)
 export class PatientProcedureController {
   constructor(private readonly procedureService: PatientProcedureService) {}
 
@@ -12,8 +14,8 @@ export class PatientProcedureController {
     return this.procedureService.create(patientId, createProcedureDto);
   }
 
-  @HttpCode(200)
   @Delete('pacientes/:patientId/procedimentos/:id')
+  @HttpCode(200)
   async remove(@Param('patientId') patientId: number, @Param('id') id: string) {
     return await this.procedureService.remove(patientId, id);
   }
