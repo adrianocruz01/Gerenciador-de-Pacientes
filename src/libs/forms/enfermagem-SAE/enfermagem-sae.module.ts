@@ -4,10 +4,11 @@ import { SAETriagemController } from './enfermagem-sae.controller';
 import { CreateSAEFormService } from './service/create-enfermagem-sae.service';
 import { GetEnfermagemSaeFormService } from './service/get-enfermagem-sae.service';
 import { AuthModule } from 'src/libs/auth/auth.module';
+import { UpdateSAEFormService } from './service/update-enfermagem-sae.service';
 
 @Module({
     imports: [PrismaModule, AuthModule],
     controllers: [SAETriagemController],
-    providers: [CreateSAEFormService, GetEnfermagemSaeFormService]
+    providers: [CreateSAEFormService, GetEnfermagemSaeFormService, UpdateSAEFormService]
 })
 export class EnfermagemSaeModule { }

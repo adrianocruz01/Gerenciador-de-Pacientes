@@ -20,7 +20,8 @@ async canActivate(context: ExecutionContext) {
     }
     const authToken = authorization.replace(/bearer/gim, '').trim();
     const resp = await this.authService.validateToken(authToken);
-    request.decodedData = resp;
+
+    request.user = resp;
     return true;
   } catch (error) {
     console.log('Auth error - ', error.message);
