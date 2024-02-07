@@ -7,9 +7,6 @@ import { AuthModule } from '../auth/auth.module';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
 import { ProcedimentoService } from './services/register-procedure-by-id.service';
 import { UpdatePatientService } from './services/update-patient.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { AuthService } from '../auth/auth.service';
-import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [PrismaModule, AuthModule],

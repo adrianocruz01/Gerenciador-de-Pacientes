@@ -1,11 +1,13 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
 import { CreateControleMaterialDto } from './dto/create-material-control.dto';
 import { FichaControleMaterialService } from './service/create-material-control.service';
 import { SearchMaterialControlService } from './service/search-material-control.service';
+import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
 
 @Controller('fichas/controle-material')
+@UseGuards(JwtAuthGuard)
 export class MaterialControleController {
     constructor(
         private readonly fichaControleMaterialService: FichaControleMaterialService,

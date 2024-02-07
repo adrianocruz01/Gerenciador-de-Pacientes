@@ -26,10 +26,6 @@ import { APP_GUARD } from '@nestjs/core';
     PrismaService,
     JwtStrategy,
     JwtService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
   ],
   exports: [AuthService, JwtService]
 })

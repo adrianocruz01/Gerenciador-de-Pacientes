@@ -1,11 +1,13 @@
 import { GetNutritionalFormService } from './services/get-nutritional-form.service';
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateNutritionalFormService } from './services/create-nutritional-form.service';
 import { CreateNutritionalDto } from './dto/create-nutritional.dto';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
 
 @Controller('fichas/nutricional')
+@UseGuards(JwtAuthGuard)
 export class NutritionalController {
   constructor(
     private readonly CreateNutritionalFormService: CreateNutritionalFormService,

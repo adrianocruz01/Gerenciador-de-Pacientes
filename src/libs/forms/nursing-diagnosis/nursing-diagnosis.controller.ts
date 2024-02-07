@@ -1,11 +1,13 @@
-import { Body, Controller, Get, HttpCode, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
 import { NursingDiagnosisService } from './service/create-nursing-diagnosis.service';
 import { CreateNursingDiagnosisDto } from './dto/create-nursing-diagnosis.dto';
 import { SearchNursingDiagnosisService } from './service/search-nursing-diagnosis.service';
+import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
 
 @Controller('fichas/diagnostico-enfermagem')
+@UseGuards(JwtAuthGuard)
 export class NursingDiagnosisController {
     constructor(
         private readonly nursingDiagnosisService: NursingDiagnosisService,
