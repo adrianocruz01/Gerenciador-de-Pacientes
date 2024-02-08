@@ -4,10 +4,11 @@ import { ReceptionService } from './service/receipt-surgical.service';
 import { PrismaModule } from 'src/shared/db/libs/prisma/prisma.module';
 import { GetReceptionFormService } from './service/get-reception.service';
 import { AuthModule } from 'src/libs/auth/auth.module';
+import { UpdateFichaReceipt } from './service/update-surgical.service';
 
 @Module({
   imports: [PrismaModule, AuthModule],
+  providers: [ReceptionService, GetReceptionFormService, UpdateFichaReceipt],
   controllers: [ReceptionController],
-  providers: [ReceptionService, GetReceptionFormService],
 })
 export class ReceiptModule {}

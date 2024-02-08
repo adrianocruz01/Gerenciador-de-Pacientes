@@ -4,10 +4,11 @@ import { PatientTransferService } from './service/create-patient-transfer.servic
 import { PrismaModule } from 'src/shared/db/libs/prisma/prisma.module';
 import { SearchPatientTransferService } from './service/search-patient-transfer.service';
 import { AuthModule } from 'src/libs/auth/auth.module';
+import { UpdateFichaPatientTransferService } from './service/upadte-patient-transfer.service';
 
 @Module({
     imports: [PrismaModule, AuthModule],
-    providers: [PatientTransferService, SearchPatientTransferService],
+    providers: [PatientTransferService, SearchPatientTransferService, UpdateFichaPatientTransferService],
     controllers: [PatientTrasnferController]
 })
 export class PatientTransferModule { }
