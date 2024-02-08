@@ -2,27 +2,23 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
 
 const fichas = {
-  Ficha_Admissao_Paciente_Unidade: "Ficha Admissao Paciente Unidade",
-  Ficha_Avaliacao_Nutricional: "Ficha Avaliacao Nutricional",
-  Ficha_Controle_Material: "Ficha Controle Material",
-  Ficha_Diagnostico_Enfermagem: "Ficha Diagnostico Enfermagem",
-  Ficha_Encaminhamento_Paciente: "Ficha Encaminhamento Paciente",
-  Ficha_Encaminhamento_Paciente_Cirurgia: "Ficha Encaminhamento Paciente Cirurgia",
-  Ficha_Intraoperatoria: "Ficha Intraoperatoria",
-  Ficha_Recebimento_Paciente_Cirurgia: "Ficha Recebimento Paciente Cirurgia",
-  Ficha_SAE_Triagem: "Ficha SAE Triagem",
-  Ficha_Transferencia_Paciente: "Ficha Transferencia Paciente",
+  Ficha_Admissao_Paciente_Unidade: 'Ficha Admissao Paciente Unidade',
+  Ficha_Avaliacao_Nutricional: 'Ficha Avaliacao Nutricional',
+  Ficha_Controle_Material: 'Ficha Controle Material',
+  Ficha_Diagnostico_Enfermagem: 'Ficha Diagnostico Enfermagem',
+  Ficha_Encaminhamento_Paciente: 'Ficha Encaminhamento Paciente',
+  Ficha_Encaminhamento_Paciente_Cirurgia: 'Ficha Encaminhamento Paciente Cirurgia',
+  Ficha_Intraoperatoria: 'Ficha Intraoperatoria',
+  Ficha_Recebimento_Paciente_Cirurgia: 'Ficha Recebimento Paciente Cirurgia',
+  Ficha_SAE_Triagem: 'Ficha SAE Triagem',
+  Ficha_Transferencia_Paciente: 'Ficha Transferencia Paciente',
 };
 
 @Injectable()
 export class FichasAllDashboardService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
-  async getFichas(queryParams: {
-    colaborador_id?: string,
-    paciente_id?: string,
-    paciente_procedimento_id?: string
-  }) {
+  async getFichas(queryParams: { colaborador_id?: string; paciente_id?: string; paciente_procedimento_id?: string }) {
     try {
       const result = [];
       const fichasKeys = Object.keys(fichas);
@@ -48,15 +44,25 @@ export class FichasAllDashboardService {
             Paciente: true,
             Paciente_Procedimento: true,
           },
-          where: whereCondition
+          where: whereCondition,
         });
 
-        fichaData.map(item => {
+        fichaData.map((item) => {
+          let ficha_id_attr_name = `fch${key.toLocaleLowerCase().split('ficha')[1]}_id`;
+
+          if (key.includes('SAE')) {
+            ficha_id_attr_name = 'fch_SAE_Triagem_id';
+          }
+
           result.push({
+            id: Number(
+              `${item[ficha_id_attr_name]}${item.Paciente_Procedimento.paciente_Procedimento_id}${item.Paciente.paciente_id}`,
+            ),
+            id_ficha: item[ficha_id_attr_name],
             nome_ficha: fichas[key],
             nome_procedimento: item?.Procedimento?.nome,
             nome_paciente: item?.Paciente?.nome,
-            data_procedimento: item?.Paciente_Procedimento.dtregistro
+            data_procedimento: item?.Paciente_Procedimento.dtregistro,
           });
         });
       }
