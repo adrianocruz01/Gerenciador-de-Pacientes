@@ -1,10 +1,12 @@
-import { Body, Controller, Get, HttpCode, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
 import { CreateControleMaterialDto } from './dto/create-material-control.dto';
 import { FichaControleMaterialService } from './service/create-material-control.service';
 import { SearchMaterialControlService } from './service/search-material-control.service';
 import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { UpdateFichaControleMaterialDto } from './dto/update-materoal-control.dto';
+import { UpdateMaterialControlService } from './service/update-material-control.service';
 
 @Controller('fichas/controle-material')
 @UseGuards(JwtAuthGuard)
@@ -12,6 +14,7 @@ export class MaterialControleController {
     constructor(
         private readonly fichaControleMaterialService: FichaControleMaterialService,
         private readonly searchMaterialControlService: SearchMaterialControlService,
+        private readonly updateMaterialControlService: UpdateMaterialControlService,
     ) { }
 
     @Get(':paciente_procedimento_id')
@@ -23,5 +26,11 @@ export class MaterialControleController {
     @HttpCode(201)
     async register(@CurrentUser() colaborador: UserPayload, @Body() createControleMaterialDto: CreateControleMaterialDto) {
         return await this.fichaControleMaterialService.execute(createControleMaterialDto, colaborador.sub);
+    }
+
+    @Put(':id')
+    @HttpCode(204)
+    async updateFichaMaterialControl(@Param('id') id: number, @Body() updateData: UpdateFichaControleMaterialDto) {
+        return  await this.updateMaterialControlService.updateFichasMaterialControl(id, updateData)
     }
 }
