@@ -20,6 +20,7 @@ import { NursingDiagnosisModule } from './libs/forms/nursing-diagnosis/nursing-d
 import { CollabModule } from './admin/collaborator/collab.module';
 import { DashboardModule } from './admin/dashboard/dashboard.module';
 import { AdminAuthModule } from './admin/auth/admin-auth.module';
+import { AdmPatientModule } from './admin/patient/admpatient.module';
 
 @Module({
   imports: [
@@ -46,7 +47,8 @@ import { AdminAuthModule } from './admin/auth/admin-auth.module';
     PatientApartamentModule,
     NursingDiagnosisModule,
     CollabModule,
-    DashboardModule
+    DashboardModule,
+    AdmPatientModule
   ],
   controllers: [AppController],
   providers: [AppService],

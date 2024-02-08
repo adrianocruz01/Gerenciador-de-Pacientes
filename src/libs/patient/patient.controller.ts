@@ -2,11 +2,9 @@ import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Para
 import { CreatePatientService } from './services/create-patient.service';
 import { SearchPatientService } from './services/search-patient.service';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
-import { UpdatePatientService } from './services/update-patient.service';
 
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientDto } from './dto/search.patient.dto';
-import { UpdatePatientDto } from './dto/update-patient.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @Controller('pacientes')
 @UseGuards(JwtAuthGuard)
@@ -16,7 +14,6 @@ export class PatientController {
     private readonly createPatientService: CreatePatientService,
     private readonly searchPatientService: SearchPatientService,
     private readonly getPatientByIdService: GetPatientByIdService,
-    private readonly updatePatientService: UpdatePatientService,
   ) { }
 
   // @Get()
@@ -56,17 +53,4 @@ export class PatientController {
     return patient;
   }
 
-  @Put(':id')
-  @HttpCode(200)
-  async update(
-    @Param('id') id: string,
-    @Body() updatePatientDto: UpdatePatientDto,
-  ) {
-    const updatedPatient = await this.updatePatientService.update(
-      parseInt(id, 10),
-      updatePatientDto,
-    );
-
-    return updatedPatient;
-  }
 }
