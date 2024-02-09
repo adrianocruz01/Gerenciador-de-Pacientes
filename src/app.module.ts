@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { UploudModule } from './libs/uploud/uploud.module';
+import { UploadModule } from './libs/upload/upload.module';
 import { AuthModule } from './libs/auth/auth.module';
 import { PatientModule } from './libs/patient/patient.module';
 import { ConfigModule } from '@nestjs/config';
@@ -31,7 +31,7 @@ import { AdmPatientModule } from './admin/patient/admpatient.module';
       // envFilePath: '.env',
     }),
     AdminAuthModule,
-    UploudModule,
+    UploadModule,
     AuthModule,
     PatientModule,
     ProcedureModule,
@@ -48,7 +48,7 @@ import { AdmPatientModule } from './admin/patient/admpatient.module';
     NursingDiagnosisModule,
     CollabModule,
     DashboardModule,
-    AdmPatientModule
+    AdmPatientModule,
   ],
   controllers: [AppController],
   providers: [AppService],

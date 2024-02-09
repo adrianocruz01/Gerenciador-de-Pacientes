@@ -6,7 +6,6 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 @Controller('upload')
 @UseGuards(JwtAuthGuard)
 export class UploadController {
-
   @Post()
   @UseInterceptors(UploadInterceptor)
   async uploadFile(@UploadedFile() file: Express.Multer.File) {
