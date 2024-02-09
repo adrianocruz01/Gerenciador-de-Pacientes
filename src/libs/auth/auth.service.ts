@@ -11,12 +11,11 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-
   validateToken(token: string) {
     return this.jwtService.verify(token, {
-        secret : process.env.JWT_SECRET_KEY
+      secret: process.env.JWT_SECRET_KEY,
     });
-}
+  }
 
   async login(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
     const { cpf, password } = authCredentialsDto;
@@ -26,7 +25,7 @@ export class AuthService {
     });
 
     if (colaborador && (await bcrypt.compare(password, colaborador.senha))) {
-      const payload = { cpf: colaborador.cpf, sub: colaborador.colaborador_id };
+      const payload = { nome: colaborador.nome, cpf: colaborador.cpf, sub: colaborador.colaborador_id };
       const accessToken = this.jwtService.sign(payload, {
         privateKey: process.env.JWT_SECRET_KEY,
       });
