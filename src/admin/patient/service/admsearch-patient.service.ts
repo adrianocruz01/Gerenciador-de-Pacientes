@@ -4,7 +4,7 @@ import { SearchPatientDto } from '../dto/admsearch.patient.dto';
 
 @Injectable()
 export class AdmSearchPatientService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async execute(patientDTO: SearchPatientDto) {
     // Verifica se ambos os campos, nome e cpf, estão vazios
@@ -14,8 +14,7 @@ export class AdmSearchPatientService {
     // }
 
     try {
-
-      let whereConditions: any[] = [];
+      const whereConditions: any[] = [];
 
       if (patientDTO.nome) {
         whereConditions.push({ nome: { contains: patientDTO.nome } });
@@ -24,8 +23,6 @@ export class AdmSearchPatientService {
       if (patientDTO.cpf) {
         whereConditions.push({ cpf: patientDTO.cpf });
       }
-
-
 
       const patients = await this.prisma.paciente.findMany({
         where: {
@@ -47,6 +44,7 @@ export class AdmSearchPatientService {
           cpf: patient.cpf,
           dtnascimento: patient.dtnascimento,
           sexo: patient.sexo,
+          status: patient.status,
           procedimentos: patient.Paciente_Procedimento.map((pProc) => pProc.Procedimento),
         };
       });
