@@ -55,9 +55,7 @@ export class FichasAllDashboardService {
           }
 
           result.push({
-            id: Number(
-              `${item[ficha_id_attr_name]}${item.Paciente_Procedimento.paciente_Procedimento_id}${item.Paciente.paciente_id}`,
-            ),
+            id: `${item[ficha_id_attr_name]}${item.Paciente_Procedimento.paciente_Procedimento_id}${item.Paciente.paciente_id}${key}`,
             id_ficha: item[ficha_id_attr_name],
             id_paciente_procedimento: item.Paciente_Procedimento.paciente_Procedimento_id,
             id_paciente: item.Paciente.paciente_id,
