@@ -1,4 +1,4 @@
-import { IsInt, IsString, IsOptional, IsIn, IsBoolean } from 'class-validator';
+import { IsInt, IsString, IsOptional, IsIn, IsBoolean, MaxLength } from 'class-validator';
 
 export class UpdateFichaAvaliacaoNutricionalDto {
   @IsInt()
@@ -12,6 +12,10 @@ export class UpdateFichaAvaliacaoNutricionalDto {
   @IsInt()
   @IsOptional()
   procedimento_id?: number;
+
+  @IsInt()
+  @IsOptional()
+  paciente_procedimento_id?: number;
 
   @IsString()
   @IsOptional()
@@ -35,6 +39,24 @@ export class UpdateFichaAvaliacaoNutricionalDto {
   horario_isulina?: string;
 
   // Adicione as validações para os outros campos conforme necessário
+  @IsOptional()
+  @IsString()
+  @MaxLength(1)
+  hipertensao: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(1)
+  medicamento_hipertensao: string;
+
+  @IsOptional()
+  @IsString()
+  medicamento_hipertensao_quais: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(1)
+  dislipidemias: string;
 
   // Exemplo:
   @IsString()
