@@ -15,12 +15,13 @@ export class IntraoperativeController {
     private readonly intraoperativeService: IntraoperativeService,
     private readonly searchIntraOperativeService: SearchIntraOperativeService,
     private readonly updateFichaIntraoperatoriaService: UpdateFichaIntraoperatoriaService
-    ) {}
+  ) { }
 
   @Get(':paciente_procedimento_id')
-    async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
-      return await this.searchIntraOperativeService.execute(paciente_procedimento_id);
-    }
+  @HttpCode(201)
+  async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
+    return await this.searchIntraOperativeService.execute(paciente_procedimento_id);
+  }
 
   @Post()
   @HttpCode(201)
@@ -34,6 +35,6 @@ export class IntraoperativeController {
   @Put(':id')
   @HttpCode(204)
   async update(@Param('id') id: number, @Body() updateData: UpdateFichaIntraoperatoriaDto) {
-     return await this.updateFichaIntraoperatoriaService.updateFichaIntraoperatoria(id, updateData);
+    return await this.updateFichaIntraoperatoriaService.updateFichaIntraoperatoria(id, updateData);
   }
 }

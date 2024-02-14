@@ -23,7 +23,7 @@ export class IntraoperativeService {
       throw new BadRequestException('Esta ficha já foi preenchida para este procedimento');
     }
 
-    return await this.prisma.ficha_Intraoperatoria.create({
+    const create = await this.prisma.ficha_Intraoperatoria.create({
       data: {
         questionar_paciente: intraoperativeData.questionar_paciente,
         termos_consentimento_assinados: intraoperativeData.termos_consentimento_assinados,
@@ -94,5 +94,7 @@ export class IntraoperativeService {
         },
       },
     });
+
+    return create;
   }
 }

@@ -19,7 +19,7 @@ export class ReceptionService {
             throw new BadRequestException('Esta ficha de recebimento já foi preenchida para este procedimento');
         }
 
-        return await this.prisma.ficha_Recebimento_Paciente_Cirurgia.create({
+        const create = await this.prisma.ficha_Recebimento_Paciente_Cirurgia.create({
             data: {
                 fch_recebimento_paciente_cirurgia_status: reception.fch_recebimento_paciente_cirurgia_status,
                 horario_chegada: reception.horario_chegada,
@@ -52,5 +52,6 @@ export class ReceptionService {
                 },
             },
         });
+        return create;
     }
 }

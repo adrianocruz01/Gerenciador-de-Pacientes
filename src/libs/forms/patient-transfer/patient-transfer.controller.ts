@@ -20,7 +20,7 @@ export class PatientTrasnferController {
     @Get(':paciente_procedimento_id')
     @HttpCode(201)
     async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
-      return await this.searchPatientTransferService.execute(paciente_procedimento_id);
+        return await this.searchPatientTransferService.execute(paciente_procedimento_id);
     }
 
     @Post()

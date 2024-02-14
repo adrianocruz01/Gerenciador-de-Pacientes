@@ -21,7 +21,7 @@ export class PatientTransferService {
             throw new BadRequestException('Esta ficha de transferência de paciente já existe para este paciente e procedimento');
         }
 
-        return await this.prisma.ficha_Transferencia_Paciente.create({
+        const create = await this.prisma.ficha_Transferencia_Paciente.create({
             data: {
                 fch_transferencia_paciente_status: transferenciaPacienteData.fch_transferencia_paciente_status,
                 apartamento: transferenciaPacienteData.apartamento,
@@ -134,5 +134,6 @@ export class PatientTransferService {
                 },
             },
         });
+        return create;
     }
 }

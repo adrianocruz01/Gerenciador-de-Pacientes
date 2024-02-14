@@ -30,7 +30,7 @@ export class UpdateFichaPatientAdmissionService {
             throw new NotFoundException('Ficha Paciente Admissão não encontrada!');
         }
 
-         return await this.prisma.ficha_Admissao_Paciente_Unidade.update({
+        return await this.prisma.ficha_Admissao_Paciente_Unidade.update({
             where: { fch_admissao_paciente_unidade_id: fichpatientadmission.fch_admissao_paciente_unidade_id },
             data: updateData
         });

@@ -18,8 +18,9 @@ export class MaterialControleController {
     ) { }
 
     @Get(':paciente_procedimento_id')
+    @HttpCode(201)
     async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
-      return await this.searchMaterialControlService.execute(paciente_procedimento_id);
+        return await this.searchMaterialControlService.execute(paciente_procedimento_id);
     }
 
     @Post()
@@ -31,6 +32,6 @@ export class MaterialControleController {
     @Put(':id')
     @HttpCode(204)
     async updateFichaMaterialControl(@Param('id') id: number, @Body() updateData: UpdateFichaControleMaterialDto) {
-        return  await this.updateMaterialControlService.updateFichasMaterialControl(id, updateData)
+        return await this.updateMaterialControlService.updateFichasMaterialControl(id, updateData)
     }
 }

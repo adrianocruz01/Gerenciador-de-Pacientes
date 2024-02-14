@@ -4,18 +4,18 @@ import { CreateNutritionalFormService } from './services/create-nutritional-form
 import { CreateNutritionalDto } from './dto/create-nutritional.dto';
 import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/libs/auth/jwt-strategy';
-// import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
 import { UpdateFichaAvaliacaoNutricionalDto } from './dto/update-nutricional.dto';
 import { UpdateFichaNutricionalService } from './services/update-nutricional.service';
 
 @Controller('fichas/nutricional')
-// @UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard)
 export class NutritionalController {
   constructor(
     private readonly CreateNutritionalFormService: CreateNutritionalFormService,
     private readonly getNutritionalFormService: GetNutritionalFormService,
     private readonly updateFichaNutricionalService: UpdateFichaNutricionalService,
-  ) {}
+  ) { }
 
   @Get(':paciente_procedimento_id')
   @HttpCode(201)

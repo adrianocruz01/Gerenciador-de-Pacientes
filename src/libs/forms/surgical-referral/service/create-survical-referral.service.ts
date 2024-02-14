@@ -17,7 +17,7 @@ export class CreateSurvicalReferralService {
             throw new BadRequestException('Essa ficha já foi preenchida para este procedimento');
         }
 
-        return await this.prisma.ficha_Encaminhamento_Paciente_Cirurgia.create({
+        const create = await this.prisma.ficha_Encaminhamento_Paciente_Cirurgia.create({
             data: {
                 fch_encaminhamento_paciente_cirurgia_status: survicalReferral.fch_encaminhamento_paciente_cirurgia_status,
                 consentimento_cirurgico_assinado: survicalReferral.consentimento_cirurgico_assinado,
@@ -49,5 +49,6 @@ export class CreateSurvicalReferralService {
                 },
             },
         });
+        return create;
     }
 }

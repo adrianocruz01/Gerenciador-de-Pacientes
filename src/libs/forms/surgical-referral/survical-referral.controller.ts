@@ -20,7 +20,7 @@ export class SurvicalReferralController {
     @Get(':paciente_procedimento_id')
     @HttpCode(201)
     async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
-      return await this.searchSurvicalReferralService.execute(paciente_procedimento_id);
+        return await this.searchSurvicalReferralService.execute(paciente_procedimento_id);
     }
 
     @Post()

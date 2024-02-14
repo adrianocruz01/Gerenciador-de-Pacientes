@@ -4,7 +4,7 @@ import { UpdateFichaAvaliacaoNutricionalDto } from '../dto/update-nutricional.dt
 
 @Injectable()
 export class UpdateFichaNutricionalService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async updateFichaNutricional(paciente_procedimento_id: number, updateData: UpdateFichaAvaliacaoNutricionalDto) {
     const pacienteProcedimentoExists = await this.prisma.paciente_Procedimento.findUnique({
