@@ -21,7 +21,7 @@ import { UpdateCollabService } from './service/update.collab.service';
 import { CreateColaboradorDto } from './dto/create-collab.dto';
 import { SearchCollabDto } from './dto/search-collab.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
-import { AdminAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AdminAuthGuard } from 'src/auth/guards/admin-auth.guard';
 
 @Controller('colaborador')
 @UseGuards(AdminAuthGuard)

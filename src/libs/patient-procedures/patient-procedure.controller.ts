@@ -1,10 +1,10 @@
 import { Body, Controller, HttpCode, Post, Get, Query, Param, Delete, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { PatientProcedureService } from './services/patient-procedure.service';
 import { CreatePatientProcedureDto } from './dto/create-patient-procedure.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from '../../auth/guards/collaborator-auth.guard';
 
 @Controller()
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class PatientProcedureController {
   constructor(private readonly procedureService: PatientProcedureService) {}
 

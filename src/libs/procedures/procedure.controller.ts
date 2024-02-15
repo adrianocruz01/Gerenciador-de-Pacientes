@@ -3,10 +3,10 @@ import { ProcedureService } from './services/procedure.service';
 import { ProcedureDto } from './dto/procedure.dto';
 import { UpdateProcedureDto } from './dto/update-procedure.dto';
 import { SearchProcedureDto } from './dto/search-procedure.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from '../../auth/guards/collaborator-auth.guard';
 
 @Controller('procedures')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class ProcedureController {
   constructor(private readonly procedureService: ProcedureService) {}
 

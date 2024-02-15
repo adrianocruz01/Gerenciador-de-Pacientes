@@ -1,15 +1,15 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { CreateTransferenciaPacienteDto } from './dto/create-patient-transfer.dt';
 import { PatientTransferService } from './service/create-patient-transfer.service';
 import { SearchPatientTransferService } from './service/search-patient-transfer.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { CreateFichaTransferenciaPacienteDto } from './dto/update-patien-prasfer.dto';
 import { UpdateFichaPatientTransferService } from './service/upadte-patient-transfer.service';
 
 @Controller('fichas/transferencia-paciente')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class PatientTrasnferController {
     constructor(
         private readonly patientTransferService: PatientTransferService,

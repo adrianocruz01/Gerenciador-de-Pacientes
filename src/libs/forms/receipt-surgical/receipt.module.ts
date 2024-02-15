@@ -3,7 +3,7 @@ import { ReceptionController } from './receipt-surgical.controller';
 import { ReceptionService } from './service/receipt-surgical.service';
 import { PrismaModule } from 'src/shared/db/libs/prisma/prisma.module';
 import { GetReceptionFormService } from './service/get-reception.service';
-import { AuthModule } from 'src/libs/auth/auth.module';
+import { AuthModule } from 'src/auth/auth.module';
 import { UpdateFichaReceipt } from './service/update-surgical.service';
 
 @Module({

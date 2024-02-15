@@ -1,15 +1,15 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { CreateControleMaterialDto } from './dto/create-material-control.dto';
 import { FichaControleMaterialService } from './service/create-material-control.service';
 import { SearchMaterialControlService } from './service/search-material-control.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaControleMaterialDto } from './dto/update-materoal-control.dto';
 import { UpdateMaterialControlService } from './service/update-material-control.service';
 
 @Controller('fichas/controle-material')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class MaterialControleController {
     constructor(
         private readonly fichaControleMaterialService: FichaControleMaterialService,

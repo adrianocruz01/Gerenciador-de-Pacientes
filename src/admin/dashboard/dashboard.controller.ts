@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode, Query, UseGuards } from '@nestjs/common';
 import { DashboardService } from './service/dashboard.service';
 import { FichasAllDashboardService } from './service/fichas.service';
 import { FichasAllDto } from './dto/fichas.dto';
-import { AdminAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AdminAuthGuard } from 'src/auth/guards/admin-auth.guard';
 
 @Controller('dashboard')
 @UseGuards(AdminAuthGuard)

@@ -1,11 +1,11 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from '../../shared/db/libs/prisma/prisma.service';
-import { AuthCredentialsDto } from './dto/auth.dto';
 import * as bcrypt from 'bcrypt';
+import { AdminCredentialsDto } from '../dto/admin-credentials.dto';
+import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
-export class AuthService {
+export class AdminAuthService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
@@ -17,15 +17,15 @@ export class AuthService {
     });
   }
 
-  async login(authCredentialsDto: AuthCredentialsDto): Promise<{ accessToken: string }> {
-    const { cpf, password } = authCredentialsDto;
+  async login(authAdmCredentialsDto: AdminCredentialsDto): Promise<{ accessToken: string }> {
+    const { cpf, password } = authAdmCredentialsDto;
 
-    const colaborador = await this.prisma.colaborador.findUnique({
+    const administrador = await this.prisma.administrador.findUnique({
       where: { cpf },
     });
 
-    if (colaborador && (await bcrypt.compare(password, colaborador.senha))) {
-      const payload = { nome: colaborador.nome, cpf: colaborador.cpf, sub: colaborador.colaborador_id };
+    if (administrador && (await bcrypt.compare(password, administrador.senha))) {
+      const payload = { cpf: administrador.cpf, sub: administrador.administrador_id, role: 'admin' };
       const accessToken = this.jwtService.sign(payload, {
         privateKey: process.env.JWT_SECRET_KEY,
       });

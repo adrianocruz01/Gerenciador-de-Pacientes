@@ -9,6 +9,7 @@ export const tokenPayloadSchema = z.object({
   cpf: z.string(),
   sub: z.number(),
   iat: z.number(),
+  role: z.enum(['admin', 'colaborador']),
 });
 
 export type UserPayload = z.infer<typeof tokenPayloadSchema>;

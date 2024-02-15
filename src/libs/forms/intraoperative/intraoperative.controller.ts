@@ -1,15 +1,15 @@
 import { Body, Controller, HttpCode, Post, Get, Param, UseGuards, Put, NotFoundException, BadRequestException } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { IntraoperativeService } from './service/create-intraoperative.service';
 import { CreateIntraoperativeDto } from './dto/create-intraoperative.dto';
 import { SearchIntraOperativeService } from './service/search-intraoperative.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaIntraoperatoriaDto } from './dto/update-intraoperative.dto';
 import { UpdateFichaIntraoperatoriaService } from './service/update-intraoperative.service';
 
 @Controller('fichas/intraoperatoria')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class IntraoperativeController {
   constructor(
     private readonly intraoperativeService: IntraoperativeService,

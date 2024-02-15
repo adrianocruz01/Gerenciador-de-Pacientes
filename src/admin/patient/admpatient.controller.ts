@@ -3,9 +3,9 @@ import { Controller, HttpCode, Get, Query, Param, UseGuards, Put, Body } from '@
 import { SearchPatientDto } from './dto/admsearch.patient.dto';
 import { AdmSearchPatientService } from './service/admsearch-patient.service';
 import { AdmGetPatientByIdService } from './service/admget-patient-by-id.service';
-import { AdminAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { UpdatePatientDto } from '../../admin/patient/dto/update-patient.dto';
 import { AdmUpdatePatientService } from './service/admupdate-patient.service';
+import { AdminAuthGuard } from 'src/auth/guards/admin-auth.guard';
 
 
 @Controller('adm/pacientes')

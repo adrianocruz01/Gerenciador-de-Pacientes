@@ -1,15 +1,15 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { ReceptionService } from './service/receipt-surgical.service';
 import { CreateReceptionDto } from './dto/create-reception.dto';
 import { GetReceptionFormService } from './service/get-reception.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { FichaRecebimentoPacienteCirurgiaDto } from './dto/update-reception.dto';
 import { UpdateFichaReceipt } from './service/update-surgical.service';
 
 @Controller('fichas/recepcao-cirurgia')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class ReceptionController {
     constructor(
         private readonly receptionService: ReceptionService,

@@ -1,14 +1,10 @@
 import { ExecutionContext, ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { IS_PUBLIC_KEY } from './public';
-import { Reflector } from '@nestjs/core';
-import { AuthService } from '../auth.service';
+import { AdminAuthService } from '../services/admin-auth.service';
 
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
-  constructor(private reflector: Reflector, 
-      private readonly authService: AuthService
-    ) {
+export class AdminAuthGuard extends AuthGuard('jwt') {
+  constructor(private readonly authService: AdminAuthService) {
     super();
   }
 
@@ -16,23 +12,21 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     try {
       const request = context.switchToHttp().getRequest();
       const { authorization }: any = request.headers;
-  
       if (!authorization || authorization.trim() === '') {
         throw new UnauthorizedException('Não autorizado');
       }
-  
       const authToken = authorization.replace(/bearer/gim, '').trim();
-  
       const resp = await this.authService.validateToken(authToken);
 
+      if (resp.role !== 'admin') {
+        throw new ForbiddenException('Não autorizado');
+      }
+
       request.user = resp;
-  
-      // request.decodedData = resp;
       return true;
     } catch (error) {
       console.log('Auth error - ', error.message);
       throw new ForbiddenException(error.message || 'Erro no servidor');
     }
   }
-  
 }

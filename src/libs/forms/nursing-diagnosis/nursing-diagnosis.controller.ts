@@ -1,15 +1,15 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { NursingDiagnosisService } from './service/create-nursing-diagnosis.service';
 import { CreateNursingDiagnosisDto } from './dto/create-nursing-diagnosis.dto';
 import { SearchNursingDiagnosisService } from './service/search-nursing-diagnosis.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaDiagnosticoEnfermagemDto } from './dto/update-nursing-diagnosis.dto';
 import { UpdateFichaNursingDiagnosisService } from './service/update-nursing-diagnosis.service';
 
 @Controller('fichas/diagnostico-enfermagem')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class NursingDiagnosisController {
     constructor(
         private readonly nursingDiagnosisService: NursingDiagnosisService,

@@ -1,10 +1,10 @@
 // Lida com a rota HTTP e utiliza o FileInterceptor para processar o upload do arquivo.
 import { Controller, Post, UploadedFile, UseInterceptors, HttpException, HttpStatus, UseGuards } from '@nestjs/common';
 import { UploadInterceptor } from './upload.interceptor';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from '../../auth/guards/collaborator-auth.guard';
 
 @Controller('upload')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class UploadController {
   @Post()
   @UseInterceptors(UploadInterceptor)

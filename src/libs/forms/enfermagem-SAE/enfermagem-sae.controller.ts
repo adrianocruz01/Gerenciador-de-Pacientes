@@ -1,15 +1,15 @@
 import { Controller, Get, HttpCode, Param, Post, Body, UseGuards, Put } from '@nestjs/common';
 import { CreateSAEDto } from './dto/create-sae.dto';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { CreateSAEFormService } from './service/create-enfermagem-sae.service';
 import { GetEnfermagemSaeFormService } from './service/get-enfermagem-sae.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateSAEDto } from './dto/update-sae.dto';
 import { UpdateSAEFormService } from './service/update-enfermagem-sae.service';
 
 @Controller('fichas/sae-triagem')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class SAETriagemController {
   constructor(
     private readonly createSAEFormService: CreateSAEFormService,

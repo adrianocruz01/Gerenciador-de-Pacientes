@@ -5,10 +5,10 @@ import { CollabController } from './collab.controller';
 import { SearchByCPFCollabService } from './service/search-by-cpf-collab.service';
 import { CollabService } from './service/search-collab.service';
 import { UpdateCollabService } from './service/update.collab.service';
-import { AdminAuthModule } from '../auth/admin-auth.module';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
-    imports: [PrismaModule, AdminAuthModule],
+    imports: [PrismaModule, AuthModule],
     providers: [
         SearchByCPFCollabService,
         CollabService,
