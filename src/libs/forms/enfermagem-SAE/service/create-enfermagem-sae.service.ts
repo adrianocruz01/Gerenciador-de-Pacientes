@@ -15,7 +15,7 @@ export class CreateSAEFormService {
 
     if (exists) throw new BadRequestException('Essa ficha já foi preenchida neste procedimento');
 
-    await this.prisma.ficha_SAE_Triagem.create({
+    const create = await this.prisma.ficha_SAE_Triagem.create({
       data: {
         dt_internacao: sae.dt_internacao,
         apartamento: sae.apartamento,
@@ -64,5 +64,7 @@ export class CreateSAEFormService {
         },
       },
     });
+
+    return create;
   }
 }

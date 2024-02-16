@@ -3,7 +3,7 @@ import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class GetNutritionalFormService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async execute(paciente_procedimento_id) {
     const paciente_procedimento = await this.prisma.paciente_Procedimento.findFirst({

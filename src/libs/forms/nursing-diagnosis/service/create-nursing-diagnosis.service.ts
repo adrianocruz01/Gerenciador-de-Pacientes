@@ -4,24 +4,24 @@ import { CreateNursingDiagnosisDto } from '../dto/create-nursing-diagnosis.dto';
 
 @Injectable()
 export class NursingDiagnosisService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async execute(createNursingDiagnosisDto: CreateNursingDiagnosisDto, colaborador_id: number) {
     const {
-            paciente_id,
-            procedimento_id,
-            paciente_procedimento_id
-        } = createNursingDiagnosisDto;
+      paciente_id,
+      procedimento_id,
+      paciente_procedimento_id
+    } = createNursingDiagnosisDto;
 
-        const exists = await this.prisma.ficha_Diagnostico_Enfermagem.findFirst({
-            where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
-        });
+    const exists = await this.prisma.ficha_Diagnostico_Enfermagem.findFirst({
+      where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
+    });
 
     if (exists) {
       throw new BadRequestException('Esta ficha já existe para este paciente e procedimento');
     }
 
-    return await this.prisma.ficha_Diagnostico_Enfermagem.create({
+    const create = await this.prisma.ficha_Diagnostico_Enfermagem.create({
       data: {
         fch_diagnostico_enfermagem_status: createNursingDiagnosisDto.fch_diagnostico_enfermagem_status,
         insonia_relacionado_ansiedade: createNursingDiagnosisDto.insonia_relacionado_ansiedade,
@@ -54,24 +54,25 @@ export class NursingDiagnosisService {
         manter_paciente_aquecido: createNursingDiagnosisDto.manter_paciente_aquecido,
         checar_identificador_alergia: createNursingDiagnosisDto.checar_identificador_alergia,
         Paciente: {
-            connect: {
-                paciente_id: +paciente_id,
-            },
+          connect: {
+            paciente_id: +paciente_id,
+          },
         },
         Colaborador: {
-            connect: { colaborador_id: colaborador_id },
+          connect: { colaborador_id: colaborador_id },
         },
         Procedimento: {
-            connect: {
-                procedimento_id: +procedimento_id,
-            },
+          connect: {
+            procedimento_id: +procedimento_id,
+          },
         },
         Paciente_Procedimento: {
-            connect: {
-                paciente_Procedimento_id: +paciente_procedimento_id,
-            },
+          connect: {
+            paciente_Procedimento_id: +paciente_procedimento_id,
+          },
         },
       },
     });
+    return create;
   }
 }

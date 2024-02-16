@@ -17,7 +17,7 @@ export class PatientAdmissionService {
             throw new BadRequestException('Essa ficha já foi preenchida neste procedimento');
         }
 
-        return await this.prisma.ficha_Admissao_Paciente_Unidade.create({
+        const create = await this.prisma.ficha_Admissao_Paciente_Unidade.create({
             data: {
                 pulseira_identificacao: admission.pulseira_identificacao,
                 fumante: admission.fumante,
@@ -58,6 +58,6 @@ export class PatientAdmissionService {
             },
 
         });
-
+        return create;
     }
 }

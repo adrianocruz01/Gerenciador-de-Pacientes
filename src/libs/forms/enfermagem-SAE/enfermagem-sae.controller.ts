@@ -26,7 +26,6 @@ export class SAETriagemController {
   @Post()
   @HttpCode(201)
   async register(@CurrentUser() colaborador: UserPayload, @Body() createSAEDto: CreateSAEDto) {
-    console.log('Colaborador:', colaborador);
     return await this.createSAEFormService.execute(createSAEDto, colaborador.sub);
   }
 

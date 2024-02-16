@@ -21,7 +21,7 @@ export class PatientApartamentService {
             throw new BadRequestException('Esta ficha já existe para este paciente e procedimento');
         }
 
-        return await this.prisma.ficha_Encaminhamento_Paciente.create({
+        const create = await this.prisma.ficha_Encaminhamento_Paciente.create({
             data: {
                 fch_encaminhamento_paciente_status: fichaEncaminhamentoPacienteData.fch_encaminhamento_paciente_status,
                 encaminhamento_horario: fichaEncaminhamentoPacienteData.encaminhamento_horario,
@@ -54,5 +54,6 @@ export class PatientApartamentService {
                 },
             },
         });
+        return create;
     }
 }

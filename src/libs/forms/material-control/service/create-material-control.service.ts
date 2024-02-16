@@ -21,7 +21,7 @@ export class FichaControleMaterialService {
             throw new BadRequestException('Esta ficha de controle de material já existe para este paciente e procedimento');
         }
 
-        return await this.prisma.ficha_Controle_Material.create({
+        const create = await this.prisma.ficha_Controle_Material.create({
             data: {
                 fch_controle_material_status: fichaControleMaterialData.fch_controle_material_status,
                 contagem_compressas_entregues: fichaControleMaterialData.contagem_compressas_entregues,
@@ -57,5 +57,7 @@ export class FichaControleMaterialService {
                 },
             },
         });
+
+        return create;
     }
 }

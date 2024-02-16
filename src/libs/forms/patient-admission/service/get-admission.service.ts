@@ -3,14 +3,14 @@ import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class GetAdmissionFormService {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prisma: PrismaService) { }
 
     async execute(paciente_procedimento_id: string) {
         const paciente_ProcedimentoExists = await this.prisma.ficha_Admissao_Paciente_Unidade.findFirst({
-            where: { paciente_ProcedimentoPaciente_Procedimento_id: +paciente_procedimento_id}
+            where: { paciente_ProcedimentoPaciente_Procedimento_id: +paciente_procedimento_id }
         });
 
-        if(!paciente_ProcedimentoExists) {
+        if (!paciente_ProcedimentoExists) {
             throw new NotFoundException('Procedimento não encontrado!');
         }
 
@@ -20,7 +20,7 @@ export class GetAdmissionFormService {
             }
         });
 
-        if(!form) {
+        if (!form) {
             throw new NotFoundException('Ficha não encontrada!');
         }
 

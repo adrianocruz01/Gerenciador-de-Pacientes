@@ -5,7 +5,7 @@ import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class CreateNutritionalFormService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async execute(nutritionalDTO: CreateNutritionalDto, colaborador_id: number) {
     const { paciente_id, procedimento_id, paciente_procedimento_id } = nutritionalDTO;
@@ -16,7 +16,7 @@ export class CreateNutritionalFormService {
 
     if (form) throw new BadRequestException('Essa ficha já foi preenchida neste procedimento');
 
-    return await this.prisma.ficha_Avaliacao_Nutricional.create({
+    const create = await this.prisma.ficha_Avaliacao_Nutricional.create({
       data: {
         diabetes: nutritionalDTO.diabetes,
         medicamento_diabetes: nutritionalDTO.medicamento_diabetes,
@@ -65,5 +65,6 @@ export class CreateNutritionalFormService {
         },
       },
     });
+    return create;
   }
 }
