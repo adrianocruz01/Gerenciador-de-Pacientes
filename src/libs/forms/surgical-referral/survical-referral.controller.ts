@@ -1,15 +1,15 @@
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 import { CreateSurvicalReferralService } from './service/create-survical-referral.service';
 import { CreateSurvicalReferralDto } from './dto/create-survical.dto';
 import { SearchSurvicalReferralService } from './service/serach-survical-referral.service';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaSurgical } from './service/update-survical-ferral.service';
 import { FichaEncaminhamentoPacienteCirurgiaDto } from './dto/update-survical.dto';
 
 @Controller('fichas/encaminhamento-cirurgia')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class SurvicalReferralController {
     constructor(
         private readonly createSurvicalReferralService: CreateSurvicalReferralService,

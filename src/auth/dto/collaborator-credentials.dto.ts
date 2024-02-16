@@ -1,6 +1,6 @@
 import { IsString, Matches, MaxLength, MinLength } from 'class-validator';
 
-export class AuthAdmCredentialsDto {
+export class CollaboratorCredentialsDto {
   @IsString()
   // @Matches(/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/, { message: 'CPF inválido' })
   cpf: string;

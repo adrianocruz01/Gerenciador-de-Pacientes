@@ -5,9 +5,9 @@ import { GetPatientByIdService } from './services/get-patient-by-id.service';
 
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientDto } from './dto/search.patient.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CollaboratorAuthGuard } from '../../auth/guards/collaborator-auth.guard';
 @Controller('pacientes')
-@UseGuards(JwtAuthGuard)
+@UseGuards(CollaboratorAuthGuard)
 export class PatientController {
   registerProcedureById: any;
   constructor(

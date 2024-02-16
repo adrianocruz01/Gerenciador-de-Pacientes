@@ -7,6 +7,7 @@ import { UserPayload } from 'src/libs/auth/jwt-strategy';
 import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
 import { UpdateFichaAvaliacaoNutricionalDto } from './dto/update-nutricional.dto';
 import { UpdateFichaNutricionalService } from './services/update-nutricional.service';
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 
 @Controller('fichas/nutricional')
 @UseGuards(JwtAuthGuard)
