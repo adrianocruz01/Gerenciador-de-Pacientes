@@ -59,7 +59,7 @@ export class FichasAllDashboardService {
             id_ficha: item[ficha_id_attr_name],
             id_paciente_procedimento: item.Paciente_Procedimento.paciente_Procedimento_id,
             id_paciente: item.Paciente.paciente_id,
-            id_procedimento: item.Procedimento.procedimento_id,
+            id_procedimento: item.Procedimento?.procedimento_id,
             nome_ficha: fichas[key],
             nome_procedimento: item?.Procedimento?.nome,
             nome_paciente: item?.Paciente?.nome,

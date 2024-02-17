@@ -1,22 +1,22 @@
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 import { GetNutritionalFormService } from './services/get-nutritional-form.service';
 import { Body, Controller, Get, HttpCode, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { CreateNutritionalFormService } from './services/create-nutritional-form.service';
 import { CreateNutritionalDto } from './dto/create-nutritional.dto';
-import { CurrentUser } from 'src/libs/auth/guards/current-user-decorator';
-import { UserPayload } from 'src/libs/auth/jwt-strategy';
-import { JwtAuthGuard } from 'src/libs/auth/guards/jwt-auth.guard';
+
 import { UpdateFichaAvaliacaoNutricionalDto } from './dto/update-nutricional.dto';
 import { UpdateFichaNutricionalService } from './services/update-nutricional.service';
-import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 
 @Controller('fichas/nutricional')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AdminCollaboratorAuthGuard)
 export class NutritionalController {
   constructor(
     private readonly CreateNutritionalFormService: CreateNutritionalFormService,
     private readonly getNutritionalFormService: GetNutritionalFormService,
     private readonly updateFichaNutricionalService: UpdateFichaNutricionalService,
-  ) { }
+  ) {}
 
   @Get(':paciente_procedimento_id')
   @HttpCode(201)
