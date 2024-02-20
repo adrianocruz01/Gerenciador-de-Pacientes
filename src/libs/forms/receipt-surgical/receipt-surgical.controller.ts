@@ -7,9 +7,10 @@ import { GetReceptionFormService } from './service/get-reception.service';
 import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { FichaRecebimentoPacienteCirurgiaDto } from './dto/update-reception.dto';
 import { UpdateFichaReceipt } from './service/update-surgical.service';
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 
 @Controller('fichas/recepcao-cirurgia')
-@UseGuards(CollaboratorAuthGuard)
+@UseGuards(AdminCollaboratorAuthGuard)
 export class ReceptionController {
   constructor(
     private readonly receptionService: ReceptionService,

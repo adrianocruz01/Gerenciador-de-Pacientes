@@ -7,31 +7,35 @@ import { SearchMaterialControlService } from './service/search-material-control.
 import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaControleMaterialDto } from './dto/update-materoal-control.dto';
 import { UpdateMaterialControlService } from './service/update-material-control.service';
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 
 @Controller('fichas/controle-material')
-@UseGuards(CollaboratorAuthGuard)
+@UseGuards(AdminCollaboratorAuthGuard)
 export class MaterialControleController {
-    constructor(
-        private readonly fichaControleMaterialService: FichaControleMaterialService,
-        private readonly searchMaterialControlService: SearchMaterialControlService,
-        private readonly updateMaterialControlService: UpdateMaterialControlService,
-    ) { }
+  constructor(
+    private readonly fichaControleMaterialService: FichaControleMaterialService,
+    private readonly searchMaterialControlService: SearchMaterialControlService,
+    private readonly updateMaterialControlService: UpdateMaterialControlService,
+  ) {}
 
-    @Get(':paciente_procedimento_id')
-    @HttpCode(201)
-    async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
-        return await this.searchMaterialControlService.execute(paciente_procedimento_id);
-    }
+  @Get(':paciente_procedimento_id')
+  @HttpCode(201)
+  async findAll(@Param('paciente_procedimento_id') paciente_procedimento_id: string) {
+    return await this.searchMaterialControlService.execute(paciente_procedimento_id);
+  }
 
-    @Post()
-    @HttpCode(201)
-    async register(@CurrentUser() colaborador: UserPayload, @Body() createControleMaterialDto: CreateControleMaterialDto) {
-        return await this.fichaControleMaterialService.execute(createControleMaterialDto, colaborador.sub);
-    }
+  @Post()
+  @HttpCode(201)
+  async register(
+    @CurrentUser() colaborador: UserPayload,
+    @Body() createControleMaterialDto: CreateControleMaterialDto,
+  ) {
+    return await this.fichaControleMaterialService.execute(createControleMaterialDto, colaborador.sub);
+  }
 
-    @Put(':id')
-    @HttpCode(204)
-    async updateFichaMaterialControl(@Param('id') id: number, @Body() updateData: UpdateFichaControleMaterialDto) {
-        return await this.updateMaterialControlService.updateFichasMaterialControl(id, updateData)
-    }
+  @Put(':id')
+  @HttpCode(204)
+  async updateFichaMaterialControl(@Param('id') id: number, @Body() updateData: UpdateFichaControleMaterialDto) {
+    return await this.updateMaterialControlService.updateFichasMaterialControl(id, updateData);
+  }
 }

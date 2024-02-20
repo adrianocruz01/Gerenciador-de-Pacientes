@@ -1,21 +1,21 @@
-import { Body, Controller, HttpCode, Post, Get, Param, UseGuards, Put, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Param, UseGuards, Put } from '@nestjs/common';
 import { CurrentUser } from 'src/auth/guards/current-user-decorator';
 import { UserPayload } from 'src/auth/jwt-strategy';
 import { IntraoperativeService } from './service/create-intraoperative.service';
 import { CreateIntraoperativeDto } from './dto/create-intraoperative.dto';
 import { SearchIntraOperativeService } from './service/search-intraoperative.service';
-import { CollaboratorAuthGuard } from 'src/auth/guards/collaborator-auth.guard';
 import { UpdateFichaIntraoperatoriaDto } from './dto/update-intraoperative.dto';
 import { UpdateFichaIntraoperatoriaService } from './service/update-intraoperative.service';
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 
 @Controller('fichas/intraoperatoria')
-@UseGuards(CollaboratorAuthGuard)
+@UseGuards(AdminCollaboratorAuthGuard)
 export class IntraoperativeController {
   constructor(
     private readonly intraoperativeService: IntraoperativeService,
     private readonly searchIntraOperativeService: SearchIntraOperativeService,
-    private readonly updateFichaIntraoperatoriaService: UpdateFichaIntraoperatoriaService
-  ) { }
+    private readonly updateFichaIntraoperatoriaService: UpdateFichaIntraoperatoriaService,
+  ) {}
 
   @Get(':paciente_procedimento_id')
   @HttpCode(201)
@@ -25,10 +25,7 @@ export class IntraoperativeController {
 
   @Post()
   @HttpCode(201)
-  async create(
-    @CurrentUser() colaborador: UserPayload,
-    @Body() createIntraoperativeDto: CreateIntraoperativeDto,
-  ) {
+  async create(@CurrentUser() colaborador: UserPayload, @Body() createIntraoperativeDto: CreateIntraoperativeDto) {
     return await this.intraoperativeService.create(createIntraoperativeDto, colaborador.sub);
   }
 
