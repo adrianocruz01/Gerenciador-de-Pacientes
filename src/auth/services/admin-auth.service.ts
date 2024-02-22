@@ -20,12 +20,12 @@ export class AdminAuthService {
   async login(authAdmCredentialsDto: AdminCredentialsDto): Promise<{ accessToken: string }> {
     const { cpf, password } = authAdmCredentialsDto;
 
-    const administrador = await this.prisma.administrador.findUnique({
-      where: { cpf },
+    const administrador = await this.prisma.colaborador.findUnique({
+      where: { cpf, especialidade: 'Administrador' },
     });
 
     if (administrador && (await bcrypt.compare(password, administrador.senha))) {
-      const payload = { cpf: administrador.cpf, sub: administrador.administrador_id, role: 'admin' };
+      const payload = { cpf: administrador.cpf, sub: administrador.colaborador_id, role: 'admin' };
       const accessToken = this.jwtService.sign(payload, {
         privateKey: process.env.JWT_SECRET_KEY,
       });

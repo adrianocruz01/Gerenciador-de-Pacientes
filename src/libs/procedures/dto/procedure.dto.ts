@@ -7,6 +7,6 @@ export class ProcedureDto {
   @IsString()
   descricao: string;
 
-  @IsEnum(['1', '2'], { message: 'Status inválido' })
+  @IsEnum(['I', 'A'], { message: 'Status inválido' })
   status: string;
 }

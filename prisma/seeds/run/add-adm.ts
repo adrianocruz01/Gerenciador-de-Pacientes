@@ -11,17 +11,17 @@ async function addAdm() {
     nome: 'admin',
     cpf: '939.509.220-32',
     senha: senhaHashed,
+    especialidade: 'Administrador',
   };
 
   try {
+    const adm = await prisma.colaborador.findUnique({ where: { cpf: novoAdm.cpf } });
 
-    const adm = await prisma.administrador.findUnique({ where: { cpf: novoAdm.cpf } });
-    
-    if(adm) {
-      throw new UnauthorizedException("O Administrador ja existe!")
+    if (adm) {
+      throw new UnauthorizedException('O Administrador ja existe!');
     }
 
-    const administrador = await prisma.administrador.create({
+    await prisma.colaborador.create({
       data: novoAdm,
     });
     // console.log('Administrador adicionado:', administrador);
