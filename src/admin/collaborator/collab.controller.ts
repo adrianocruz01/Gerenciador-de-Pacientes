@@ -2,10 +2,8 @@ import {
   BadRequestException,
   Body,
   Controller,
-  Delete,
   Get,
   HttpCode,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -22,9 +20,9 @@ import { CreateColaboradorDto } from './dto/create-collab.dto';
 import { SearchCollabDto } from './dto/search-collab.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
 import { AdminAuthGuard } from 'src/auth/guards/admin-auth.guard';
+import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
 
 @Controller('colaborador')
-@UseGuards(AdminAuthGuard)
 export class CollabController {
   constructor(
     private readonly createCollabService: CreateCollabService,
@@ -35,6 +33,7 @@ export class CollabController {
 
   @Post()
   @HttpCode(201)
+  @UseGuards(AdminAuthGuard)
   async register(@Body() createColaboradorDto: CreateColaboradorDto) {
     const collab = await this.createCollabService.execute(createColaboradorDto);
 
@@ -45,6 +44,7 @@ export class CollabController {
     return collab;
   }
 
+  @UseGuards(AdminCollaboratorAuthGuard)
   @Get('/pesquisar')
   @HttpCode(200)
   async getAllCollabs(@Query() searchCollabDto: SearchCollabDto) {
@@ -57,6 +57,7 @@ export class CollabController {
 
   @Get('/pesquisarCpf')
   @HttpCode(200)
+  @UseGuards(AdminAuthGuard)
   async searchByCpf(@Query() searchCollabDto: SearchCollabDto) {
     const collab = await this.searchByCPFCollabService.execute(searchCollabDto);
     return collab;
@@ -64,6 +65,7 @@ export class CollabController {
 
   @Put(':id')
   @HttpCode(204)
+  @UseGuards(AdminAuthGuard)
   async updateCollaborador(@Param('id') id: string, @Body() updateColaboradorDto: UpdateColaboradorDto) {
     const idNumber = parseInt(id, 10);
 
