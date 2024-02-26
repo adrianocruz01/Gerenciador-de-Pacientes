@@ -4,7 +4,7 @@ import { CreateSAEDto } from '../dto/create-sae.dto';
 
 @Injectable()
 export class CreateSAEFormService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async execute(sae: CreateSAEDto, colaborador_id: number) {
     const { paciente_procedimento_id } = sae;
@@ -54,7 +54,7 @@ export class CreateSAEFormService {
         Procedimento: {
           connect: {
             procedimento_id: sae.procedimento_id,
-          }
+          },
         },
 
         Paciente_Procedimento: {
@@ -62,6 +62,17 @@ export class CreateSAEFormService {
             paciente_Procedimento_id: sae.paciente_procedimento_id,
           },
         },
+      },
+    });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: colaborador_id,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de ficha',
+        atributo: 'Ficha SAE',
+        id_afetado: sae.paciente_id,
+        flag_afetado: 'P',
       },
     });
 

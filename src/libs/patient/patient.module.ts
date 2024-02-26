@@ -6,15 +6,11 @@ import { PrismaModule } from '../../shared/db/libs/prisma/prisma.module';
 import { AuthModule } from '../../auth/auth.module';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
 import { ProcedimentoService } from './services/register-procedure-by-id.service';
+import { LogModule } from 'src/admin/log/log.module';
 
 @Module({
   imports: [PrismaModule, AuthModule],
-  providers: [
-    SearchPatientService,
-    CreatePatientService,
-    GetPatientByIdService,
-    ProcedimentoService,
-  ],
+  providers: [SearchPatientService, CreatePatientService, GetPatientByIdService, ProcedimentoService],
   controllers: [PatientController],
 })
 export class PatientModule {}

@@ -7,11 +7,7 @@ export class IntraoperativeService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(intraoperativeData: CreateIntraoperativeDto, colaborador_id: number) {
-    const {
-      paciente_id,
-      procedimento_id, 
-      paciente_procedimento_id,
-    } = intraoperativeData;
+    const { paciente_id, procedimento_id, paciente_procedimento_id } = intraoperativeData;
 
     const exists = await this.prisma.ficha_Intraoperatoria.findFirst({
       where: {
@@ -61,7 +57,8 @@ export class IntraoperativeService {
         assistencia_ventilosa_mascara_venture: intraoperativeData.assistencia_ventilosa_mascara_venture,
         assistencia_ventilosa_tubo_endotraqueal: intraoperativeData.assistencia_ventilosa_tubo_endotraqueal,
         mobilizacao: intraoperativeData.mobilizacao,
-        implantacao_materiais_equipamentos_disponiveis: intraoperativeData.implantacao_materiais_equipamentos_disponiveis,
+        implantacao_materiais_equipamentos_disponiveis:
+          intraoperativeData.implantacao_materiais_equipamentos_disponiveis,
         prontuario_preenchido: intraoperativeData.prontuario_preenchido,
         mobilizacao_local: intraoperativeData.mobilizacao_local,
         meia_elastica: intraoperativeData.meia_elastica,
@@ -92,6 +89,17 @@ export class IntraoperativeService {
             paciente_Procedimento_id: +paciente_procedimento_id,
           },
         },
+      },
+    });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: colaborador_id,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de ficha',
+        atributo: 'Ficha Intraoperatória',
+        id_afetado: paciente_id,
+        flag_afetado: 'P',
       },
     });
 

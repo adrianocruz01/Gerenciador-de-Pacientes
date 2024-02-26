@@ -1,4 +1,4 @@
-import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param, Put, Delete, NotFoundException, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, Get, Query, BadRequestException, Param, UseGuards } from '@nestjs/common';
 import { CreatePatientService } from './services/create-patient.service';
 import { SearchPatientService } from './services/search-patient.service';
 import { GetPatientByIdService } from './services/get-patient-by-id.service';
@@ -6,6 +6,8 @@ import { GetPatientByIdService } from './services/get-patient-by-id.service';
 import { CreatePatientDto } from './dto/create.patient.dto';
 import { SearchPatientDto } from './dto/search.patient.dto';
 import { CollaboratorAuthGuard } from '../../auth/guards/collaborator-auth.guard';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 @Controller('pacientes')
 @UseGuards(CollaboratorAuthGuard)
 export class PatientController {
@@ -14,7 +16,7 @@ export class PatientController {
     private readonly createPatientService: CreatePatientService,
     private readonly searchPatientService: SearchPatientService,
     private readonly getPatientByIdService: GetPatientByIdService,
-  ) { }
+  ) {}
 
   // @Get()
   // @HttpCode(200)
@@ -44,13 +46,12 @@ export class PatientController {
 
   @Post('/cadastrar')
   @HttpCode(201)
-  async register(@Body() createPatientDtos: CreatePatientDto) {
-    const patient = await this.createPatientService.execute(createPatientDtos);
+  async register(@Body() createPatientDtos: CreatePatientDto, @CurrentUser() user: UserPayload) {
+    const patient = await this.createPatientService.execute(createPatientDtos, user);
     if (!patient) {
       throw new BadRequestException('Não foi possível criar o paciente com os dados fornecidos.');
     }
 
     return patient;
   }
-
 }

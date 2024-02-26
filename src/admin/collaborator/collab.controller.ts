@@ -21,6 +21,8 @@ import { SearchCollabDto } from './dto/search-collab.dto';
 import { UpdateColaboradorDto } from './dto/update.collab.dto';
 import { AdminAuthGuard } from 'src/auth/guards/admin-auth.guard';
 import { AdminCollaboratorAuthGuard } from 'src/auth/guards/admin-collaborator-auth.guard';
+import { CurrentUser } from 'src/auth/guards/current-user-decorator';
+import { UserPayload } from 'src/auth/jwt-strategy';
 
 @Controller('colaborador')
 export class CollabController {
@@ -34,8 +36,8 @@ export class CollabController {
   @Post()
   @HttpCode(201)
   @UseGuards(AdminAuthGuard)
-  async register(@Body() createColaboradorDto: CreateColaboradorDto) {
-    const collab = await this.createCollabService.execute(createColaboradorDto);
+  async register(@Body() createColaboradorDto: CreateColaboradorDto, @CurrentUser() user: UserPayload) {
+    const collab = await this.createCollabService.execute(createColaboradorDto, user);
 
     if (!collab) {
       throw new BadRequestException('Não foi possível criar o colaborador com os dados fornecidos.');

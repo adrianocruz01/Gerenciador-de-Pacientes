@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateNutritionalDto } from '../dto/create-nutritional.dto';
-import { UpdateNutritionalDto } from '../dto/update-patient-procedure.dto';
 import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class CreateNutritionalFormService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async execute(nutritionalDTO: CreateNutritionalDto, colaborador_id: number) {
     const { paciente_id, procedimento_id, paciente_procedimento_id } = nutritionalDTO;
@@ -65,6 +64,18 @@ export class CreateNutritionalFormService {
         },
       },
     });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: colaborador_id,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de ficha',
+        atributo: 'Ficha de avaliação nutricional',
+        id_afetado: paciente_id,
+        flag_afetado: 'P',
+      },
+    });
+
     return create;
   }
 }

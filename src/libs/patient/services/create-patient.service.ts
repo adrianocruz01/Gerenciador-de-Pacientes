@@ -1,13 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreatePatientDto } from '../dto/create.patient.dto';
 import { PrismaService } from '../../../shared/db/libs/prisma/prisma.service';
+import { UserPayload } from 'src/auth/jwt-strategy';
 
 @Injectable()
 export class CreatePatientService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async execute(patientDTO: CreatePatientDto) {
-    // Trás somente um paciente (o primeiro que encontrar)
+  async execute(patientDTO: CreatePatientDto, user: UserPayload) {
     const hasPatient = await this.prisma.paciente.findFirst({
       where: {
         cpf: patientDTO.cpf,
@@ -28,6 +28,18 @@ export class CreatePatientService {
         dtcadastro: new Date(),
       },
     });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: user.sub,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de paciente',
+        atributo: null,
+        id_afetado: patient.paciente_id,
+        flag_afetado: 'P',
+      },
+    });
+
     return {
       id: patient.paciente_id,
       nome: patient.nome,

@@ -4,14 +4,10 @@ import { CreateNursingDiagnosisDto } from '../dto/create-nursing-diagnosis.dto';
 
 @Injectable()
 export class NursingDiagnosisService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async execute(createNursingDiagnosisDto: CreateNursingDiagnosisDto, colaborador_id: number) {
-    const {
-      paciente_id,
-      procedimento_id,
-      paciente_procedimento_id
-    } = createNursingDiagnosisDto;
+    const { paciente_id, procedimento_id, paciente_procedimento_id } = createNursingDiagnosisDto;
 
     const exists = await this.prisma.ficha_Diagnostico_Enfermagem.findFirst({
       where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
@@ -73,6 +69,18 @@ export class NursingDiagnosisService {
         },
       },
     });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: colaborador_id,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de ficha',
+        atributo: 'Ficha de diagnóstico de enfermagem',
+        id_afetado: paciente_id,
+        flag_afetado: 'P',
+      },
+    });
+
     return create;
   }
 }

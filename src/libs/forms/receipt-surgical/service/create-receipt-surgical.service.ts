@@ -6,52 +6,64 @@ import { PrismaService } from 'src/shared/db/libs/prisma/prisma.service';
 
 @Injectable()
 export class ReceptionService {
-    constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
-    async execute(reception: CreateReceptionDto, colaborador_id: number) {
-        const { paciente_id, procedimento_id, paciente_procedimento_id } = reception;
+  async execute(reception: CreateReceptionDto, colaborador_id: number) {
+    const { paciente_id, procedimento_id, paciente_procedimento_id } = reception;
 
-        const exists = await this.prisma.ficha_Recebimento_Paciente_Cirurgia.findFirst({
-            where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
-        });
+    const exists = await this.prisma.ficha_Recebimento_Paciente_Cirurgia.findFirst({
+      where: { paciente_ProcedimentoPaciente_Procedimento_id: paciente_procedimento_id },
+    });
 
-        if (exists) {
-            throw new BadRequestException('Esta ficha de recebimento já foi preenchida para este procedimento');
-        }
-
-        const create = await this.prisma.ficha_Recebimento_Paciente_Cirurgia.create({
-            data: {
-                fch_recebimento_paciente_cirurgia_status: reception.fch_recebimento_paciente_cirurgia_status,
-                horario_chegada: reception.horario_chegada,
-                sala: reception.sala,
-                responsavel_recebimento_paciente: reception.responsavel_recebimento_paciente,
-                anexo: reception.anexo,
-                anexo_qual: reception.anexo_qual,
-                materiais_implantes_equipamentos: reception.materiais_implantes_equipamentos,
-                prazo_validacao_esterilizacao: reception.prazo_validacao_esterilizacao,
-                integradores_quimicos_todas_caixas: reception.integradores_quimicos_todas_caixas,
-                montagem_so_conforme_procedimento: reception.montagem_so_conforme_procedimento,
-                observacao: reception.observacao,
-                Paciente: {
-                    connect: {
-                        paciente_id: +paciente_id,
-                    },
-                },
-                Colaborador: {
-                    connect: { colaborador_id: colaborador_id },
-                },
-                Procedimento: {
-                    connect: {
-                        procedimento_id: +procedimento_id,
-                    },
-                },
-                Paciente_Procedimento: {
-                    connect: {
-                        paciente_Procedimento_id: +paciente_procedimento_id,
-                    },
-                },
-            },
-        });
-        return create;
+    if (exists) {
+      throw new BadRequestException('Esta ficha de recebimento já foi preenchida para este procedimento');
     }
+
+    const create = await this.prisma.ficha_Recebimento_Paciente_Cirurgia.create({
+      data: {
+        fch_recebimento_paciente_cirurgia_status: reception.fch_recebimento_paciente_cirurgia_status,
+        horario_chegada: reception.horario_chegada,
+        sala: reception.sala,
+        responsavel_recebimento_paciente: reception.responsavel_recebimento_paciente,
+        anexo: reception.anexo,
+        anexo_qual: reception.anexo_qual,
+        materiais_implantes_equipamentos: reception.materiais_implantes_equipamentos,
+        prazo_validacao_esterilizacao: reception.prazo_validacao_esterilizacao,
+        integradores_quimicos_todas_caixas: reception.integradores_quimicos_todas_caixas,
+        montagem_so_conforme_procedimento: reception.montagem_so_conforme_procedimento,
+        observacao: reception.observacao,
+        Paciente: {
+          connect: {
+            paciente_id: +paciente_id,
+          },
+        },
+        Colaborador: {
+          connect: { colaborador_id: colaborador_id },
+        },
+        Procedimento: {
+          connect: {
+            procedimento_id: +procedimento_id,
+          },
+        },
+        Paciente_Procedimento: {
+          connect: {
+            paciente_Procedimento_id: +paciente_procedimento_id,
+          },
+        },
+      },
+    });
+
+    await this.prisma.log.create({
+      data: {
+        id_responsavel_mudanca: colaborador_id,
+        flag_responsavel: 'C',
+        acao: 'Cadastro de ficha',
+        atributo: 'Ficha de recebimento do paciente no centro cirúrgico',
+        id_afetado: paciente_id,
+        flag_afetado: 'P',
+      },
+    });
+
+    return create;
+  }
 }
