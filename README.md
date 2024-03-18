@@ -13,7 +13,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 
 1. Clone este repositório em sua máquina local:
    ```
-   git clone https://gitlab.com/icl1993337/icl-backend.git
+   git clone https://github.com/adrianocruz01/Gerenciador-de-Pacientes.git
    cd icl-backend
    ```
 
@@ -45,13 +45,19 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas em s
 Este projeto segue uma estrutura de pastas organizada para facilitar o desenvolvimento, manutenção e escalabilidade. Aqui está uma visão geral da estrutura de pastas:
 ```
 project-root/
-  ├── src/
   │    │─── prisma
   │    │    ├── migrations/
   │    │    │    └── 20231227210210_initial_db_structure/
   │    │    │    │      └── migration.sql
   │    │    │    └── migrations_lock.toml
+  │    │    ├── seeds/
+  │    │    │    └── run/
+  │    │    │    │      └── add-adm.ts
+  │    │    │    │      └── add-colaborador.ts
+  │    │    │    │      └── add-procedimentos.ts
+  │    │    │    └── seeder.ts
   │    │    └── schema.prisma
+  ├── src/
   │    ├── libs/
   │    │    ├── auth/
   │    │    │    └── dto/
