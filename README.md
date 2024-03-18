@@ -139,3 +139,7 @@ npx prisma studio
 # ou
 yarn prisma studio
 ```
+
+## Conclusão
+
+Este é um projeto para gerenciamento de pacientes para qualquer hospital/clinica de estética, focado para ter o controle de todos os pacientes, desde o check in, cirurgia, e auta do paciente, todo o ciclo dele dentro da unidade.
