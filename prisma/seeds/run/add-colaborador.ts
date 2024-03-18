@@ -8,8 +8,9 @@ async function addColaborador() {
 
   const novoColaborador = {
     nome: 'yuri',
-    cpf: '046.179.703-80',
+    cpf: '053.197.201-14',
     senha: senhaHashed,
+    especialidade: 'Administrador',
   };
 
   try {
